@@ -1,0 +1,706 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EF1F6F1A-697E-4413-B995-2733C0F72DAC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScreenWarranty</RootNamespace>
+    <AssemblyName>adg-scaffolding</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.7.1\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.7.1\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.3.2\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.1\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.7.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\blog.css" />
+    <Content Include="assets\css\check-warranty\card.min.css" />
+    <Content Include="assets\css\check-warranty\custom.css" />
+    <Content Include="assets\css\check-warranty\styles-2ecc71.min.css" />
+    <Content Include="assets\css\check-warranty\styles-e74c3c.min.css" />
+    <Content Include="assets\css\check-warranty\styles-f39c12.min.css" />
+    <Content Include="assets\css\check-warranty\styles.css" />
+    <Content Include="assets\css\check-warranty\styles.min.css" />
+    <Content Include="assets\css\check-warranty\vendor.min.css" />
+    <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\demo.css" />
+    <Content Include="assets\css\tabs.css" />
+    <Content Include="assets\img\avatars\1-small.png" />
+    <Content Include="assets\img\avatars\1.png" />
+    <Content Include="assets\img\avatars\10-small.png" />
+    <Content Include="assets\img\avatars\10.png" />
+    <Content Include="assets\img\avatars\11-small.png" />
+    <Content Include="assets\img\avatars\11.png" />
+    <Content Include="assets\img\avatars\12-small.png" />
+    <Content Include="assets\img\avatars\12.png" />
+    <Content Include="assets\img\avatars\2-small.png" />
+    <Content Include="assets\img\avatars\2.png" />
+    <Content Include="assets\img\avatars\3-small.png" />
+    <Content Include="assets\img\avatars\3.png" />
+    <Content Include="assets\img\avatars\4-small.png" />
+    <Content Include="assets\img\avatars\4.png" />
+    <Content Include="assets\img\avatars\5-small.png" />
+    <Content Include="assets\img\avatars\5.png" />
+    <Content Include="assets\img\avatars\6-small.png" />
+    <Content Include="assets\img\avatars\6.png" />
+    <Content Include="assets\img\avatars\7-small.png" />
+    <Content Include="assets\img\avatars\7.png" />
+    <Content Include="assets\img\avatars\8-small.png" />
+    <Content Include="assets\img\avatars\8.png" />
+    <Content Include="assets\img\avatars\9-small.png" />
+    <Content Include="assets\img\avatars\9.png" />
+    <Content Include="assets\img\bg\1.jpg" />
+    <Content Include="assets\img\bg\2.jpg" />
+    <Content Include="assets\img\bg\3.jpg" />
+    <Content Include="assets\img\bg\4.jpg" />
+    <Content Include="assets\img\bg\5.jpg" />
+    <Content Include="assets\img\bg\6.jpg" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\uikit\adidas.jpg" />
+    <Content Include="assets\img\uikit\app-phone.png" />
+    <Content Include="assets\img\uikit\app.png" />
+    <Content Include="assets\img\uikit\backpack.jpg" />
+    <Content Include="assets\img\uikit\chair-1.jpg" />
+    <Content Include="assets\img\uikit\headphones.jpg" />
+    <Content Include="assets\img\uikit\iwatch.jpg" />
+    <Content Include="assets\img\uikit\logo-1.png" />
+    <Content Include="assets\img\uikit\logo-10.png" />
+    <Content Include="assets\img\uikit\logo-11.png" />
+    <Content Include="assets\img\uikit\logo-2.png" />
+    <Content Include="assets\img\uikit\logo-3.png" />
+    <Content Include="assets\img\uikit\logo-4.png" />
+    <Content Include="assets\img\uikit\logo-5.png" />
+    <Content Include="assets\img\uikit\logo-6.png" />
+    <Content Include="assets\img\uikit\logo-7.png" />
+    <Content Include="assets\img\uikit\logo-8.png" />
+    <Content Include="assets\img\uikit\logo-9.png" />
+    <Content Include="assets\img\uikit\nike-1.jpg" />
+    <Content Include="assets\img\uikit\presentation-costume.jpg" />
+    <Content Include="assets\img\uikit\presentation-jeans.jpg" />
+    <Content Include="assets\img\uikit\presentation-shirt.jpg" />
+    <Content Include="assets\img\uikit\presentation-suit.jpg" />
+    <Content Include="assets\img\uikit\ps4.jpg" />
+    <Content Include="assets\img\uikit\s7edge-1.jpg" />
+    <Content Include="assets\img\uikit\s7edge-2.jpg" />
+    <Content Include="assets\img\uikit\s7edge-3.jpg" />
+    <Content Include="assets\img\uikit\s7edge-4.jpg" />
+    <Content Include="assets\img\uikit\sunglasses.jpg" />
+    <Content Include="assets\js\administration\user-list.js" />
+    <Content Include="assets\js\administration\branch-list.js" />
+    <Content Include="assets\js\administration\role-list.js" />
+    <Content Include="assets\js\administration\company-list.js" />
+    <Content Include="assets\js\blog.js" />
+    <Content Include="assets\js\charts_c3.js" />
+    <Content Include="assets\js\charts_chartist.js" />
+    <Content Include="assets\js\charts_chartjs.js" />
+    <Content Include="assets\js\charts_flot.js" />
+    <Content Include="assets\js\charts_gmaps.js" />
+    <Content Include="assets\js\charts_mapael.js" />
+    <Content Include="assets\js\charts_morrisjs.js" />
+    <Content Include="assets\js\charts_sparkline.js" />
+    <Content Include="assets\js\check-warranty\card.min.js" />
+    <Content Include="assets\js\check-warranty\modernizr.min.js" />
+    <Content Include="assets\js\check-warranty\scripts.min.js" />
+    <Content Include="assets\js\check-warranty\vendor.min.js" />
+    <Content Include="assets\js\claim\claim-list.js" />
+    <Content Include="assets\js\customer\customer-list.js" />
+    <Content Include="assets\js\dashboards_dashboard-1.js" />
+    <Content Include="assets\js\dashboards_dashboard-2.js" />
+    <Content Include="assets\js\dashboards_dashboard-3.js" />
+    <Content Include="assets\js\dashboards_dashboard-4.js" />
+    <Content Include="assets\js\dashboards_dashboard-5.js" />
+    <Content Include="assets\js\demo.js" />
+    <Content Include="assets\js\export-xlsx.js" />
+    <Content Include="assets\js\forms_custom-controls.js" />
+    <Content Include="assets\js\forms_dual-listbox.js" />
+    <Content Include="assets\js\forms_editors.js" />
+    <Content Include="assets\js\forms_extras.js" />
+    <Content Include="assets\js\forms_file-upload-inquiry.js" />
+    <Content Include="assets\js\forms_file-upload.js" />
+    <Content Include="assets\js\forms_input-groups.js" />
+    <Content Include="assets\js\forms_pickers.js" />
+    <Content Include="assets\js\forms_selects.js" />
+    <Content Include="assets\js\forms_sliders.js" />
+    <Content Include="assets\js\forms_typeahead.js" />
+    <Content Include="assets\js\forms_validation.js" />
+    <Content Include="assets\js\forms_wizard.js" />
+    <Content Include="assets\js\inquiry\inquiry-ma-list.js" />
+    <Content Include="assets\js\inquiry\inquiry-list-admin.js" />
+    <Content Include="assets\js\inquiry\inquiry-list.js" />
+    <Content Include="assets\js\inquiry\import-inquiry.js" />
+    <Content Include="assets\js\landing.js" />
+    <Content Include="assets\js\layouts.js" />
+    <Content Include="assets\js\misc_blockui.js" />
+    <Content Include="assets\js\misc_clipboardjs.js" />
+    <Content Include="assets\js\misc_idle-timer.js" />
+    <Content Include="assets\js\misc_ladda.js" />
+    <Content Include="assets\js\misc_masonry.js" />
+    <Content Include="assets\js\misc_numeraljs.js" />
+    <Content Include="assets\js\misc_perfect-scrollbar.js" />
+    <Content Include="assets\js\misc_vegasjs.js" />
+    <Content Include="assets\js\pages_account-settings.js" />
+    <Content Include="assets\js\pages_articles_edit.js" />
+    <Content Include="assets\js\pages_articles_list.js" />
+    <Content Include="assets\js\pages_chat.js" />
+    <Content Include="assets\js\pages_clients.js" />
+    <Content Include="assets\js\pages_contacts.js" />
+    <Content Include="assets\js\pages_e-commerce_order-list.js" />
+    <Content Include="assets\js\pages_e-commerce_product-edit.js" />
+    <Content Include="assets\js\pages_e-commerce_product-item.js" />
+    <Content Include="assets\js\pages_e-commerce_product-list.js" />
+    <Content Include="assets\js\pages_file-manager.js" />
+    <Content Include="assets\js\pages_gallery.js" />
+    <Content Include="assets\js\pages_kanban-board.js" />
+    <Content Include="assets\js\pages_messages.js" />
+    <Content Include="assets\js\pages_projects_item.js" />
+    <Content Include="assets\js\pages_projects_list.js" />
+    <Content Include="assets\js\pages_task-list.js" />
+    <Content Include="assets\js\pages_teams.js" />
+    <Content Include="assets\js\pages_tickets_edit.js" />
+    <Content Include="assets\js\pages_tickets_list.js" />
+    <Content Include="assets\js\pages_users_edit.js" />
+    <Content Include="assets\js\pages_users_list.js" />
+    <Content Include="assets\js\pages_vacancies.js" />
+    <Content Include="assets\js\portfolio.js" />
+    <Content Include="assets\js\shared\custom.js" />
+    <Content Include="assets\js\shop.js" />
+    <Content Include="assets\js\sparepart\sparepart-list.js" />
+    <Content Include="assets\js\tables_bootstrap-table.js" />
+    <Content Include="assets\js\tables_datatables.js" />
+    <Content Include="assets\js\ui_app-brand.js" />
+    <Content Include="assets\js\ui_button-groups.js" />
+    <Content Include="assets\js\ui_carousel.js" />
+    <Content Include="assets\js\ui_cropper.js" />
+    <Content Include="assets\js\ui_drag-and-drop.js" />
+    <Content Include="assets\js\ui_dropdowns.js" />
+    <Content Include="assets\js\ui_fullcalendar.js" />
+    <Content Include="assets\js\ui_lightbox.js" />
+    <Content Include="assets\js\ui_media-player.js" />
+    <Content Include="assets\js\ui_modals.js" />
+    <Content Include="assets\js\ui_navbar.js" />
+    <Content Include="assets\js\ui_navs.js" />
+    <Content Include="assets\js\ui_notifications.js" />
+    <Content Include="assets\js\ui_sidenav.js" />
+    <Content Include="assets\js\ui_tooltips.js" />
+    <Content Include="assets\js\ui_tour.js" />
+    <Content Include="assets\js\ui_treeview.js" />
+    <Content Include="assets\js\view\claim\import-claim-data.js" />
+    <Content Include="assets\js\view\warranty\warranty-list.js" />
+    <Content Include="assets\js\warranty-check\warranty-check.js" />
+    <Content Include="assets\vendor\css\appwork-material.css" />
+    <Content Include="assets\vendor\css\bootstrap-material.css" />
+    <Content Include="assets\vendor\css\colors-material.css" />
+    <Content Include="assets\vendor\css\pages\account.css" />
+    <Content Include="assets\vendor\css\pages\authentication.css" />
+    <Content Include="assets\vendor\css\pages\chat.css" />
+    <Content Include="assets\vendor\css\pages\clients.css" />
+    <Content Include="assets\vendor\css\pages\contacts.css" />
+    <Content Include="assets\vendor\css\pages\file-manager.css" />
+    <Content Include="assets\vendor\css\pages\messages.css" />
+    <Content Include="assets\vendor\css\pages\products.css" />
+    <Content Include="assets\vendor\css\pages\projects.css" />
+    <Content Include="assets\vendor\css\pages\search.css" />
+    <Content Include="assets\vendor\css\pages\tasks.css" />
+    <Content Include="assets\vendor\css\pages\tickets.css" />
+    <Content Include="assets\vendor\css\pages\users.css" />
+    <Content Include="assets\vendor\css\theme-corporate-material.css" />
+    <Content Include="assets\vendor\css\uikit.css" />
+    <Content Include="assets\vendor\fonts\fontawesome.css" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-brands-400.svg" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-regular-400.svg" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-solid-900.svg" />
+    <Content Include="assets\vendor\fonts\ionicons.css" />
+    <Content Include="assets\vendor\fonts\ionicons\ionicons.svg" />
+    <Content Include="assets\vendor\fonts\linearicons.css" />
+    <Content Include="assets\vendor\fonts\linearicons\Linearicons-Free.svg" />
+    <Content Include="assets\vendor\fonts\open-iconic.css" />
+    <Content Include="assets\vendor\fonts\open-iconic\open-iconic.svg" />
+    <Content Include="assets\vendor\fonts\pe-icon-7-stroke.css" />
+    <Content Include="assets\vendor\fonts\pe-icon-7-stroke\Pe-icon-7-stroke.svg" />
+    <Content Include="assets\vendor\js\bootstrap.js" />
+    <Content Include="assets\vendor\js\download.js" />
+    <Content Include="assets\vendor\js\dropdown-hover.js" />
+    <Content Include="assets\vendor\js\FileSaver.js" />
+    <Content Include="assets\vendor\js\layout-helpers.js" />
+    <Content Include="assets\vendor\js\material-ripple.js" />
+    <Content Include="assets\vendor\js\mega-dropdown.js" />
+    <Content Include="assets\vendor\js\pace.js" />
+    <Content Include="assets\vendor\js\sidenav.js" />
+    <Content Include="assets\vendor\js\theme-settings.js" />
+    <Content Include="assets\vendor\js\xlsx.full.min.js" />
+    <Content Include="assets\vendor\libs\animate-css\animate.css" />
+    <Content Include="assets\vendor\libs\autosize\autosize.js" />
+    <Content Include="assets\vendor\libs\block-ui\block-ui.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-fullscreen.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-indicator.css" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-indicator.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-video.css" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-video.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-vimeo.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery-youtube.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery.css" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\gallery.js" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\error.png" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\error.svg" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\loading.gif" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\play-pause.png" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\play-pause.svg" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\video-play.png" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\img\video-play.svg" />
+    <Content Include="assets\vendor\libs\blueimp-gallery\jquery.gallery.js" />
+    <Content Include="assets\vendor\libs\bootbox\bootbox.js" />
+    <Content Include="assets\vendor\libs\bootstrap-datepicker\bootstrap-datepicker.css" />
+    <Content Include="assets\vendor\libs\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Include="assets\vendor\libs\bootstrap-daterangepicker\bootstrap-daterangepicker.css" />
+    <Content Include="assets\vendor\libs\bootstrap-daterangepicker\bootstrap-daterangepicker.js" />
+    <Content Include="assets\vendor\libs\bootstrap-duallistbox\bootstrap-duallistbox.css" />
+    <Content Include="assets\vendor\libs\bootstrap-duallistbox\bootstrap-duallistbox.js" />
+    <Content Include="assets\vendor\libs\bootstrap-markdown\bootstrap-markdown.css" />
+    <Content Include="assets\vendor\libs\bootstrap-markdown\bootstrap-markdown.js" />
+    <Content Include="assets\vendor\libs\bootstrap-material-datetimepicker\bootstrap-material-datetimepicker.css" />
+    <Content Include="assets\vendor\libs\bootstrap-material-datetimepicker\bootstrap-material-datetimepicker.js" />
+    <Content Include="assets\vendor\libs\bootstrap-maxlength\bootstrap-maxlength.css" />
+    <Content Include="assets\vendor\libs\bootstrap-maxlength\bootstrap-maxlength.js" />
+    <Content Include="assets\vendor\libs\bootstrap-menu\bootstrap-menu.js" />
+    <Content Include="assets\vendor\libs\bootstrap-multiselect\bootstrap-multiselect.css" />
+    <Content Include="assets\vendor\libs\bootstrap-multiselect\bootstrap-multiselect.js" />
+    <Content Include="assets\vendor\libs\bootstrap-select\bootstrap-select.css" />
+    <Content Include="assets\vendor\libs\bootstrap-select\bootstrap-select.js" />
+    <Content Include="assets\vendor\libs\bootstrap-slider\bootstrap-slider.css" />
+    <Content Include="assets\vendor\libs\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="assets\vendor\libs\bootstrap-sortable\bootstrap-sortable.css" />
+    <Content Include="assets\vendor\libs\bootstrap-sortable\bootstrap-sortable.js" />
+    <Content Include="assets\vendor\libs\bootstrap-sweetalert\bootstrap-sweetalert.css" />
+    <Content Include="assets\vendor\libs\bootstrap-sweetalert\bootstrap-sweetalert.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\bootstrap-table.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\bootstrap-table.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\accent-neutralise\accent-neutralise.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\auto-refresh\auto-refresh.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\auto-refresh\auto-refresh.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\click-edit-row\click-edit-row.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\click-edit-row\click-edit-row.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\cookie\cookie.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\copy-rows\copy-rows.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\editable\editable.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\export\export.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\filter-control\filter-control.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\filter-control\filter-control.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\filter\filter.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\flat-json\flat-json.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\group-by-v2\group-by-v2.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\group-by-v2\group-by-v2.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\group-by\group-by.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\group-by\group-by.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\key-events\key-events.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\mobile\mobile.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\multi-column-toggle\multi-column-toggle.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\multiple-search\multiple-search.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\multiple-selection-row\multiple-selection-row.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\multiple-selection-row\multiple-selection-row.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\multiple-sort\multiple-sort.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\natural-sorting\natural-sorting.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\print\print.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\reorder-columns\reorder-columns.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\reorder-rows\reorder-rows.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\reorder-rows\reorder-rows.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\resizable\resizable.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\select2-filter\select2-filter.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\sticky-header\sticky-header.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\sticky-header\sticky-header.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\toolbar\toolbar.js" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\tree-column\tree-column.css" />
+    <Content Include="assets\vendor\libs\bootstrap-table\extensions\tree-column\tree-column.js" />
+    <Content Include="assets\vendor\libs\bootstrap-tagsinput\bootstrap-tagsinput.css" />
+    <Content Include="assets\vendor\libs\bootstrap-tagsinput\bootstrap-tagsinput.js" />
+    <Content Include="assets\vendor\libs\bootstrap-tour\bootstrap-tour.css" />
+    <Content Include="assets\vendor\libs\bootstrap-tour\bootstrap-tour.js" />
+    <Content Include="assets\vendor\libs\c3\c3.css" />
+    <Content Include="assets\vendor\libs\c3\c3.js" />
+    <Content Include="assets\vendor\libs\chartist\chartist.css" />
+    <Content Include="assets\vendor\libs\chartist\chartist.js" />
+    <Content Include="assets\vendor\libs\chartjs\chartjs.js" />
+    <Content Include="assets\vendor\libs\clipboard\clipboard.js" />
+    <Content Include="assets\vendor\libs\cropper\cropper.css" />
+    <Content Include="assets\vendor\libs\cropper\cropper.js" />
+    <Content Include="assets\vendor\libs\d3\d3.js" />
+    <Content Include="assets\vendor\libs\datatables\datatables.css" />
+    <Content Include="assets\vendor\libs\datatables\datatables.js" />
+    <Content Include="assets\vendor\libs\dragula\dragula.css" />
+    <Content Include="assets\vendor\libs\dragula\dragula.js" />
+    <Content Include="assets\vendor\libs\dropzone\dropzone.css" />
+    <Content Include="assets\vendor\libs\dropzone\dropzone.js" />
+    <Content Include="assets\vendor\libs\eve\eve.js" />
+    <Content Include="assets\vendor\libs\flot\flot.css" />
+    <Content Include="assets\vendor\libs\flot\flot.js" />
+    <Content Include="assets\vendor\libs\flow-js\flow.css" />
+    <Content Include="assets\vendor\libs\flow-js\flow.js" />
+    <Content Include="assets\vendor\libs\fullcalendar\fullcalendar.css" />
+    <Content Include="assets\vendor\libs\fullcalendar\fullcalendar.js" />
+    <Content Include="assets\vendor\libs\fullcalendar\locale-all.js" />
+    <Content Include="assets\vendor\libs\gmaps\gmaps.js" />
+    <Content Include="assets\vendor\libs\growl\growl.css" />
+    <Content Include="assets\vendor\libs\growl\growl.js" />
+    <Content Include="assets\vendor\libs\idletimer\idletimer.js" />
+    <Content Include="assets\vendor\libs\jstree\jstree.js" />
+    <Content Include="assets\vendor\libs\jstree\themes\default-dark\32px.png" />
+    <Content Include="assets\vendor\libs\jstree\themes\default-dark\40px.png" />
+    <Content Include="assets\vendor\libs\jstree\themes\default-dark\style.css" />
+    <Content Include="assets\vendor\libs\jstree\themes\default-dark\throbber.gif" />
+    <Content Include="assets\vendor\libs\jstree\themes\default\32px.png" />
+    <Content Include="assets\vendor\libs\jstree\themes\default\40px.png" />
+    <Content Include="assets\vendor\libs\jstree\themes\default\style.css" />
+    <Content Include="assets\vendor\libs\jstree\themes\default\throbber.gif" />
+    <Content Include="assets\vendor\libs\knob\knob.js" />
+    <Content Include="assets\vendor\libs\ladda\ladda.css" />
+    <Content Include="assets\vendor\libs\ladda\ladda.js" />
+    <Content Include="assets\vendor\libs\mapael\mapael.js" />
+    <Content Include="assets\vendor\libs\mapael\maps\france_departments.js" />
+    <Content Include="assets\vendor\libs\mapael\maps\usa_states.js" />
+    <Content Include="assets\vendor\libs\mapael\maps\world_countries.js" />
+    <Content Include="assets\vendor\libs\mapael\maps\world_countries_mercator.js" />
+    <Content Include="assets\vendor\libs\mapael\maps\world_countries_miller.js" />
+    <Content Include="assets\vendor\libs\markdown\markdown.js" />
+    <Content Include="assets\vendor\libs\masonry\masonry.js" />
+    <Content Include="assets\vendor\libs\minicolors\jquery.minicolors.png" />
+    <Content Include="assets\vendor\libs\minicolors\minicolors.css" />
+    <Content Include="assets\vendor\libs\minicolors\minicolors.js" />
+    <Content Include="assets\vendor\libs\moment\moment.js" />
+    <Content Include="assets\vendor\libs\morris\morris.css" />
+    <Content Include="assets\vendor\libs\morris\morris.js" />
+    <Content Include="assets\vendor\libs\nestable\nestable.css" />
+    <Content Include="assets\vendor\libs\nestable\nestable.js" />
+    <Content Include="assets\vendor\libs\nouislider\nouislider.css" />
+    <Content Include="assets\vendor\libs\nouislider\nouislider.js" />
+    <Content Include="assets\vendor\libs\numeral\numeral.js" />
+    <Content Include="assets\vendor\libs\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="assets\vendor\libs\perfect-scrollbar\perfect-scrollbar.js" />
+    <Content Include="assets\vendor\libs\photoswipe\default-skin.png" />
+    <Content Include="assets\vendor\libs\photoswipe\default-skin.svg" />
+    <Content Include="assets\vendor\libs\photoswipe\photoswipe.css" />
+    <Content Include="assets\vendor\libs\photoswipe\photoswipe.js" />
+    <Content Include="assets\vendor\libs\photoswipe\preloader.gif" />
+    <Content Include="assets\vendor\libs\plyr\plyr.css" />
+    <Content Include="assets\vendor\libs\plyr\plyr.js" />
+    <Content Include="assets\vendor\libs\popper\popper.js" />
+    <Content Include="assets\vendor\libs\pwstrength-bootstrap\pwstrength-bootstrap.js" />
+    <Content Include="assets\vendor\libs\quill\editor.css" />
+    <Content Include="assets\vendor\libs\quill\quill.js" />
+    <Content Include="assets\vendor\libs\quill\typography.css" />
+    <Content Include="assets\vendor\libs\raphael\raphael.js" />
+    <Content Include="assets\vendor\libs\select2\select2.css" />
+    <Content Include="assets\vendor\libs\select2\select2.js" />
+    <Content Include="assets\vendor\libs\smartwizard\smartwizard.css" />
+    <Content Include="assets\vendor\libs\smartwizard\smartwizard.js" />
+    <Content Include="assets\vendor\libs\sortablejs\sortable.js" />
+    <Content Include="assets\vendor\libs\sparkline\sparkline.js" />
+    <Content Include="assets\vendor\libs\spinkit\spinkit.css" />
+    <Content Include="assets\vendor\libs\spin\spin.js" />
+    <Content Include="assets\vendor\libs\swiper\swiper.css" />
+    <Content Include="assets\vendor\libs\swiper\swiper.js" />
+    <Content Include="assets\vendor\libs\tableexport\tableexport.js" />
+    <Content Include="assets\vendor\libs\timepicker\timepicker.css" />
+    <Content Include="assets\vendor\libs\timepicker\timepicker.js" />
+    <Content Include="assets\vendor\libs\toastr\toastr.css" />
+    <Content Include="assets\vendor\libs\toastr\toastr.js" />
+    <Content Include="assets\vendor\libs\typeahead-js\typeahead.css" />
+    <Content Include="assets\vendor\libs\typeahead-js\typeahead.js" />
+    <Content Include="assets\vendor\libs\validate\validate.js" />
+    <Content Include="assets\vendor\libs\vanilla-text-mask\text-mask-addons.js" />
+    <Content Include="assets\vendor\libs\vanilla-text-mask\vanilla-text-mask.js" />
+    <Content Include="assets\vendor\libs\vegas\overlays\01.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\02.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\03.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\04.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\05.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\06.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\07.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\08.png" />
+    <Content Include="assets\vendor\libs\vegas\overlays\09.png" />
+    <Content Include="assets\vendor\libs\vegas\vegas.css" />
+    <Content Include="assets\vendor\libs\vegas\vegas.js" />
+    <Content Include="Backend\Administrator\User\user-info.aspx" />
+    <Content Include="Backend\Administrator\User\user-list.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Backend\login.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backend\Administrator\User\user-info.aspx.cs">
+      <DependentUpon>user-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Administrator\User\user-info.aspx.designer.cs">
+      <DependentUpon>user-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Administrator\User\user-list.aspx.cs">
+      <DependentUpon>user-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Administrator\User\user-list.aspx.designer.cs">
+      <DependentUpon>user-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Backend\Dropdown.cs" />
+    <Compile Include="Backend\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\.DS_Store" />
+    <Content Include="assets\img\.DS_Store" />
+    <Content Include="assets\img\bg\.DS_Store" />
+    <Content Include="assets\vendor\.DS_Store" />
+    <Content Include="assets\vendor\css\.DS_Store" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-brands-400.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-brands-400.ttf" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-brands-400.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-brands-400.woff2" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-regular-400.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-regular-400.ttf" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-regular-400.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-regular-400.woff2" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-solid-900.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-solid-900.ttf" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-solid-900.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\fa-solid-900.woff2" />
+    <Content Include="assets\vendor\fonts\ionicons\ionicons.eot" />
+    <Content Include="assets\vendor\fonts\ionicons\ionicons.ttf" />
+    <Content Include="assets\vendor\fonts\ionicons\ionicons.woff" />
+    <Content Include="assets\vendor\fonts\ionicons\ionicons.woff2" />
+    <Content Include="assets\vendor\fonts\linearicons\Linearicons-Free.eot" />
+    <Content Include="assets\vendor\fonts\linearicons\Linearicons-Free.ttf" />
+    <Content Include="assets\vendor\fonts\linearicons\Linearicons-Free.woff" />
+    <Content Include="assets\vendor\fonts\linearicons\Linearicons-Free.woff2" />
+    <Content Include="assets\vendor\fonts\open-iconic\open-iconic.eot" />
+    <Content Include="assets\vendor\fonts\open-iconic\open-iconic.otf" />
+    <Content Include="assets\vendor\fonts\open-iconic\open-iconic.ttf" />
+    <Content Include="assets\vendor\fonts\open-iconic\open-iconic.woff" />
+    <Content Include="assets\vendor\fonts\pe-icon-7-stroke\Pe-icon-7-stroke.eot" />
+    <Content Include="assets\vendor\fonts\pe-icon-7-stroke\Pe-icon-7-stroke.ttf" />
+    <Content Include="assets\vendor\fonts\pe-icon-7-stroke\Pe-icon-7-stroke.woff" />
+    <Content Include="assets\vendor\js\xlsx.full.min.map" />
+    <Content Include="assets\css\check-warranty\styles.min.css.map" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\coverage-service - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service-dev - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service-dev - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service-uat - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service-uat - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\coverage-service-uat - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - FTP2.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - ReadOnly - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\screen-warranty-uat - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - FTP2.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\ScreenWarranty - Web Deploy2.pubxml" />
+    <None Include="Properties\PublishProfiles\xcite-pos-test - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\xcite-pos-test - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\xcite-pos-test - Web Deploy.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="Backend\MasterPage.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Definitions\Definitions.csproj">
+      <Project>{46503f1f-798f-4c37-962d-7d5a94998bad}</Project>
+      <Name>Definitions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{c368833b-4a91-40e4-9d4d-e35c2d7ffaf1}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{46eabb71-7623-4797-88c2-7007604bb82f}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\js\view\service-coverage\" />
+    <Folder Include="assets\js\XcCoverage\" />
+    <Folder Include="Files\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55547</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55547/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

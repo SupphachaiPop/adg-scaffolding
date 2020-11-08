@@ -1,0 +1,269 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.Master.cs" Inherits="adg_scaffolding.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html class="default-style">
+<head runat="server">
+    <title>Coverage Service</title>
+    <link rel="shortcut icon" href="http://xcite.co.th//img/logo/logo.png" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
+
+
+    <!-- Icon fonts -->
+    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/ionicons.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/linearicons.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/open-iconic.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/pe-icon-7-stroke.css">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/assets/vendor/css/bootstrap-material.css" class="theme-settings-bootstrap-css">
+    <link rel="stylesheet" href="/assets/vendor/css/appwork-material.css" class="theme-settings-appwork-css">
+    <link rel="stylesheet" href="/assets/vendor/css/theme-corporate-material.css" class="theme-settings-theme-css">
+    <link rel="stylesheet" href="/assets/vendor/css/colors-material.css" class="theme-settings-colors-css">
+    <link rel="stylesheet" href="/assets/vendor/css/uikit.css">
+    <link rel="stylesheet" href="/assets/css/demo.css">
+
+    <script src="/assets/vendor/js/material-ripple.js"></script>
+    <script src="/assets/vendor/js/layout-helpers.js"></script>
+
+    <!-- Core scripts -->
+    <script src="/assets/vendor/js/pace.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Libs -->
+    <link rel="stylesheet" href="/assets/vendor/libs/select2/select2.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/smartwizard/smartwizard.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/photoswipe/photoswipe.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables/datatables.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/dropzone/dropzone.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/bootstrap-sweetalert/bootstrap-sweetalert.css">
+    <link rel="stylesheet" href="/assets/css/tabs.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <script>
+            //On UpdatePanel Refresh
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            if (prm != null) {
+                prm.add_endRequest(function (sender, e) {
+                    if (sender._postBackSettings.panelsToUpdate != null) {
+                        $('.datatables-demo').dataTable();
+                    }
+                });
+            };
+        </script>
+        <div class="page-loader">
+            <div class="bg-primary"></div>
+        </div>
+
+        <!-- Layout wrapper -->
+        <div class="layout-wrapper layout-2">
+            <div class="layout-inner">
+
+                <!-- Layout sidenav -->
+                <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-dark">
+
+                    <!-- Brand demo (see /assets/css/demo/demo.css) -->
+                    <div class="app-brand demo">
+                        <a href="javascript:void();" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Coverage Service
+                        </a>
+                        <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
+                            <i class="ion ion-md-menu align-middle"></i>
+                        </a>
+                    </div>
+
+                    <div class="sidenav-divider mt-0"></div>
+
+                    <!-- Links -->
+
+                    <ul class="sidenav-inner py-1">
+                        <asp:Repeater ID="rptMenu" runat="server" OnItemDataBound="rptMenu_ItemDataBound">
+                            <ItemTemplate>
+                                <li id="liParent" runat="server" class="sidenav-item">
+                                    <a id="parentUrlMenu" runat="server" href="javascript:void(0)" class="sidenav-link sidenav-toggle">
+                                        <i class="sidenav-icon ion ion-ios-folder"></i>
+                                        <div id="parentLabel" runat="server" class="menu-font-size"></div>
+                                    </a>
+                                    <ul id="uiChild" runat="server" class="sidenav-menu">
+                                        <asp:Repeater ID="rptChildMenu" runat="server" OnItemDataBound="rptChildMenu_ItemDataBound">
+                                            <ItemTemplate>
+                                                <li class="sidenav-item">
+                                                    <a id="childUrlMenu" runat="server" href="/Backend/Administrator/Company/company-list.aspx" class="sidenav-link">
+                                                        <div id="childLabel" runat="server" class="menu-font-size"></div>
+                                                    </a>
+                                                </li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>
+                </div>
+                <!-- / Layout sidenav -->
+
+                <!-- Layout container -->
+                <div class="layout-container">
+                    <!-- Layout navbar -->
+                    <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x" id="layout-navbar">
+
+                        <!-- Brand demo (see /assets/css/demo/demo.css) -->
+                        <a href="javascript:void();" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
+                            <span class="app-brand-text demo font-weight-normal ml-2">Coverage Service</span>
+                        </a>
+
+                        <!-- Sidenav toggle (see /assets/css/demo/demo.css) -->
+                        <div class="layout-sidenav-toggle navbar-nav d-lg-none align-items-lg-center mr-auto">
+                            <a class="nav-item nav-link px-0 mr-lg-4" href="javascript:void(0)">
+                                <i class="ion ion-md-menu text-large align-middle"></i>
+                            </a>
+                        </div>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#layout-navbar-collapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="navbar-collapse collapse" id="layout-navbar-collapse">
+                            <!-- Divider -->
+                            <hr class="d-lg-none w-100 my-2">
+
+                            <div class="navbar-nav align-items-lg-center ml-auto">
+                                <div class="demo-navbar-user nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                        <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
+                                            <span class="px-1 mr-lg-2 ml-2 ml-lg-0">
+                                                <asp:Label ID="lblUsername" Style="color: black" runat="server" Text="John Doe"></asp:Label>
+                                            </span>
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <asp:LinkButton ID="log_out" runat="server" OnClick="log_out_Click" CssClass="dropdown-item">
+                                            <i class="ion ion-ios-log-out text-danger"></i>&nbsp; ออกจากระบบ</asp:LinkButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- / Layout navbar -->
+
+                    <!-- Layout content -->
+                    <div class="layout-content">
+                        <asp:ScriptManager ID="ScriptManager1" runat="server">
+                        </asp:ScriptManager>
+
+                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0">
+                            <ProgressTemplate>
+                                <div class="modal modal-fill-in fade show" style="display: block; padding-right: 17px;">
+                                    <div class="modal-dialog modal">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="progress m-3">
+                                                    <div class="progress-bar" style="width: 300%">กำลังดำเนินการ ...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-backdrop fade show"></div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+
+                        <!-- Content -->
+                        <asp:ContentPlaceHolder ID="FromPlaceHolder" runat="server">
+                        </asp:ContentPlaceHolder>
+
+                        <!-- / Content -->
+
+                        <!-- Layout footer -->
+                        <nav class="layout-footer footer bg-footer-theme">
+                            <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+                                <div class="pt-3">
+                                    <span class="footer-text font-weight-bolder">Coverage Service</span> ©
+                           
+                                </div>
+                            </div>
+                        </nav>
+                        <!-- / Layout footer -->
+
+                    </div>
+                    <!-- Layout content -->
+
+                </div>
+                <!-- / Layout container -->
+
+            </div>
+
+            <!-- Overlay -->
+            <div class="layout-overlay layout-sidenav-toggle"></div>
+        </div>
+        <!-- / Layout wrapper -->
+        <asp:ContentPlaceHolder ID="ModalPlaceHolder" runat="server" EnableViewState="true">
+        </asp:ContentPlaceHolder>
+    </form>
+
+
+    <!-- Core scripts -->
+    <script src="/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/assets/vendor/js/bootstrap.js"></script>
+    <script src="/assets/vendor/js/sidenav.js"></script>
+
+    <!-- Libs -->
+    <script src="/assets/vendor/libs/select2/select2.js"></script>
+    <script src="/assets/vendor/libs/photoswipe/photoswipe.js"></script>
+    <script src="/assets/vendor/libs/moment/moment.js"></script>
+    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="/assets/vendor/libs/datatables/datatables.js"></script>
+    <script src="/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="/assets/js/ui_button-groups.js"></script>
+    <script src="/assets/js/ui_modals.js"></script>
+
+    <!-- Demo -->
+    <script src="/assets/js/demo.js"></script>
+    <%--<script src="/assets/js/forms_file-upload-inquiry.js"></script>--%>
+    <script src="/assets/js/tables_datatables.js"></script>
+    <%--<script src="/assets/js/dashboards_dashboard-1.js"></script>--%>
+    <script src="/assets/vendor/libs/bootstrap-sweetalert/bootstrap-sweetalert.js"></script>
+    <script src="/assets/vendor/libs/bootbox/bootbox.js"></script>
+    <script src="/assets/js/ui_lightbox.js"></script>
+    <script src="/assets/js/shared/custom.js"></script>
+
+
+    <%-- XLSX for export on client side --%>
+    <script src="/assets/vendor/js/xlsx.full.min.js"></script>
+    <script src="/assets/vendor/js/FileSaver.js"></script>
+    <script src="/assets/vendor/js/download.js"></script>
+    <script src="/assets/js/export-xlsx.js"></script>
+
+
+    <script type="text/javascript">
+        function showProgress() {
+            $('<%= UpdateProgress1.ClientID  %>').show();
+        }
+        function hideProgress() {
+            $('<%= UpdateProgress1.ClientID  %>').hide();
+        }
+        function InitSelect2() {
+            $('.js-example-basic-single').select2();
+          }
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            InitSelect2();
+        });
+
+      
+    </script>
+</body>
+</html>
