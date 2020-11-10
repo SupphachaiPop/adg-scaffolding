@@ -1,0 +1,9 @@
+D:\adg-scaffolding\Entity\bin\Debug\netstandard2.0\Entity.deps.json
+D:\adg-scaffolding\Entity\bin\Debug\netstandard2.0\Entity.dll
+D:\adg-scaffolding\Entity\bin\Debug\netstandard2.0\Entity.pdb
+D:\adg-scaffolding\Entity\obj\Debug\netstandard2.0\Entity.AssemblyInfoInputs.cache
+D:\adg-scaffolding\Entity\obj\Debug\netstandard2.0\Entity.AssemblyInfo.cs
+D:\adg-scaffolding\Entity\obj\Debug\netstandard2.0\Entity.csproj.CoreCompileInputs.cache
+D:\adg-scaffolding\Entity\obj\Debug\netstandard2.0\Entity.dll
+D:\adg-scaffolding\Entity\obj\Debug\netstandard2.0\Entity.pdb
+D:\adg-scaffolding\Entity\obj\Debug\netstandard2.0\Entity.csprojAssemblyReference.cache

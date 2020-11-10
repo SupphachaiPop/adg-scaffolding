@@ -3,53 +3,51 @@ using System.Collections.Generic;
 using System.Text;
 using DAO.Backend;
 using Entity;
-using Entity.Backend;
 
 namespace Service.Backend
 {
-    public partial class dataService
+    public partial class DataService
     {
         DataDao dataDao = new DataDao();
-
-        public List<user> GetDataAll()
+        public List<user> GetUserList()
         {
-            return dataDao.GetDataAll();
+            return dataDao.GetUserList();
         }
 
-        public result_info_user GetDataByID(long id)
+        public result_info_user GetUserInfo(long id)
         {
-            return dataDao.GetDataByID(id);
+            return dataDao.GetInfoUser(id);
         }
 
-        public List<result_search_user> GetDataByCondition(param_search_user param)
+        public List<result_search_user> SearchUserList(param_search_user param)
         {
-            return dataDao.GetDataByCondition(param);
+            return dataDao.SearchUserList(param);
         }
 
 
-        public int InsertData(param_create_user entity)
+        public int InsertUser(param_create_user entity)
         {
-            return dataDao.InsertData(entity);
+            return dataDao.InsertUser(entity);
         }
 
-        public int UpdateData(param_create_user entity)
+        public int UpdateUser(param_create_user entity)
         {
-            return dataDao.UpdateData(entity);
+            return dataDao.UpdateUser(entity);
         }
 
-        public int UpdateDataStatus(user entity)
+        public int UpdateStatusUser(user entity)
         {
-            return dataDao.UpdateDataStatus(entity);
+            return dataDao.UpdateStatusUser(entity);
         }
 
-        public int DeleteData(user entity)
+        public int UpdateIsRefferedUser(user entity)
         {
-            return dataDao.DeleteData(entity);
+            return dataDao.UpdateStatusUser(entity);
         }
 
-        public bool CheckIsReferred(user entity)
+        public int DeleteUser(user entity)
         {
-            return dataDao.CheckIsReferred(entity);
+            return dataDao.DeleteUser(entity);
         }
     }
 }

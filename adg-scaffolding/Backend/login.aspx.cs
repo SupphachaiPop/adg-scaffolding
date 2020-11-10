@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entity.Backend;
 using Service.Backend;
 using Definitions;
 using Entity;
@@ -59,11 +58,11 @@ namespace adg_scaffolding.Backend
             }
         }
 
-        public UserEntity GetUserLogin()
-        {
-            UserEntity userEntity = new UserEntity();
-            userEntity = (UserEntity)Session["userLoginBackend"];
-            return userEntity;
-        }
+        //public UserEntity GetUserLogin()
+        //{
+        //    UserEntity userEntity = new UserEntity();
+        //    userEntity = (UserEntity)Session["userLoginBackend"];
+        //    return userEntity;
+        //}
     }
 }

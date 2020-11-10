@@ -40,7 +40,7 @@ namespace adg_scaffolding.Backend.Administrator.User
 
             try
             {
-                
+
                 JQDT_Order firstOrder = order.FirstOrDefault();
                 int TotalRecords = 0;
                 string OrderField = firstOrder.column;
@@ -76,12 +76,12 @@ namespace adg_scaffolding.Backend.Administrator.User
                                                           String Order,
                                                           String OrderDir)
         {
-            dataService dataService = new dataService();
+            DataService dataService = new DataService();
             List<result_search_user> userList = new List<result_search_user>();
 
             try
             {
-                userList = dataService.GetDataByCondition(param: param);
+                userList = dataService.SearchUserList(param: param);
                 userList = buildDataForDisplay(entities: userList);
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace adg_scaffolding.Backend.Administrator.User
         [WebMethod]
         public static bool UpdateStatus(string id, bool is_active)
         {
-            dataService dataService = new dataService();
+            DataService dataService = new DataService();
             user userEntity = new user();
             var user = userLogin();
 
@@ -122,7 +122,7 @@ namespace adg_scaffolding.Backend.Administrator.User
             userEntity.is_active = is_active;
             userEntity.modified_by = user.user_id;
 
-            if (dataService.UpdateDataStatus(userEntity) > 0)
+            if (dataService.UpdateStatusUser(userEntity) > 0)
             {
                 return true;
             }
@@ -133,27 +133,28 @@ namespace adg_scaffolding.Backend.Administrator.User
         [WebMethod]
         public static bool DeleteData(string id)
         {
-            dataService dataService = new dataService();
+            DataService dataService = new DataService();
             user userEntity = new user();
             var user = userLogin();
 
             userEntity.user_id = DecryptCode(id);
             userEntity.modified_by = user.user_id;
-
-            if (dataService.DeleteData(userEntity) > 0)
+            var isReferred = dataService.GetUserInfo(userEntity.user_id).is_referred;
+            if (!isReferred.Value)
             {
-                return true;
+                if (dataService.DeleteUser(userEntity) > 0)
+                {
+                    return true;
+                }
             }
-
             return false;
         }
-
-        public static user userLogin()
+        public static result_user_login userLogin()
         {
-            user user = new user();
+            result_user_login user = new result_user_login();
             if ((HttpContext.Current.Session["userLoginBackend"] != null))
             {
-                user = (user)HttpContext.Current.Session["userLoginBackend"];
+                user = (result_user_login)HttpContext.Current.Session["userLoginBackend"];
             }
 
             return user;

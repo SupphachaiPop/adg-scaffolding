@@ -12,7 +12,7 @@ namespace Service.Backend
 
         public result_user_login GetUserLogin(param_user_login param)
         {
-            return dataDao.GetUserLogin(param);
+            return dataDao.GetLoginUser(param);
         }
     }
 }

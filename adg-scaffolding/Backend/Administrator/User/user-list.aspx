@@ -15,8 +15,7 @@
                                     USER
                                 </small>
                             </div>
-                    <br />
-                    <asp:LinkButton ID="btnCreateUser" CssClass="btn btn-round  btn-success btn-sm mr-2" OnClick="btnCreateUser_Click" runat="server">
+                    <asp:LinkButton ID="btnCreateUser" CssClass="btn btn-success mt-4" OnClick="btnCreateUser_Click" runat="server">
                                 <span class="ion ion-md-add mr-2"></span>Create
                     </asp:LinkButton>
                 </h4>

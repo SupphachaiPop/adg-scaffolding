@@ -33,13 +33,13 @@ namespace adg_scaffolding.Backend.Administrator.User
 
         public void setDataToUIByID(Int32 ID)
         {
-            dataService dataService = new dataService();
+            DataService dataService = new DataService();
             result_info_user user = new result_info_user();
             UtilityCommon utilityCommon = new UtilityCommon();
             chkStatus.Checked = true;
             if (ID > 0)
             {
-                user = dataService.GetDataByID(ID);
+                user = dataService.GetUserInfo(ID);
                 if (user != null)
                 {
                     var passwordDecrypt = utilityCommon.DecryptData(encryptedText: user.password,
@@ -52,7 +52,7 @@ namespace adg_scaffolding.Backend.Administrator.User
                     txtLastname.Text = user.last_name;
                     txtNickName.Text = user.nick_name;
                     txtAddress.Text = user.address;
-                    txtPhone.Text = user.email;
+                    txtPhone.Text = user.phone;
                     txtEmail.Text = user.email;
                     txtComment.Text = user.comment;
                     chkStatus.Checked = ID != 0 ? user.is_active.Value : true;
@@ -69,7 +69,7 @@ namespace adg_scaffolding.Backend.Administrator.User
                 return;
             }
 
-            dataService dataService = new dataService();
+            DataService dataService = new DataService();
             param_create_user param = new param_create_user();
             UtilityCommon utilityCommon = new UtilityCommon();
             DateTime _now = DateTime.Now;
@@ -84,6 +84,7 @@ namespace adg_scaffolding.Backend.Administrator.User
             param.first_name = txtFirstname.Text;
             param.last_name = txtLastname.Text;
             param.nick_name = txtNickName.Text;
+            param.address = txtAddress.Text;
             param.phone = txtPhone.Text;
             param.email = txtEmail.Text;
             param.comment = txtComment.Text;
@@ -98,11 +99,11 @@ namespace adg_scaffolding.Backend.Administrator.User
             int success = 0;
             if (userId > 0)
             {
-                success = dataService.UpdateData(param);
+                success = dataService.UpdateUser(param);
             }
             else
             {
-                success = dataService.InsertData(param);
+                success = dataService.InsertUser(param);
             }
 
             if (success > 0)
@@ -119,13 +120,13 @@ namespace adg_scaffolding.Backend.Administrator.User
         }
         public bool validateForm(out string message)
         {
-            dataService dataService = new dataService();
-            List<user> userList = dataService.GetDataAll();
+            DataService dataService = new DataService();
+            List<user> userList = dataService.GetUserList();
             message = "";
 
             if (string.IsNullOrEmpty(txtUserName.Text.Trim()))
             {
-                message = "กรุณากรอก Username";
+                message = "กรุณากรอก ชื่อผู้ใช้งาน (Username)";
                 return false;
             }
 
@@ -135,7 +136,7 @@ namespace adg_scaffolding.Backend.Administrator.User
                 userList = userList.Where(i => i.user_id != userId).ToList();
                 if (userList.Any(i => i.username.Trim().Equals(txtUserName.Text.Trim())))
                 {
-                    message = "Username นี้มีอยู่ในระบบแล้ว";
+                    message = "ชื่อผู้ใช้งาน (Username) นี้มีอยู่ในระบบแล้ว";
                     return false;
                 }
             }
@@ -143,15 +144,37 @@ namespace adg_scaffolding.Backend.Administrator.User
             if (string.IsNullOrEmpty(txtPassword.Text.Trim()))
             {
                 txtPassword.Focus();
-                message = "กรุณากรอก Password";
+                message = "กรุณากรอกรหัสผ่าน (Password)";
                 return false;
             }
 
             if (ddlRole.SelectedValue == "0")
             {
-                message = "กรุณากรอก Company";
+                message = "กรุณากรอก Role";
                 return false;
             }
+
+            if (string.IsNullOrEmpty(txtFirstname.Text.Trim()))
+            {
+                txtFirstname.Focus();
+                message = "กรุณากรอกชื่อจริง (First Name)";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtLastname.Text.Trim()))
+            {
+                txtLastname.Focus();
+                message = "กรุณากรอกนามสกุล (Last Name)";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtAddress.Text.Trim()))
+            {
+                txtAddress.Focus();
+                message = "กรุณากรอกที่อยู่ (Address)";
+                return false;
+            }
+
 
             if (!string.IsNullOrEmpty(txtEmail.Text.Trim()))
             {
@@ -163,7 +186,7 @@ namespace adg_scaffolding.Backend.Administrator.User
                 }
                 catch
                 {
-                    message = "รูปแบบอีเมล์ไม่ถูกต้อง";
+                    message = "รูปแบบอีเมล์ไม่ถูกต้อง (Email)";
                     return false;
                 }
             }

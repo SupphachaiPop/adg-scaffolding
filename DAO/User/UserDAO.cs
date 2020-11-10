@@ -16,10 +16,10 @@ namespace DAO.Backend
             DBHelper = new DBHelper();
         }
 
-        public result_user_login GetUserLogin(param_user_login param)
+        public result_user_login GetLoginUser(param_user_login param)
         {
             result_user_login user = new result_user_login();
-
+            user.user_menu = new List<result_user_login_menu>();
             try
             {
                 using (DBHelper.CreateConnection())
@@ -30,7 +30,14 @@ namespace DAO.Backend
                         DBHelper.CreateParameters();
                         DBHelper.AddParam("username", param.username);
                         DBHelper.AddParam("password", param.password);
-                        user = DBHelper.SelectStoreProcedureFirst<result_user_login>("select_user_login");
+                        user = DBHelper.SelectStoreProcedureFirst<result_user_login>("select_login_user");
+
+                        if (user != null)
+                        {
+                            DBHelper.CreateParameters();
+                            DBHelper.AddParam("role_id", user.role_id);
+                            user.user_menu = DBHelper.SelectStoreProcedure<result_user_login_menu>("select_info_role_menu_by_role").Where(i=> i.is_display == true).ToList();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -50,7 +57,7 @@ namespace DAO.Backend
             return user;
         }
 
-        public List<user> GetDataAll()
+        public List<user> GetUserList()
         {
             List<user> res = new List<user>();
 
@@ -61,8 +68,7 @@ namespace DAO.Backend
                     try
                     {
                         DBHelper.OpenConnection();
-
-                        res = DBHelper.SelectStoreProcedure<user>("select_user").ToList();
+                        res = DBHelper.SelectStoreProcedure<user>("select_list_user").ToList();
                     }
                     catch (Exception ex)
                     {
@@ -82,7 +88,7 @@ namespace DAO.Backend
             return res;
         }
 
-        public List<result_search_user> GetDataByCondition(param_search_user param)
+        public List<result_search_user> SearchUserList(param_search_user param)
         {
             List<result_search_user> res = null;
 
@@ -117,39 +123,7 @@ namespace DAO.Backend
             return res;
         }
 
-        public bool CheckIsReferred(user user)
-        {
-            var isReferred = new bool();
-            try
-            {
-                using (DBHelper.CreateConnection())
-                {
-                    try
-                    {
-                        DBHelper.OpenConnection();
-                        DBHelper.CreateParameters();
-                        DBHelper.AddParam("user_id", user.user_id);
-                        isReferred = DBHelper.SelectStoreProcedureFirst<bool>("check_refrred_user");
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                    finally
-                    {
-                        DBHelper.CloseConnection();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return isReferred;
-        }
-
-        public result_info_user GetDataByID(long id)
+        public result_info_user GetInfoUser(long id)
         {
             result_info_user res = new result_info_user();
 
@@ -181,7 +155,7 @@ namespace DAO.Backend
             return res;
         }
 
-        public int InsertData(param_create_user entity)
+        public int InsertUser(param_create_user entity)
         {
             Int32 res = 0;
             var dateNow = DateTime.Now;
@@ -198,9 +172,9 @@ namespace DAO.Backend
                         DBHelper.AddParam("username", entity.username);
                         DBHelper.AddParam("password", entity.password);
                         DBHelper.AddParam("first_name", entity.first_name);
-                        DBHelper.AddParam("fullname", entity.last_name);
-                        DBHelper.AddParam("fullname", entity.nick_name);
-                        DBHelper.AddParam("fullname", entity.address);
+                        DBHelper.AddParam("last_name", entity.last_name);
+                        DBHelper.AddParam("nick_name", entity.nick_name);
+                        DBHelper.AddParam("address", entity.address);
                         DBHelper.AddParam("email", entity.email);
                         DBHelper.AddParam("phone", entity.phone);
                         DBHelper.AddParam("comment", entity.comment);
@@ -231,7 +205,7 @@ namespace DAO.Backend
             }
             return res;
         }
-        public int UpdateData(param_create_user entity)
+        public int UpdateUser(param_create_user entity)
         {
             Int32 res = 0;
 
@@ -249,9 +223,9 @@ namespace DAO.Backend
                         DBHelper.AddParam("username", entity.username);
                         DBHelper.AddParam("password", entity.password);
                         DBHelper.AddParam("first_name", entity.first_name);
-                        DBHelper.AddParam("fullname", entity.last_name);
-                        DBHelper.AddParam("fullname", entity.nick_name);
-                        DBHelper.AddParam("fullname", entity.address);
+                        DBHelper.AddParam("last_name", entity.last_name);
+                        DBHelper.AddParam("nick_name", entity.nick_name);
+                        DBHelper.AddParam("address", entity.address);
                         DBHelper.AddParam("email", entity.email);
                         DBHelper.AddParam("phone", entity.phone);
                         DBHelper.AddParam("comment", entity.comment);
@@ -279,7 +253,7 @@ namespace DAO.Backend
             return res;
         }
 
-        public int UpdateDataStatus(user entity)
+        public int UpdateStatusUser(user entity)
         {
             Int32 res = 0;
 
@@ -316,7 +290,46 @@ namespace DAO.Backend
             }
             return res;
         }
-        public int DeleteData(user entity)
+
+        public int UpdateRefferedUser(user entity)
+        {
+            Int32 res = 0;
+
+            try
+            {
+                using (DBHelper.CreateConnection())
+                {
+                    try
+                    {
+                        DBHelper.OpenConnection();
+                        DBHelper.CreateParameters();
+                        DBHelper.AddParamOut("success_row", res);
+                        DBHelper.AddParam("is_referred", entity.is_referred);
+                        DBHelper.AddParam("user_id", entity.user_id);
+                        DBHelper.AddParam("modified_by", entity.modified_by);
+                        DBHelper.AddParam("modified_date", dateNow);
+
+                        DBHelper.ExecuteStoreProcedure("update_reffered_user");
+                        res = DBHelper.GetParamOut<Int32>("success_row");
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        DBHelper.CloseConnection();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
+
+        public int DeleteUser(user entity)
         {
             Int32 res = 0;
             try

@@ -62,18 +62,6 @@
                                                     <asp:TextBox ID="txtRoleCode" CssClass="form-control form-control-md" runat="server" placeholder="Role Code"></asp:TextBox>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-xl-4 mb-4 col-sm-12" id="DropdownCompany" runat="server">
-                                                <div class="form-group">
-                                                    <label class="form-label form-label-sm text-uppercase">
-                                                        Company
-                                                <span class="text-danger">*</span>
-                                                    </label>
-                                                    <asp:DropDownList ID="ddlCompany" CssClass="form-control form-control-md text-uppercase  js-example-basic-single" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged" AutoPostBack="true" runat="server">
-                                                    </asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label form-label-sm text-uppercase">
@@ -83,8 +71,6 @@
                                                     <asp:TextBox ID="txtRoleName" CssClass="form-control form-control-md" runat="server" placeholder="Role Name"></asp:TextBox>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-lg-12 col-xl-12 mb-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label form-label-sm text-uppercase">Comment</label>

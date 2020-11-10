@@ -3,51 +3,51 @@ using System.Collections.Generic;
 using System.Text;
 using DAO.Backend;
 using Entity;
-using Entity.Backend;
 
 namespace Service.Backend
 {
-    public partial class dataService
+    public partial class DataService
     {
-        public List<role> GetDataAllRole()
+
+        public List<role> GetRoleList()
         {
-            return dataDao.GetDataAll();
+            return dataDao.GetRoleList();
         }
 
-        public result_info_role GetDataByID(long id)
+        public result_info_role GetRoleInfo(long id)
         {
-            return dataDao.GetDataByID(id);
+            return dataDao.GetRoleInfo(id);
         }
 
-        public List<result_search_role> GetDataByCondition(param_search_role param)
+        public List<result_search_role> SearchRoleList(param_search_role param)
         {
-            return dataDao.GetDataByCondition(param);
+            return dataDao.SearchRoleList(param);
         }
 
 
-        public int InsertData(param_create_role entity)
+        public int InsertRole(param_create_role entity)
         {
-            return dataDao.InsertData(entity);
+            return dataDao.InsertRole(entity);
         }
 
-        public int UpdateData(param_create_role entity)
+        public int UpdateRole(param_create_role entity)
         {
-            return dataDao.UpdateData(entity);
+            return dataDao.UpdateRole(entity);
         }
 
-        public int UpdateDataStatus(role entity)
+        public int UpdateStatusRole(role entity)
         {
-            return dataDao.UpdateDataStatus(entity);
+            return dataDao.UpdateStatusRole(entity);
         }
 
-        public int DeleteData(role entity)
+        public int DeleteRole(role entity)
         {
-            return dataDao.DeleteData(entity);
+            return dataDao.DeleteRole(entity);
         }
 
-        public bool CheckIsReferred(role entity)
+        public int UpdateReferredRole(role entity)
         {
-            return dataDao.CheckIsReferred(entity);
+            return dataDao.UpdateReferredRole(entity);
         }
     }
 }

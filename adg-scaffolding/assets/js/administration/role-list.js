@@ -25,7 +25,6 @@ $(function () {
             type: "POST",
             dataType: "json",
             data: function (d) {
-                d.company_id = $("select[id*=ddlCompany]").find(':selected').val();
                 d.is_active = $("select[id*=ddlStatus]").find(':selected').val();
                 d.txtSearch = $("input[id*=txtSearch]").val();
 
@@ -61,14 +60,14 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     if (type === 'display') {
-                        return '<label class="switcher switcher-sm" ><input id="chkStatus" type="checkbox" ' + (data ? "checked" : "") + ' class="switcher-input" value="' + row.role_encrypt + '"><span class="switcher-indicator"><span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span><span class="switcher-no"><span class="ion ion-md-close"></span></span></span></label>';
+                        return '<label class="switcher switcher-sm" ><input id="chkStatus" type="checkbox" ' + (data ? "checked" : "") + ' class="switcher-input" value="' + row.id + '"><span class="switcher-indicator"><span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span><span class="switcher-no"><span class="ion ion-md-close"></span></span></span></label>';
                     }
 
                     return data;
                 }
             },
             {
-                data: "role_encrypt", className: "text-center", orderable: false,
+                data: "id", className: "text-center", orderable: false,
                 render: function (data, type, row, meta) {
 
                     return renderCol_Tools(data, type, row, meta);
@@ -133,7 +132,7 @@ $(function () {
         var _this = $(this);
         var rowIndex = _this.attr('rIndex');
         var role = tblObj.rows(rowIndex).data()[0];
-        $("input[id*=hdfId]").val(role.role_encrypt);
+        $("input[id*=hdfId]").val(role.id);
         ShowModalShared('div[id=DeleteRecord]');
     });
 

@@ -10,7 +10,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Service.Backend;
 using Definitions.Static_Text;
-using Entity.Backend;
 
 namespace adg_scaffolding.Backend.Administrator.Role
 {
@@ -18,24 +17,7 @@ namespace adg_scaffolding.Backend.Administrator.Role
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            SetDataToDropDownList();
-            SetControlNotHeadOffice();
-        }
-        public void SetDataToDropDownList()
-        {
-            Dropdown dropdown = new Dropdown();
-            ddlCompany = dropdown.GetDropdownCompany(ddlCompany);
-        }
 
-        public void SetControlNotHeadOffice()
-        {
-            DropdownCompany.Attributes.Add("style", "display:block;");
-            var user = userLogin();
-            if (!user.is_manage)
-            {
-                ddlCompany.SelectedValue = user.company_id.ToString();
-                DropdownCompany.Attributes.Add("style", "display:none;");
-            }
         }
 
         protected void btnCreateRole_Click(object sender, EventArgs e)
@@ -50,49 +32,31 @@ namespace adg_scaffolding.Backend.Administrator.Role
                                                 int length,
                                                 List<JQDT_Order> order,
                                                 string txtSearch,
-                                                bool? is_active,
-                                                int? company_id)
+                                                bool? is_active)
         {
 
-            paramRoleEntity param = new paramRoleEntity();
-            DataTables<RoleEntity> result = new DataTables<RoleEntity>();
+            param_search_role param = new param_search_role();
+            DataTables<result_search_role> result = new DataTables<result_search_role>();
 
             try
             {
-                UtilityCommon utilityCommon = new UtilityCommon();
                 JQDT_Order firstOrder = order.FirstOrDefault();
-
                 int StartRec = start;
                 int TotalRecords = 0;
                 string OrderField = firstOrder.column;
                 string OrderDir = firstOrder.dir;
 
                 param.search = txtSearch.Trim();
-                param.company_id = company_id != 0 ? company_id : null;
                 param.is_active = is_active.HasValue ? is_active : null;
                 param.pageSize = length;
                 param.pageNumber = (StartRec + param.pageSize) / param.pageSize;
 
-                //check user Role type
-                var user = userLogin();
-                if (!user.is_manage)
-                {
-                    param.company_id = user.company_id;
-                }
-
-                List<RoleEntity> RoleList = LoadData(param: param,
+                List<result_search_role> RoleList = LoadData(param: param,
                                                       Order: OrderField,
                                                       OrderDir: OrderDir);
 
                 if (RoleList.Count() > 0)
                 {
-                    RoleList.ForEach(item =>
-                    {
-                        item.role_encrypt = utilityCommon.EncryptDataUrlEncoder(textData: item.role_id.ToString(),
-                                                                    encryptionkey: StaticKeys.DataEncrypteKey);
-
-                    });
-
                     TotalRecords = RoleList.Count();
                     result.draw = Convert.ToInt32(draw);
                     result.recordsTotal = TotalRecords;
@@ -108,51 +72,54 @@ namespace adg_scaffolding.Backend.Administrator.Role
             return result;
         }
 
-        private static List<RoleEntity> LoadData(paramRoleEntity param,
-                                                      String Order,
-                                                      String OrderDir)
+        private static List<result_search_role> LoadData(param_search_role param,
+                                                          String Order,
+                                                          String OrderDir)
         {
-            RoleService RoleService = new RoleService();
-            List<RoleEntity> RoleEntities = new List<RoleEntity>();
+            DataService dataService = new DataService();
+            List<result_search_role> roleList = new List<result_search_role>();
 
             try
             {
-                RoleEntities = RoleService.GetDataByCondition(param: param);
-                RoleEntities = buildDataForDisplay(entities: RoleEntities);
+                roleList = dataService.SearchRoleList(param: param);
+                roleList = buildDataForDisplay(roleList: roleList);
             }
             catch (Exception ex)
             {
                 throw;
             }
 
-            return RoleEntities;
+            return roleList;
         }
 
-        private static List<RoleEntity> buildDataForDisplay(List<RoleEntity> entities)
+        private static List<result_search_role> buildDataForDisplay(List<result_search_role> roleList)
         {
-            entities = entities.Select(e =>
+            UtilityCommon utilityCommon = new UtilityCommon();
+            roleList = roleList.Select(e =>
             {
                 e.role_code = !string.IsNullOrEmpty(e.role_code) ? e.role_code : Static_Text.DEFAULT_VALUE.DEFAULT_REPLACE_STRING_EMPTY;
                 e.role_name = !string.IsNullOrEmpty(e.role_name) ? e.role_name : Static_Text.DEFAULT_VALUE.DEFAULT_REPLACE_STRING_EMPTY;
                 e.comment = !string.IsNullOrEmpty(e.comment) ? e.comment : Static_Text.DEFAULT_VALUE.DEFAULT_REPLACE_STRING_EMPTY;
+                e.id = utilityCommon.EncryptDataUrlEncoder(textData: e.role_id.ToString(),
+                                                                   encryptionkey: StaticKeys.DataEncrypteKey);
                 return e;
 
             }).ToList();
 
-            return entities;
+            return roleList;
         }
 
         [WebMethod]
         public static string UpdateStatus(string id, bool is_active)
         {
-            RoleService RoleService = new RoleService();
-            RoleEntity RoleEntity = new RoleEntity();
+            DataService dataService = new DataService();
+            role role = new role();
 
             var user = userLogin();
-            RoleEntity.role_id = DecryptCode(id);
-            RoleEntity.is_active = is_active;
-            RoleEntity.modified_by = user.user_id;
-            if (RoleService.UpdateDataStatus(RoleEntity) > 0)
+            role.role_id = DecryptCode(id);
+            role.is_active = is_active;
+            role.modified_by = user.user_id;
+            if (dataService.UpdateStatusRole(role) > 0)
             {
                 return "success";
             }
@@ -163,16 +130,17 @@ namespace adg_scaffolding.Backend.Administrator.Role
         [WebMethod]
         public static bool DeleteData(string id)
         {
-            RoleService RoleService = new RoleService();
-            RoleEntity RoleEntity = new RoleEntity();
+            DataService dataService = new DataService();
+            role role = new role();
             var user = userLogin();
 
-            RoleEntity.role_id = DecryptCode(id);
-            RoleEntity.modified_by = user.user_id; ;
-            var isReferred = RoleService.CheckIsReferred(RoleEntity);
-            if (!isReferred)
+            role.role_id = DecryptCode(id);
+            role.modified_by = user.user_id;
+
+            var isReferred = dataService.GetRoleInfo(role.role_id).is_referred;
+            if (!isReferred.Value)
             {
-                if (RoleService.DeleteData(RoleEntity) > 0)
+                if (dataService.DeleteRole(role) > 0)
                 {
                     return true;
                 }
@@ -181,12 +149,12 @@ namespace adg_scaffolding.Backend.Administrator.Role
             return false;
         }
 
-        public static UserEntity userLogin()
+        public static result_user_login userLogin()
         {
-            UserEntity user = new UserEntity();
+            result_user_login user = new result_user_login();
             if ((HttpContext.Current.Session["userLoginBackend"] != null))
             {
-                user = (UserEntity)HttpContext.Current.Session["userLoginBackend"];
+                user = (result_user_login)HttpContext.Current.Session["userLoginBackend"];
             }
 
             return user;

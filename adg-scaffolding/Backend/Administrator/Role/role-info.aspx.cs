@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entity.Backend;
+using Entity;
 using Definitions;
 using Service.Backend;
 using System.Web.UI.HtmlControls;
@@ -18,79 +18,44 @@ namespace adg_scaffolding.Backend.Administrator.Role
             if (!IsPostBack)
             {
                 var roleId = GetIdFromQueryString();
-                SetDataToDropDownList();
-                SetControlNotHeadOffice();
                 setDataToUIByID(roleId);
             }
         }
+        public result_info_role GetDataRole(Int32 roleId)
+        {
+            DataService DataService = new DataService();
+            result_info_role role = new result_info_role();
+            role = DataService.GetRoleInfo(roleId);
 
-        public void SetControlNotHeadOffice()
-        {
-            var user = userLogin();
-            if (!user.is_manage)
-            {
-                ddlCompany.SelectedValue = user.company_id.ToString();
-                DropdownCompany.Attributes.Add("style", "display:none;");
-                setDataToRepeater(0, user.company_id);
-            }
-        }
-        public void SetDataToDropDownList()
-        {
-            Dropdown dropdown = new Dropdown();
-            ddlCompany = dropdown.GetDropdownCompany(ddlCompany);
-        }
-        public RoleEntity GetDataRole(Int32 roleId)
-        {
-            RoleService roleService = new RoleService();
-            RoleEntity roleEntity = new RoleEntity();
-            roleEntity = roleService.GetDataByID(roleId);
-
-            return roleEntity;
-        }
-        public List<RoleMenuEntity> GetDataRoleMenu(Int32 roleId, Int32 companyId)
-        {
-            RoleMenuService roleMenuService = new RoleMenuService();
-            List<RoleMenuEntity> roleMenuEntities = new List<RoleMenuEntity>();
-            roleMenuEntities = roleMenuService.GetDataByCondition(roleId, companyId);
-
-            return roleMenuEntities;
+            return role;
         }
         public void setDataToUIByID(Int32 ID)
         {
-            var companyId = 0;
             chkStatus.Checked = true;
-            if (ID != 0)
+            var role = GetDataRole(ID);
+            if (role != null)
             {
-                var roleEntity = GetDataRole(ID);
-                if (roleEntity != null)
-                {
-                    companyId = roleEntity.company_id;
-                    txtRoleCode.Text = roleEntity.role_code;
-                    ddlCompany.SelectedValue = companyId.ToString();
-                    txtRoleName.Text = roleEntity.role_name;
-                    txtComment.Text = roleEntity.comment;
-                    chkStatus.Checked = ID != 0 ? roleEntity.is_active : true;
-                }
+                txtRoleCode.Text = role.role_code;
+                txtRoleName.Text = role.role_name;
+                txtComment.Text = role.comment;
+                chkStatus.Checked = ID != 0 ? role.is_active.Value : true;
             }
-            setDataToRepeater(ID, companyId);
+            setDataToRepeater(ID,role.role_menu);
         }
 
-        public void setDataToRepeater(Int32 roleId, Int32 companyId)
+        public void setDataToRepeater(int roleId, List<result_info_role_menu> role_menus)
         {
-            List<RoleMenuEntity> roleMenuEntities = new List<RoleMenuEntity>();
-            roleMenuEntities = GetDataRoleMenu(roleId, companyId);
-
             rptRoleMenu.DataSource = null;
-            if (roleMenuEntities != null && roleMenuEntities.Count() > 0)
+            if (role_menus != null && role_menus.Count() > 0)
             {
-                rptRoleMenu.DataSource = roleMenuEntities;
+                rptRoleMenu.DataSource = role_menus.OrderBy(i => i.menu_seq_render);
                 rptRoleMenu.DataBind();
             }
         }
 
         protected void rptRoleMenu_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            RoleMenuEntity copmpanyMenuEntity = (RoleMenuEntity)e.Item.DataItem;
+            result_info_role_menu role_menu = (result_info_role_menu)e.Item.DataItem;
 
             Label lblroleMenuId = (Label)e.Item.FindControl("lblroleMenuId");
             Label lblMenuId = (Label)e.Item.FindControl("lblMenuId");
@@ -98,16 +63,17 @@ namespace adg_scaffolding.Backend.Administrator.Role
             HtmlInputCheckBox chkStatus = (HtmlInputCheckBox)e.Item.FindControl("chkStatus");
             HiddenField hdfStatus = (HiddenField)e.Item.FindControl("hdfStatus");
 
-            lblroleMenuId.Text = copmpanyMenuEntity.role_item_id.ToString();
-            lblMenuId.Text = copmpanyMenuEntity.menu_id.ToString();
-            lblMenuName.Text = copmpanyMenuEntity.menu_name.ToString();
-            hdfStatus.Value = copmpanyMenuEntity.is_active.ToString();
+            lblroleMenuId.Text = role_menu.role_menu_id.ToString();
+            lblMenuId.Text = role_menu.menu_id.ToString();
+            lblMenuName.Text = role_menu.menu_name_render.ToString();
+            hdfStatus.Value = role_menu.is_display.ToString();
 
-             if (copmpanyMenuEntity.is_display == true)
+            role_menu.is_display = role_menu.is_display != null ? role_menu.is_display : false;
+            if (role_menu.is_display == true)
             {
                 chkStatus.Attributes.Add("checked", "checked");
             }
-            else if (copmpanyMenuEntity.is_display == false)
+            else if (role_menu.is_display == false)
             {
                 chkStatus.Attributes.Remove("checked");
             }
@@ -126,28 +92,29 @@ namespace adg_scaffolding.Backend.Administrator.Role
                     return;
                 }
 
-                RoleService roleService = new RoleService();
-                RoleEntity roleEntity = new RoleEntity();
-                roleEntity.roleMenuEntities = new List<RoleMenuEntity>();
+                DataService DataService = new DataService();
+                param_create_role role = new param_create_role();
+                role.role_menu = new List<param_create_role_menu>();
 
                 var roleId = GetIdFromQueryString();
-                roleEntity.role_id = roleId;
-                roleEntity.role_code = txtRoleCode.Text;
-                roleEntity.role_name = txtRoleName.Text;
-                roleEntity.company_id = int.Parse(ddlCompany.SelectedValue);
-                roleEntity.comment = txtComment.Text;
-                roleEntity.is_active = chkStatus.Checked;
-                roleEntity.created_by = user.user_id;
-                roleEntity.modified_by = user.user_id;
-                roleEntity.roleMenuEntities = GetDataRoleMenu();
+                role.role_id = roleId;
+                role.role_code = txtRoleCode.Text;
+                role.role_name = txtRoleName.Text;
+                role.comment = txtComment.Text;
+                role.is_referred = false;
+                role.is_active = chkStatus.Checked;
+                role.is_deleted = false;
+                role.created_by = user.user_id;
+                role.modified_by = user.user_id;
+                role.role_menu = GetDataRoleMenu();
 
                 if (roleId > 0)
                 {
-                    success = roleService.UpdateData(roleEntity);
+                    success = DataService.UpdateRole(role);
                 }
                 else
                 {
-                    success = roleService.InsertData(roleEntity);
+                    success = DataService.InsertRole(role);
                 }
             }
             catch (Exception ex)
@@ -170,8 +137,8 @@ namespace adg_scaffolding.Backend.Administrator.Role
         }
         public bool validateForm(out string message)
         {
-            RoleService roleService = new RoleService();
-            var roleList = roleService.GetDataAll();
+            DataService DataService = new DataService();
+            var roleList = DataService.GetRoleList();
             message = "";
 
             if (roleList != null && roleList.Count > 0)
@@ -203,18 +170,13 @@ namespace adg_scaffolding.Backend.Administrator.Role
                 message = "กรุณากรอก role Name";
                 return false;
             }
-            if (ddlCompany.SelectedValue == "0")
-            {
-                message = "กรุณากรอก Company";
-                return false;
-            }
 
             return true;
         }
-        public List<RoleMenuEntity> GetDataRoleMenu()
+        public List<param_create_role_menu> GetDataRoleMenu()
         {
             var user = userLogin();
-            List<RoleMenuEntity> roleMenuEntities = new List<RoleMenuEntity>();
+            List<param_create_role_menu> role_menus = new List<param_create_role_menu>();
 
             for (int item = 0; item < rptRoleMenu.Items.Count; item++)
             {
@@ -223,9 +185,9 @@ namespace adg_scaffolding.Backend.Administrator.Role
                 HtmlInputCheckBox chkStatus = (HtmlInputCheckBox)rptRoleMenu.Items[item].FindControl("chkStatus");
                 HiddenField hdfStatus = (HiddenField)rptRoleMenu.Items[item].FindControl("hdfStatus");
 
-                roleMenuEntities.Add(new RoleMenuEntity
+                role_menus.Add(new param_create_role_menu
                 {
-                    role_item_id = int.Parse(lblroleMenuId.Text),
+                    role_menu_id = int.Parse(lblroleMenuId.Text),
                     menu_id = int.Parse(lblMenuId.Text),
                     is_display = chkStatus.Checked,
                     created_by = user.user_id,
@@ -234,7 +196,7 @@ namespace adg_scaffolding.Backend.Administrator.Role
                 });
             }
 
-            return roleMenuEntities;
+            return role_menus;
         }
         protected void lbnBack_Click(object sender, EventArgs e)
         {
@@ -245,12 +207,12 @@ namespace adg_scaffolding.Backend.Administrator.Role
             Response.Redirect(StaticUrl.RoleListUrl, false);
         }
 
-        public UserEntity userLogin()
+        public static result_user_login userLogin()
         {
-            UserEntity user = new UserEntity();
+            result_user_login user = new result_user_login();
             if ((HttpContext.Current.Session["userLoginBackend"] != null))
             {
-                user = (UserEntity)HttpContext.Current.Session["userLoginBackend"];
+                user = (result_user_login)HttpContext.Current.Session["userLoginBackend"];
             }
 
             return user;
@@ -268,13 +230,6 @@ namespace adg_scaffolding.Backend.Administrator.Role
                                                               encryptionkey: StaticKeys.DataEncrypteKey);
 
             return id;
-        }
-
-        protected void ddlCompany_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var roleId = GetIdFromQueryString();
-            setDataToRepeater(roleId, int.Parse(ddlCompany.SelectedValue));
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
     }
 }

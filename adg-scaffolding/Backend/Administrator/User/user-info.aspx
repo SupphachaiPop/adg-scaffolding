@@ -91,18 +91,19 @@
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
                                                 Nick Name
-                                                <span class="text-danger">*</span>
                                             </label>
                                             <asp:TextBox ID="txtNickName" CssClass="form-control form-control-md" runat="server" placeholder="Firstname"></asp:TextBox>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Address
+                                    <div class="row col-lg-12 col-xl-12 mb-12 col-sm-12">
+                                        <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label form-label-sm text-uppercase">
+                                                    Address
                                                  <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:TextBox ID="txtAddress" CssClass="form-control form-control-md" TextMode="MultiLine" Rows="3" runat="server" placeholder="Address"></asp:TextBox>
+                                                </label>
+                                                <asp:TextBox ID="txtAddress" CssClass="form-control form-control-md" TextMode="MultiLine" Rows="3" runat="server" placeholder="Address"></asp:TextBox>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">

@@ -38,7 +38,7 @@ namespace adg_scaffolding
                 if (Session["userLoginBackend"] != null)
                 {
                     lblUsername.Text = UserLogin.username.ToString();
-                    setMenuByRole();
+                    setUserMenu();
                 }
                 else
                 {
@@ -54,42 +54,45 @@ namespace adg_scaffolding
             userLogin = (result_user_login)Session["userLoginBackend"];
             return userLogin;
         }
-        private void setMenuByRole()
+        private void setUserMenu()
         {
-            //RoleMenuService roleMenuService = new RoleMenuService();
-            //List<RoleMenuMasterEntity> menuMasterEntities = new List<RoleMenuMasterEntity>();
-            //UserEntity userEntity = (UserEntity)Session["userLoginBackend"];
-            //menuMasterEntities = roleMenuService.GetMenuByRole(role_id: userEntity.role_id);
+            result_user_login userLogin = GetLogin();
+            List<result_user_login_menu> masterMenu = new List<result_user_login_menu>();
 
-            //rptMenu.DataSource = menuMasterEntities;
-            //rptMenu.DataBind();
+            masterMenu = userLogin.user_menu.Where(i => i.parent_menu_id == null).OrderBy(o => o.seq).ToList();
+            masterMenu.ForEach(i =>
+            {
+                i.childmenu = userLogin.user_menu.Where(o => o.parent_menu_id == i.menu_id).OrderBy(o => o.seq).ToList();
+            });
+            rptMenu.DataSource = masterMenu;
+            rptMenu.DataBind();
         }
         protected void rptMenu_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            //RoleMenuMasterEntity item = (RoleMenuMasterEntity)e.Item.DataItem;
+            result_user_login_menu item = (result_user_login_menu)e.Item.DataItem;
 
-            //HtmlGenericControl liParent = (HtmlGenericControl)e.Item.FindControl("liParent");
-            //HtmlAnchor parentUrlMenu = (HtmlAnchor)e.Item.FindControl("parentUrlMenu");
-            //HtmlGenericControl parentLabel = (HtmlGenericControl)e.Item.FindControl("parentLabel");
-            //Repeater rptChildMenu = (Repeater)e.Item.FindControl("rptChildMenu");
+            HtmlGenericControl liParent = (HtmlGenericControl)e.Item.FindControl("liParent");
+            HtmlAnchor parentUrlMenu = (HtmlAnchor)e.Item.FindControl("parentUrlMenu");
+            HtmlGenericControl parentLabel = (HtmlGenericControl)e.Item.FindControl("parentLabel");
+            Repeater rptChildMenu = (Repeater)e.Item.FindControl("rptChildMenu");
 
-            //parentUrlMenu.HRef = string.IsNullOrEmpty(item.parent_url) ? StaticUrl.DEFAULT_EMPTY_URL : item.parent_url.Trim();
-            //parentLabel.InnerHtml = item.parent_menu_name;
+            parentUrlMenu.HRef = string.IsNullOrEmpty(item.menu_url) ? StaticUrl.DEFAULT_EMPTY_URL : item.menu_url.Trim();
+            parentLabel.InnerHtml = item.menu_name;
 
-            //// child menu
-            //rptChildMenu.DataSource = item.child_menu;
-            //rptChildMenu.DataBind();
+            // child menu
+            rptChildMenu.DataSource = item.childmenu;
+            rptChildMenu.DataBind();
 
         }
         protected void rptChildMenu_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            //RoleMenuMasterEntity item = (RoleMenuMasterEntity)e.Item.DataItem;
-            ////HtmlGenericControl uiChild = (HtmlGenericControl)e.Item.FindControl("uiChild");
-            //HtmlAnchor childUrlMenu = (HtmlAnchor)e.Item.FindControl("childUrlMenu");
-            //HtmlGenericControl childLabel = (HtmlGenericControl)e.Item.FindControl("childLabel");
+            result_user_login_menu item = (result_user_login_menu)e.Item.DataItem;
+            //HtmlGenericControl uiChild = (HtmlGenericControl)e.Item.FindControl("uiChild");
+            HtmlAnchor childUrlMenu = (HtmlAnchor)e.Item.FindControl("childUrlMenu");
+            HtmlGenericControl childLabel = (HtmlGenericControl)e.Item.FindControl("childLabel");
 
-            //childUrlMenu.HRef = item.url.Trim();
-            //childLabel.InnerHtml = item.menu_name;
+            childUrlMenu.HRef = item.menu_url.Trim();
+            childLabel.InnerHtml = item.menu_name;
         }
         protected void log_out_Click(object sender, EventArgs e)
         {

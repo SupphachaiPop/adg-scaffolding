@@ -16,8 +16,7 @@
                                     ROLE
                                 </small>
                             </div>
-                    <br />
-                    <asp:LinkButton ID="btnCreateRole" CssClass="btn btn-round  btn-success btn-sm mr-2" OnClick="btnCreateRole_Click" runat="server">
+                    <asp:LinkButton ID="btnCreateUser" CssClass="btn btn-success mt-4" OnClick="btnCreateRole_Click" runat="server">
                                 <span class="ion ion-md-add mr-2"></span>Create
                     </asp:LinkButton>
                 </h4>
@@ -30,17 +29,10 @@
                         <div class="col-md-12 col-lg-12 col-xl-12">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-6 col-xl-6 mb-12">
+                                    <div class="col-lg-9 col-xl-9 mb-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">Search</label>
                                             <asp:TextBox ID="txtSearch" CssClass="form-control form-control-md" runat="server" placeholder="ค้นหา"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3" id="DropdownCompany" runat="server">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">Company</label>
-                                            <asp:DropDownList ID="ddlCompany" CssClass="form-control form-control-sm text-uppercase js-example-basic-single" runat="server">
-                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-xl-3">
