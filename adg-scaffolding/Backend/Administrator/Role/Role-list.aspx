@@ -12,7 +12,7 @@
                 <h4 class="font-weight-bold py-3 mb-2">Role
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
-                                    <a href="javascript:void(0)" class="mr-1">XCITE COVERAGE</a>/
+                                    <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
                                     ROLE
                                 </small>
                             </div>

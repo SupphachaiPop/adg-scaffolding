@@ -63,7 +63,7 @@ namespace adg_scaffolding.Backend.Administrator.User
         protected void lbnSave_Click(object sender, EventArgs e)
         {
             string message = "";
-            if (!validateForm(out message))
+            if (!ValidateForm(out message))
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "openModalWaring('" + message + "');", true);
                 return;
@@ -118,7 +118,7 @@ namespace adg_scaffolding.Backend.Administrator.User
                 return;
             }
         }
-        public bool validateForm(out string message)
+        public bool ValidateForm(out string message)
         {
             DataService dataService = new DataService();
             List<user> userList = dataService.GetUserList();

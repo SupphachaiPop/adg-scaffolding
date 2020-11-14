@@ -8,9 +8,9 @@ namespace Entity
         public string product_code { get; set; } // product_code (length: 300)
         public string product_name { get; set; } // product_name (length: 300)
         public string product_description { get; set; } // product_description (length: 4000)
-        public int stock { get; set; } // stock
-        public decimal? product_cost { get; set; } // product_cost
-        public decimal? product_price { get; set; } // product_price
+        public int stock_qty { get; set; } // stock
+        public decimal product_cost_price { get; set; } // product_cost
+        public decimal product_sale_price { get; set; } // product_price
         public string comment { get; set; } // comment (length: 4000)
         public int? created_by { get; set; } // created_by
         public System.DateTime? created_date { get; set; } // created_date

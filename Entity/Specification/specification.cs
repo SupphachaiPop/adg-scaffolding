@@ -4,6 +4,7 @@ namespace Entity
     public class specification
     {
         public int specification_id { get; set; } // specification_id (Primary key)
+        public string specification_code { get; set; } // specification_code (length: 300)
         public string specification_name { get; set; } // specification_name (length: 300)
         public string comment { get; set; } // comment (length: 4000)
         public int? created_by { get; set; } // created_by

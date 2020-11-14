@@ -86,7 +86,7 @@ namespace adg_scaffolding.Backend.Administrator.Role
 
             try
             {
-                if (!validateForm(out message))
+                if (!ValidateForm(out message))
                 {
                     ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "openModalWaring('" + message + "');", true);
                     return;
@@ -135,7 +135,7 @@ namespace adg_scaffolding.Backend.Administrator.Role
                 return;
             }
         }
-        public bool validateForm(out string message)
+        public bool ValidateForm(out string message)
         {
             DataService DataService = new DataService();
             var roleList = DataService.GetRoleList();

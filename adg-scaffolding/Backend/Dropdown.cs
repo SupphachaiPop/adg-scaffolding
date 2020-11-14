@@ -14,19 +14,60 @@ namespace adg_scaffolding.Backend
         public DropDownList GetDropdownRole(DropDownList dropdown)
         {
             DataService dataService = new DataService();
-            var role = dataService.GetRoleList();
-            if (role.Count() > 0)
+            var roleList = dataService.GetRoleList();
+            if (roleList.Count() > 0)
             {
-                role = role.Where(i => i.is_active == true).ToList();
-                dropdown.DataSource = role;
-                role.Insert(0, new role
+                dropdown.DataSource = roleList;
+                roleList.Insert(0, new role
                 {
                     role_id = 0,
-                    role_name = "-- Select --"
+                    role_name = "-- Select --",
+                    is_active = true
                 });
 
                 dropdown.DataValueField = "role_id";
                 dropdown.DataTextField = "role_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!roleList.Where(i => i.role_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
+            }
+
+            return dropdown;
+        }
+        #endregion
+
+        #region Role 
+        public DropDownList GetDropdownSpecification(DropDownList dropdown)
+        {
+            DataService dataService = new DataService();
+            var specificationList = dataService.GetSpecificationList();
+            if (specificationList.Count() > 0)
+            {
+                dropdown.DataSource = specificationList;
+                specificationList.Insert(0, new specification
+                {
+                    specification_id = 0,
+                    specification_name = "-- Select --"
+                });
+
+                dropdown.DataValueField = "specification_id";
+                dropdown.DataTextField = "specification_name";
+
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!specificationList.Where(i => i.specification_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
                 dropdown.DataBind();
             }
 
