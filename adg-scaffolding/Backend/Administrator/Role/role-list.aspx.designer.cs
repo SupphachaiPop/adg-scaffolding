@@ -24,13 +24,13 @@ namespace adg_scaffolding.Backend.Administrator.Role
         protected global::System.Web.UI.UpdatePanel upnInboud;
 
         /// <summary>
-        /// btnCreateUser control.
+        /// btnCreateRole control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCreateUser;
+        protected global::System.Web.UI.WebControls.LinkButton btnCreateRole;
 
         /// <summary>
         /// hdfId control.

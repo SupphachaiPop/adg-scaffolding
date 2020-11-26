@@ -9,14 +9,14 @@
         <ContentTemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
-                <h4 class="font-weight-bold py-3 mb-2">Role
+                <h4 class="font-weight-bold py-3 mb-2">ROLE
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
                                     <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
                                     ROLE
                                 </small>
                             </div>
-                    <asp:LinkButton ID="btnCreateUser" CssClass="btn btn-success mt-4" OnClick="btnCreateRole_Click" runat="server">
+                    <asp:LinkButton ID="btnCreateRole" CssClass="btn btn-success mt-4" OnClick="btnCreateRole_Click" runat="server">
                                 <span class="ion ion-md-add mr-2"></span>Create
                     </asp:LinkButton>
                 </h4>

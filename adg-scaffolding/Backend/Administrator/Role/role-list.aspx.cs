@@ -13,6 +13,7 @@ using Definitions.Static_Text;
 
 namespace adg_scaffolding.Backend.Administrator.Role
 {
+    [System.Web.Script.Services.ScriptService]
     public partial class role_list : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)

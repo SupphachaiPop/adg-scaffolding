@@ -144,13 +144,13 @@ namespace adg_scaffolding.Backend.Administrator.User
             if (string.IsNullOrEmpty(txtPassword.Text.Trim()))
             {
                 txtPassword.Focus();
-                message = "กรุณากรอกรหัสผ่าน (Password)";
+                message = "กรุณากรอก รหัสผ่าน (Password)";
                 return false;
             }
 
             if (ddlRole.SelectedValue == "0")
             {
-                message = "กรุณากรอก Role";
+                message = "กรุณากรอก บทบาทพนักงาน (Role)";
                 return false;
             }
 

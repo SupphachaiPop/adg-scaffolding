@@ -5,16 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FromPlaceHolder" runat="server">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        function clearFilter() {
-            $('#inbound-info').dataTable({
-                paging: false,
-                destroy: true,
-                deferRender: true,
-            });
-            $('#inbound-info').dataTable().fnFilter('');
-        }
-    </script>
+
 
     <!-- Content -->
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -100,7 +91,7 @@
                                     <div class="tab-pane fade" id="feature" role="tabpanel" aria-labelledby="feature-tab">
                                         <hr class="mb-3">
                                         <div class="card-datatable table-responsive">
-                                            <table class="datatables-demo table table-striped table-hover table-bordered">
+                                            <table id="tblRoleMenu" class="datatables-demo table table-striped table-hover table-bordered">
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th class="tbw-10">Menu Name</th>
@@ -169,6 +160,9 @@
             document.getElementById("pSuccess").innerHTML = msg;
             $('#ModalSuccess').modal('show');
         }
+
+       
+
     </script>
 
     <div class="modal fade" id="ModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

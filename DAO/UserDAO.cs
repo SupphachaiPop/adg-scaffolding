@@ -123,7 +123,7 @@ namespace DAO.Backend
             return res;
         }
 
-        public result_info_user GetInfoUser(long id)
+        public result_info_user GetUserInfo(long id)
         {
             result_info_user res = new result_info_user();
 

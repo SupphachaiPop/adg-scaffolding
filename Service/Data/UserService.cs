@@ -16,7 +16,7 @@ namespace Service.Backend
 
         public result_info_user GetUserInfo(long id)
         {
-            return dataDao.GetInfoUser(id);
+            return dataDao.GetUserInfo(id);
         }
 
         public List<result_search_user> SearchUserList(param_search_user param)
@@ -40,9 +40,9 @@ namespace Service.Backend
             return dataDao.UpdateStatusUser(entity);
         }
 
-        public int UpdateIsRefferedUser(user entity)
+        public int UpdateRefferedUser(user entity)
         {
-            return dataDao.UpdateStatusUser(entity);
+            return dataDao.UpdateRefferedUser(entity);
         }
 
         public int DeleteUser(user entity)

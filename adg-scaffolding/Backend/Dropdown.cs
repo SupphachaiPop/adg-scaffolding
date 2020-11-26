@@ -43,7 +43,7 @@ namespace adg_scaffolding.Backend
         }
         #endregion
 
-        #region Role 
+        #region Specification 
         public DropDownList GetDropdownSpecification(DropDownList dropdown)
         {
             DataService dataService = new DataService();
@@ -69,6 +69,39 @@ namespace adg_scaffolding.Backend
                     }
                 };
                 dropdown.DataBind();
+            }
+
+            return dropdown;
+        }
+        #endregion
+
+        #region Role 
+        public DropDownList GetDropdownWarehouse(DropDownList dropdown)
+        {
+            DataService dataService = new DataService();
+            var warehouseList = dataService.GetWarehouseList();
+            if (warehouseList.Count() > 0)
+            {
+                dropdown.DataSource = warehouseList;
+                warehouseList.Insert(0, new warehouse
+                {
+                    warehouse_id = 0,
+                    warehouse_name = "-- Select --",
+                    is_active = true
+                });
+
+                dropdown.DataValueField = "warehouse_id";
+                dropdown.DataTextField = "warehouse_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!warehouseList.Where(i => i.warehouse_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
             }
 
             return dropdown;

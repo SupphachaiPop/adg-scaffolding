@@ -192,13 +192,13 @@ namespace adg_scaffolding.Backend.Product_Management.Product
                 if (string.IsNullOrEmpty(txtProductCode.Text.Trim()))
                 {
                     txtProductCode.Focus();
-                    message = "กรุณากรอก Product Code";
+                    message = "กรุณากรอก รหัสสินค้า (Product Code)";
                     return false;
                 }
                 if (string.IsNullOrEmpty(txtProductName.Text.Trim()))
                 {
                     txtProductName.Focus();
-                    message = "กรุณากรอก Product Name";
+                    message = "กรุณากรอก ชื่อสินค้า (Product Name)";
                     return false;
                 }
 
@@ -206,13 +206,13 @@ namespace adg_scaffolding.Backend.Product_Management.Product
                 productList = productList.Where(i => i.product_id != productId).ToList();
                 if (productList.Any(i => i.product_code.Trim().Equals(txtProductCode.Text.Trim())))
                 {
-                    message = "Product Code นี้มีอยู่ในระบบแล้ว”";
+                    message = "รหัสสินค้า (Product Code) นี้มีอยู่ในระบบแล้ว";
                     return false;
                 }
 
                 if (productList.Any(i => i.product_name.Trim().Equals(txtProductName.Text.Trim())))
                 {
-                    message = "Product Name นี้มีอยู่ในระบบแล้ว”";
+                    message = "ชื่อสินค้า (Product Name) นี้มีอยู่ในระบบแล้ว";
                     return false;
                 }
             }
@@ -220,25 +220,25 @@ namespace adg_scaffolding.Backend.Product_Management.Product
             if (string.IsNullOrEmpty(txtStock.Text.Trim()))
             {
                 txtStock.Focus();
-                message = "กรุณากรอก Stock";
+                message = "กรุณากรอก จำนวนสินค้าคงค้าง (Stock)";
                 return false;
             }
             if (ddlSpecification.SelectedValue == "0")
             {
                 ddlSpecification.Focus();
-                message = "กรุณากรอก Specification";
+                message = "กรุณาเลือก ลักษณะเฉพาะสินค้า (Specification) ";
                 return false;
             }
             if (string.IsNullOrEmpty(txtCostPrice.Text.Trim()))
             {
                 txtCostPrice.Focus();
-                message = "กรุณากรอก Cost Price";
+                message = "กรุณากรอก ต้นทุนสินค้า (Cost Price)";
                 return false;
             }
             if (string.IsNullOrEmpty(txtSalePrice.Text.Trim()))
             {
                 txtSalePrice.Focus();
-                message = "กรุณากรอก Sale Price";
+                message = "กรุณากรอก ราคาขายสินค้า (Sale Price)";
                 return false;
             }
 

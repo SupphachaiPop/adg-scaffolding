@@ -1,8 +1,8 @@
-var urlList = "/Backoffice/MasterData/Warranty/warranty-list.aspx";
+var urlList = "/Backend/Warehouse-Management/Warehouse/Warehouse-list.aspx";
+var urlInfo = "/Backend/Warehouse-Management/Warehouse/Warehouse-info.aspx";
 var msg;
-var tblId = '#tblSWWarranty';
+var tblId = '#tblWarehouse';
 var tblObj;
-var isExport = false;
 
 $(function () {
     var numberRenderer = $.fn.dataTable.render.number(',', '.', 0).display;
@@ -25,10 +25,9 @@ $(function () {
             type: "POST",
             dataType: "json",
             data: function (d) {
-                d.isExport = isExport;
-                d.textWarrantyName = $("input[id*=txtWarrantyName]").val();
-                d.textWarrantyCode = $("input[id*=txtWarrantyCode]").val();
-                //d.textFieldSearch = $("input[type=search]").val();
+                //d.company_id = $("select[id*=ddlCompany]").find(':selected').val();
+                d.is_active = $("select[id*=ddlStatus]").find(':selected').val();
+                d.txtSearch = $("input[id*=txtSearch]").val();
 
                 return JSON.stringify(d);
             },
@@ -39,25 +38,26 @@ $(function () {
                 json.data = json.d.data;
 
                 var return_data = json;
+                console.log(return_data.data);
                 return return_data.data;
             }
         },
         columns: [
             {
-                data: "warranty_code",
-                orderable: true
+                data: "warehouse_code",
+                orderable: false,
             },
             {
-                data: "warranty_name",
-                orderable: true
+                data: "warehouse_name",
+                orderable: false,
             },
             {
-                data: "warranty_day",
-                orderable: true
+                data: "phone",
+                orderable: false,
             },
             {
-                data: "warranty_terms",
-                orderable: true
+                data: "comment",
+                orderable: false
             },
             {
                 data: "is_active",
@@ -65,14 +65,14 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     if (type === 'display') {
-                        return '<label class="switcher switcher-sm"><input id="chkStatus" type="checkbox" ' + (data ? "checked" : "") + ' class="switcher-input" value="' + row.warranty_id + '"><span class="switcher-indicator"><span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span><span class="switcher-no"><span class="ion ion-md-close"></span></span></span></label>';
+                        return '<label class="switcher switcher-sm"><input id="chkStatus" type="checkbox" ' + (data ? "checked" : "") + ' class="switcher-input" value="' + row.id + '"><span class="switcher-indicator"><span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span><span class="switcher-no"><span class="ion ion-md-close"></span></span></span></label>';
                     }
 
                     return data;
                 }
             },
             {
-                data: "warranty_id", className: "text-center", orderable: false,
+                data: "id", className: "text-center", orderable: false,
                 render: function (data, type, row, meta) {
 
                     return renderCol_Tools(data, type, row, meta);
@@ -94,18 +94,6 @@ $(function () {
         return moment(data).format("DD/MM/YYYY");
     };
 
-    //function renderCol_CustomerInfo(data, type, row, meta) {
-    //    var ret = '';
-    //    var br = '<br />'
-    //    var idCard = '<b>เลขบัตรประชาชน: </b>' + row.sw_id_card;
-    //    var name = '<b>ชื่อ-นามสกุล: </b>' + row.sw_customer_name;
-
-    //    ret += idCard;
-    //    ret += br + name;
-
-    //    return ret;
-    //}
-
     function renderCol_Number(data, type, row, meta) {
 
         return numberRenderer(data);
@@ -113,12 +101,12 @@ $(function () {
 
     function renderCol_Tools(data, type, row, meta) {
         var ret = '';
-        var btnDelete = '<button type="button" id="btnDelete" rIndex="' + meta.row + '" class="btn btn-danger text-uppercase"><i class="ion ion-md-close"></i></button>';
-        //var aView = '<a href="' + urlInfo + '?ID=' + data + '" class="btn btn-primary mr-1">View</a>';
+        var btnDelete = '<button type="button" id="btnDelete"  rIndex="' + meta.row + '" class="btn btn-danger text-uppercase"><i class="ion ion-md-close"></i></button>';
+        var aView = '<a href="' + urlInfo + '?ID=' + data + '" class="btn btn-primary mr-1"><i class="ion ion-md-search"></i></a>';
 
         if (type === 'display') {
 
-            ret += '<div class="btn-group btn-group-sm">' + btnDelete;
+            ret += '<div class="btn-group btn-group-sm">' + aView + btnDelete;
             ret += '</div>';
 
             return ret;
@@ -128,15 +116,6 @@ $(function () {
     };
 
     $("button[id*=btnSearch]").click(function () {
-        //var msg;
-
-        //if (!IsValidCompareDate('input[id*=txtStartDate]', 'input[id*=txtEndDate]')) {
-        //    msg = 'วันที่ลงทะเบียน (จากวันที่) ต้องน้อยกว่าหรือเท่ากับ วันที่ลงทะเบียน (ถึงวันที่)';
-        //    WarningAlertWithFocus(msg, 'input[id*=txtStartDate]');
-
-        //    return;
-        //}
-
         tblObj.ajax.reload();
     });
 
@@ -157,17 +136,16 @@ $(function () {
     $(tblId + ' tbody').on('click', 'td button', function () {
         var _this = $(this);
         var rowIndex = _this.attr('rIndex');
-        var warranty = tblObj.rows(rowIndex).data()[0];
+        var User = tblObj.rows(rowIndex).data()[0];
 
-        $("input[id*=hdfWarrantyId]").val(warranty.warranty_id);
+        $("input[id*=hdfId]").val(User.id);
         ShowModalShared('div[id=DeleteRecord]');
     });
 
     $(tblId + ' tbody').on('change', 'input.switcher-input', function () {
-        var sw_warranty_id = $(this).attr('value');
+        var id = $(this).attr('value');
         var checked = $(this).prop('checked');
-        var entity = { sw_warranty_id: parseInt(sw_warranty_id), is_active: checked };
-        console.log(entity);
+        var entity = { id: id, is_active: checked };
         $.ajax({
             type: "POST",
             url: urlList + '/UpdateStatus',
@@ -189,16 +167,12 @@ $(function () {
             }
         });
     });
-
-    //SetControlPicker('input[id*=txtStartDate]');
-    //SetControlPicker('input[id*=txtEndDate]');
 });
 
-
 function DeleteData() {
-    var hdfWarrantyId = $("input[id*=hdfWarrantyId]");
+    var hdfId = $("input[id*=hdfId]");
     var entity = {
-        id: parseInt(hdfWarrantyId.val())
+        id: hdfId.val()
     };
 
     $.ajax({
@@ -207,17 +181,25 @@ function DeleteData() {
         data: JSON.stringify(entity),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function () {
-            msg = 'ทำรายการสำเร็จ';
+        success: function (result) {
+            console.log(result.d);
+            if (result.d == true) {
+                msg = 'ลบรายการสำเร็จ';
+                openModalSuccess(msg);
+                tblObj.ajax.reload();
+            }
+            else {
+                msg = 'ลบรายการไม่สำเร็จ<br/>เนื่องจากรายการนี้ถูกนำไปอ้างอิงในเอากสารอื่น';
+                openModalFail(msg)
+            }
 
-            SuccessAlertWithReloadTableObj(msg, tblObj);
             HideModal('div[id=DeleteRecord]');
             HideProgressBar('div[id*=UpdateProgress1]');
         },
         error: function () {
-            msg = 'ทำรายการไม่สำเร็จ';
-
-            ErrorAlert(msg.toUpperCase());
+            msg = 'ลบรายการไม่สำเร็จ';
+            openModalFail(msg)
+            HideModal('div[id=DeleteRecord]');
             HideProgressBar('div[id*=UpdateProgress1]');
         },
     });

@@ -4,6 +4,8 @@ namespace Entity
     public class customer
     {
         public int customer_id { get; set; } // customer_id (Primary key)
+
+        public string customer_code { get; set; } // customer_name (length: 300)
         public string customer_name { get; set; } // customer_name (length: 300)
         public string tax_no { get; set; } // tax_no (length: 20)
         public string address { get; set; } // address (length: 300)

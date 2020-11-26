@@ -14,6 +14,14 @@ namespace Definitions
         public const string SpecificationInfoUrl = "/Backend/Product-Management/Specification/specification-info.aspx";
         public const string ProductListUrl = "/Backend/Product-Management/Product/product-list.aspx";
         public const string ProductInfoUrl = "/Backend/Product-Management/Product/product-info.aspx";
+        public const string WarehouseListUrl = "/Backend/Warehouse-Management/Warehouse/warehouse-list.aspx";
+        public const string WarehouseInfoUrl = "/Backend/Warehouse-Management/Warehouse/warehouse-info.aspx";
+        public const string LocationListUrl = "/Backend/Warehouse-Management/Location/location-list.aspx";
+        public const string LocationInfoUrl = "/Backend/Warehouse-Management/Location/location-info.aspx";
+        public const string CustomerListUrl = "/Backend/Customer/customer-list.aspx";
+        public const string CustomerInfoUrl = "/Backend/Customer/customer-info.aspx"; 
+        public const string DeliveryListUrl = "/Backend/Delivery/Delivery-list.aspx";
+        public const string DeliveryInfoUrl = "/Backend/Delivery/Delivery-info.aspx";
 
         public const string DEFAULT_EMPTY_URL = "javascript:void(0);";
         public const string BASE_URL = "/Backend";

@@ -40,7 +40,7 @@ namespace adg_scaffolding.Backend.Administrator.Role
                 txtComment.Text = role.comment;
                 chkStatus.Checked = ID != 0 ? role.is_active.Value : true;
             }
-            setDataToRepeater(ID,role.role_menu);
+            setDataToRepeater(ID, role.role_menu);
         }
 
         public void setDataToRepeater(int roleId, List<result_info_role_menu> role_menus)
@@ -147,13 +147,13 @@ namespace adg_scaffolding.Backend.Administrator.Role
                 roleList = roleList.Where(i => i.role_id != roleId).ToList();
                 if (roleList.Any(i => i.role_code.Trim().Equals(txtRoleCode.Text.Trim())))
                 {
-                    message = "role Code นี้มีอยู่ในระบบแล้ว”";
+                    message = "รหัสบทบาทพนักงาน (Role Code) นี้มีอยู่ในระบบแล้ว”";
                     return false;
                 }
 
                 if (roleList.Any(i => i.role_name.Trim().Equals(txtRoleName.Text.Trim())))
                 {
-                    message = "role Name นี้มีอยู่ในระบบแล้ว”";
+                    message = "ชื่อบทบาทพนักงาน (Role Name) นี้มีอยู่ในระบบแล้ว”";
                     return false;
                 }
             }
@@ -161,13 +161,13 @@ namespace adg_scaffolding.Backend.Administrator.Role
             if (string.IsNullOrEmpty(txtRoleCode.Text.Trim()))
             {
                 txtRoleCode.Focus();
-                message = "กรุณากรอก role Code";
+                message = "กรุณากรอก รหัสบทบาทพนักงาน (Role Code)";
                 return false;
             }
             if (string.IsNullOrEmpty(txtRoleName.Text.Trim()))
             {
                 txtRoleName.Focus();
-                message = "กรุณากรอก role Name";
+                message = "กรุณากรอก ชื่อบทบาทพนักงาน (Role Name)";
                 return false;
             }
 

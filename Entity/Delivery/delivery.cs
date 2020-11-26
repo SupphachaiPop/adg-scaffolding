@@ -5,6 +5,7 @@ namespace Entity
     public class delivery
     {
         public int delivery_id { get; set; } // delivery_id (Primary key)
+        public string delivery_code { get; set; } // delivery_name (length: 300)
         public string delivery_name { get; set; } // delivery_name (length: 300)
         public string tax_no { get; set; } // tax_no (length: 20)
         public string address { get; set; } // address (length: 300)

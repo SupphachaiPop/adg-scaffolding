@@ -203,6 +203,10 @@
     <Content Include="assets\img\uikit\s7edge-3.jpg" />
     <Content Include="assets\img\uikit\s7edge-4.jpg" />
     <Content Include="assets\img\uikit\sunglasses.jpg" />
+    <Content Include="assets\js\customer\customer-list1.js" />
+    <Content Include="assets\js\delivery\delivery-list.js" />
+    <Content Include="assets\js\warehouseManagement\location-list.js" />
+    <Content Include="assets\js\warehouseManagement\warehouse-list.js" />
     <Content Include="assets\js\productManagement\specification-list.js" />
     <Content Include="assets\js\productManagement\product-list.js" />
     <Content Include="assets\js\administration\user-list.js" />
@@ -216,7 +220,6 @@
     <Content Include="assets\js\charts_mapael.js" />
     <Content Include="assets\js\charts_morrisjs.js" />
     <Content Include="assets\js\charts_sparkline.js" />
-    <Content Include="assets\js\customer\customer-list.js" />
     <Content Include="assets\js\dashboards_dashboard-1.js" />
     <Content Include="assets\js\dashboards_dashboard-2.js" />
     <Content Include="assets\js\dashboards_dashboard-3.js" />
@@ -273,7 +276,6 @@
     <Content Include="assets\js\portfolio.js" />
     <Content Include="assets\js\shared\custom.js" />
     <Content Include="assets\js\shop.js" />
-    <Content Include="assets\js\sparepart\sparepart-list.js" />
     <Content Include="assets\js\tables_bootstrap-table.js" />
     <Content Include="assets\js\tables_datatables.js" />
     <Content Include="assets\js\ui_app-brand.js" />
@@ -293,8 +295,6 @@
     <Content Include="assets\js\ui_tooltips.js" />
     <Content Include="assets\js\ui_tour.js" />
     <Content Include="assets\js\ui_treeview.js" />
-    <Content Include="assets\js\view\claim\import-claim-data.js" />
-    <Content Include="assets\js\view\warranty\warranty-list.js" />
     <Content Include="assets\vendor\css\appwork-material.css" />
     <Content Include="assets\vendor\css\bootstrap-material.css" />
     <Content Include="assets\vendor\css\colors-material.css" />
@@ -530,10 +530,18 @@
     <Content Include="Backend\Administrator\Role\role-list.aspx" />
     <Content Include="Backend\Administrator\User\user-info.aspx" />
     <Content Include="Backend\Administrator\User\user-list.aspx" />
+    <Content Include="Backend\Customer\customer-list.aspx" />
+    <Content Include="Backend\Delivery\delivery-info.aspx" />
+    <Content Include="Backend\Delivery\delivery-list.aspx" />
     <Content Include="Backend\Product-Management\Product\product-info.aspx" />
     <Content Include="Backend\Product-Management\Product\product-list.aspx" />
+    <Content Include="Backend\Customer\customer-info.aspx" />
     <Content Include="Backend\Product-Management\Specification\specification-info.aspx" />
     <Content Include="Backend\Product-Management\Specification\specification-list.aspx" />
+    <Content Include="Backend\Warehouse-Management\Location\location-info.aspx" />
+    <Content Include="Backend\Warehouse-Management\Location\location-list.aspx" />
+    <Content Include="Backend\Warehouse-Management\Warehouse\warehouse-info.aspx" />
+    <Content Include="Backend\Warehouse-Management\Warehouse\warehouse-list.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -566,6 +574,27 @@
     <Compile Include="Backend\Administrator\User\user-list.aspx.designer.cs">
       <DependentUpon>user-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Backend\Customer\customer-list.aspx.cs">
+      <DependentUpon>customer-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Customer\customer-list.aspx.designer.cs">
+      <DependentUpon>customer-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Delivery\delivery-info.aspx.cs">
+      <DependentUpon>delivery-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Delivery\delivery-info.aspx.designer.cs">
+      <DependentUpon>delivery-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Delivery\delivery-list.aspx.cs">
+      <DependentUpon>delivery-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Delivery\delivery-list.aspx.designer.cs">
+      <DependentUpon>delivery-list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\IsReferred.cs" />
     <Compile Include="Backend\Product-Management\Product\product-info.aspx.cs">
       <DependentUpon>product-info.aspx</DependentUpon>
@@ -581,6 +610,13 @@
     <Compile Include="Backend\Product-Management\Product\product-list.aspx.designer.cs">
       <DependentUpon>product-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Backend\Customer\customer-info.aspx.cs">
+      <DependentUpon>customer-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Customer\customer-info.aspx.designer.cs">
+      <DependentUpon>customer-info.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\Product-Management\Specification\specification-info.aspx.cs">
       <DependentUpon>specification-info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -594,6 +630,31 @@
     </Compile>
     <Compile Include="Backend\Product-Management\Specification\specification-list.aspx.designer.cs">
       <DependentUpon>specification-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Location\location-info.aspx.cs">
+      <DependentUpon>location-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Location\location-info.aspx.designer.cs">
+      <DependentUpon>location-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Location\location-list.aspx.cs">
+      <DependentUpon>location-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Location\location-list.aspx.designer.cs">
+      <DependentUpon>location-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Warehouse\warehouse-info.aspx.cs">
+      <DependentUpon>warehouse-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Warehouse\warehouse-info.aspx.designer.cs">
+      <DependentUpon>warehouse-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Warehouse\warehouse-list.aspx.cs">
+      <DependentUpon>warehouse-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Warehouse-Management\Warehouse\warehouse-list.aspx.designer.cs">
+      <DependentUpon>warehouse-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Backend\Dropdown.cs" />
@@ -698,7 +759,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\js\view\service-coverage\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <PropertyGroup>
