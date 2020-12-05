@@ -35,7 +35,7 @@ namespace adg_scaffolding.Backend.Delivery
                 {
                     lblDeliveryId.Text = ID.ToString();
                     txtDeliveryName.Text = delivery.delivery_name;
-                    txtDeliveryName.Text = delivery.delivery_code;
+                    txtDeliveryCode.Text = delivery.delivery_code;
                     txtTaxNo.Text = delivery.tax_no;
                     txtAddress.Text = delivery.address;
                     txtPhone.Text = delivery.phone;
@@ -106,12 +106,12 @@ namespace adg_scaffolding.Backend.Delivery
 
             if (string.IsNullOrEmpty(txtDeliveryCode.Text.Trim()))
             {
-                message = "กรุณากรอก รหัสลูกค้า (delivery Code)";
+                message = "กรุณากรอก รหัสบริษัทขนส่ง (delivery Code)";
                 return false;
             }
             if (string.IsNullOrEmpty(txtDeliveryName.Text.Trim()))
             {
-                message = "กรุณากรอก ชื่อลูกค้า (delivery Name)";
+                message = "กรุณากรอก ชื่อบริษัทขนส่ง (delivery Name)";
                 return false;
             }
 
@@ -121,13 +121,13 @@ namespace adg_scaffolding.Backend.Delivery
                 deliveryList = deliveryList.Where(i => i.delivery_id != deliveryId).ToList();
                 if (deliveryList.Any(i => i.delivery_name.Trim().Equals(txtDeliveryName.Text.Trim())))
                 {
-                    message = "ชื่อลูกค้า (delivery Name) นี้มีอยู่ในระบบแล้ว";
+                    message = "ชื่อลูกบริษัทขนส่ง (delivery Name) นี้มีอยู่ในระบบแล้ว";
                     return false;
                 }
 
                 if (deliveryList.Any(i => i.delivery_code.Trim().Equals(txtDeliveryCode.Text.Trim())))
                 {
-                    message = "รหัสลูกค้า (delivery Code) นี้มีอยู่ในระบบแล้ว";
+                    message = "รหัสบริษัทขนส่ง (delivery Code) นี้มีอยู่ในระบบแล้ว";
                     return false;
                 }
             }
@@ -137,13 +137,6 @@ namespace adg_scaffolding.Backend.Delivery
             {
                 txtTaxNo.Focus();
                 message = "กรุณากรอกเลขประจำตัวผู้เสียภาษี (Tax No)";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(txtEmail.Text.Trim()))
-            {
-                txtEmail.Focus();
-                message = "กรุณากรอกอีเมลล์ (Email)";
                 return false;
             }
 

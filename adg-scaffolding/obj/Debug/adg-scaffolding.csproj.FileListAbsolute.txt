@@ -1,5 +1,3 @@
-D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.csproj.CoreCompileInputs.cache
-D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.csprojAssemblyReference.cache
 D:\adg-scaffolding\adg-scaffolding\bin\adg-scaffolding.dll.config
 D:\adg-scaffolding\adg-scaffolding\bin\adg-scaffolding.dll
 D:\adg-scaffolding\adg-scaffolding\bin\adg-scaffolding.pdb
@@ -196,6 +194,8 @@ D:\adg-scaffolding\adg-scaffolding\bin\System.Security.AccessControl.xml
 D:\adg-scaffolding\adg-scaffolding\bin\System.Security.Permissions.xml
 D:\adg-scaffolding\adg-scaffolding\bin\System.Security.Principal.Windows.xml
 D:\adg-scaffolding\adg-scaffolding\bin\DAO.pdb
+D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.csprojAssemblyReference.cache
+D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.csproj.CoreCompileInputs.cache
 D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.csproj.CopyComplete
 D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.dll
 D:\adg-scaffolding\adg-scaffolding\obj\Debug\adg-scaffolding.pdb

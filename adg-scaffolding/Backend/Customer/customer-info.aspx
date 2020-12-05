@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row col-lg-12 col-xl-12 mb-12 col-sm-12">
+                                <div class="row">
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">

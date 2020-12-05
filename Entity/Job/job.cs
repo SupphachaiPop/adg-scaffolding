@@ -9,7 +9,6 @@ namespace Entity
         public int product_id { get; set; } // product_id
         public int amount { get; set; } // amount
         public int status_id { get; set; } // status_id
-        public int? parent_job_id { get; set; } // parent_job_id
         public string comment { get; set; } // comment (length: 4000)
         public int? created_by { get; set; } // created_by
         public System.DateTime? created_date { get; set; } // created_date

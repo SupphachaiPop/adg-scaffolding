@@ -204,6 +204,9 @@
     <Content Include="assets\img\uikit\s7edge-4.jpg" />
     <Content Include="assets\img\uikit\sunglasses.jpg" />
     <Content Include="assets\js\customer\customer-list1.js" />
+    <Content Include="assets\js\JobManagement\job-delivery-list.js" />
+    <Content Include="assets\js\JobManagement\job-cleaning-list.js" />
+    <Content Include="assets\js\JobManagement\job-repair-list.js" />
     <Content Include="assets\js\delivery\delivery-list.js" />
     <Content Include="assets\js\warehouseManagement\location-list.js" />
     <Content Include="assets\js\warehouseManagement\warehouse-list.js" />
@@ -533,11 +536,15 @@
     <Content Include="Backend\Customer\customer-list.aspx" />
     <Content Include="Backend\Delivery\delivery-info.aspx" />
     <Content Include="Backend\Delivery\delivery-list.aspx" />
+    <Content Include="Backend\Job-Management\Delivery\job-delivery-list.aspx" />
+    <Content Include="Backend\Job-Management\Cleaning\job-cleaning-list.aspx" />
+    <Content Include="Backend\Job-Management\Repair\job-repair-info.aspx" />
     <Content Include="Backend\Product-Management\Product\product-info.aspx" />
     <Content Include="Backend\Product-Management\Product\product-list.aspx" />
     <Content Include="Backend\Customer\customer-info.aspx" />
     <Content Include="Backend\Product-Management\Specification\specification-info.aspx" />
     <Content Include="Backend\Product-Management\Specification\specification-list.aspx" />
+    <Content Include="Backend\Job-Management\Repair\job-repair-list.aspx" />
     <Content Include="Backend\Warehouse-Management\Location\location-info.aspx" />
     <Content Include="Backend\Warehouse-Management\Location\location-list.aspx" />
     <Content Include="Backend\Warehouse-Management\Warehouse\warehouse-info.aspx" />
@@ -596,6 +603,26 @@
       <DependentUpon>delivery-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\IsReferred.cs" />
+    <Compile Include="Backend\Job-Management\Delivery\job-delivery-list.aspx.cs">
+      <DependentUpon>job-delivery-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Delivery\job-delivery-list.aspx.designer.cs">
+      <DependentUpon>job-delivery-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Cleaning\job-cleaning-list.aspx.cs">
+      <DependentUpon>job-cleaning-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Cleaning\job-cleaning-list.aspx.designer.cs">
+      <DependentUpon>job-cleaning-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Repair\job-repair-info.aspx.cs">
+      <DependentUpon>job-repair-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Repair\job-repair-info.aspx.designer.cs">
+      <DependentUpon>job-repair-info.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\Product-Management\Product\product-info.aspx.cs">
       <DependentUpon>product-info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -630,6 +657,13 @@
     </Compile>
     <Compile Include="Backend\Product-Management\Specification\specification-list.aspx.designer.cs">
       <DependentUpon>specification-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Repair\job-repair-list.aspx.cs">
+      <DependentUpon>job-repair-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Job-Management\Repair\job-repair-list.aspx.designer.cs">
+      <DependentUpon>job-repair-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\Warehouse-Management\Location\location-info.aspx.cs">
       <DependentUpon>location-info.aspx</DependentUpon>
@@ -776,7 +810,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55547</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55547/</IISUrl>
+          <IISUrl>http://localhost:55548/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,7 +1,7 @@
 var urlList = "/Backend/Customer/customer-list.aspx";
 var urlInfo = "/Backend/Customer/customer-info.aspx";
 var msg;
-var tblId = '#tblcustomer';
+var tblId = '#tblCustomer';
 var tblObj;
 
 $(function () {

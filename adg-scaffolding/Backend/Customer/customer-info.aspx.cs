@@ -35,7 +35,7 @@ namespace adg_scaffolding.Backend.Customer
                 {
                     lblCustomerId.Text = ID.ToString();
                     txtCustomerName.Text = customer.customer_name;
-                    txtCustomerName.Text = customer.customer_code;
+                    txtCustomerCode.Text = customer.customer_code;
                     txtTaxNo.Text = customer.tax_no;
                     txtAddress.Text = customer.address;
                     txtPhone.Text = customer.phone;
@@ -137,13 +137,6 @@ namespace adg_scaffolding.Backend.Customer
             {
                 txtTaxNo.Focus();
                 message = "กรุณากรอกเลขประจำตัวผู้เสียภาษี (Tax No)";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(txtEmail.Text.Trim()))
-            {
-                txtEmail.Focus();
-                message = "กรุณากรอกอีเมลล์ (Email)";
                 return false;
             }
 

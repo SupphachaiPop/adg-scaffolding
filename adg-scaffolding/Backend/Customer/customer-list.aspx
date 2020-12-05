@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="customer-list.aspx.cs" Inherits="adg_scaffolding.Backend.Customer.Customer_list" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="customer-list.aspx.cs" Inherits="adg_scaffolding.Backend.Customer.customer_list" %>
 
 <%@ MasterType VirtualPath="~/Backend/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

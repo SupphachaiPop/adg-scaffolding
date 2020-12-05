@@ -11,7 +11,7 @@ namespace adg_scaffolding.Backend.Customer
 {
 
 
-    public partial class Customer_list
+    public partial class customer_list
     {
 
         /// <summary>

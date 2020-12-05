@@ -14,7 +14,7 @@ using Definitions;
 namespace adg_scaffolding.Backend.Customer
 {
     [System.Web.Script.Services.ScriptService]
-    public partial class Customer_list : System.Web.UI.Page
+    public partial class customer_list : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

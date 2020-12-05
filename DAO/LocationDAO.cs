@@ -247,7 +247,7 @@ namespace DAO.Backend
                                         DBHelper.CreateParameters();
                                         // create zone
                                         DBHelper.AddParamOut("zone_id", i.zone_id);
-                                        DBHelper.AddParam("location_id", res);
+                                        DBHelper.AddParam("location_id", entity.location_id);
                                         DBHelper.AddParam("zone_code", i.zone_code);
                                         DBHelper.AddParam("zone_name", i.zone_name);
                                         DBHelper.AddParam("comment", i.comment);

@@ -75,7 +75,7 @@ namespace adg_scaffolding.Backend
         }
         #endregion
 
-        #region Role 
+        #region Warehouse 
         public DropDownList GetDropdownWarehouse(DropDownList dropdown)
         {
             DataService dataService = new DataService();
@@ -96,6 +96,43 @@ namespace adg_scaffolding.Backend
                 foreach (ListItem item in dropdown.Items)
                 {
                     if (!warehouseList.Where(i => i.warehouse_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
+            }
+
+            return dropdown;
+        }
+        #endregion
+
+        #region Product 
+        public DropDownList GetDropdownProduct(DropDownList dropdown)
+        {
+            DataService dataService = new DataService();
+            var productList = dataService.GetProductList();
+            if (productList.Count() > 0)
+            {
+                productList.ForEach(i =>
+                {
+                    i.product_name = i.product_code + " : " + i.product_name;
+                });
+                dropdown.DataSource = productList;
+                productList.Insert(0, new product
+                {
+                    product_id = 0,
+                    product_name = "-- Select --",
+                    is_active = true
+                });
+
+                dropdown.DataValueField = "product_id";
+                dropdown.DataTextField = "product_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!productList.Where(i => i.product_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
                     {
                         item.Attributes.Add("style", "color:gray;");
                         item.Attributes.Add("disabled", "disabled");
