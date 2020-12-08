@@ -9,9 +9,9 @@ using Definitions;
 using Entity;
 using ClosedXML;
 
-namespace adg_scaffolding.Backend.Job_Management.Repair
+namespace adg_scaffolding.Backend.Job_Management.Transfer
 {
-    public partial class job_repair_info : System.Web.UI.Page
+    public partial class job_transfer_info : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,35 +19,48 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             {
                 var zoneId = GetIdFromQueryString();
                 SetDropdownList();
-                setDataToUIByID(zoneId);
             }
         }
 
         public void SetDropdownList()
         {
             Dropdown dropdown = new Dropdown();
-            ddlProduct = dropdown.GetDropdownProduct(ddlProduct);
+            ddlLocationSource = dropdown.GetDropdownProduct(ddlLocationSource);
         }
 
-        public void setDataToUIByID(Int32 ID)
+        protected void ddlLocationSource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataService dataService = new DataService();
-            result_info_job_zone JobRepair = new result_info_job_zone();
-            UtilityCommon utilityCommon = new UtilityCommon();
-            if (ID > 0)
-            {
-                var statusId = (int)_BaseConst.status_job.repair_processing;
-                JobRepair = dataService.GetJobZoneInfo(zoneId: ID, statusId: statusId);
-                if (JobRepair != null)
-                {
-                    txtLocationName.Text = JobRepair.location_name;
-                    txtZoneName.Text = JobRepair.zone_name;
-                    setDataToRepeater(JobRepair.items);
-                }
-            }
+            Dropdown dropdown = new Dropdown();
+            ddlLocationDestination = dropdown.GetDropdownProduct(ddlLocationDestination);
+            ddlZoneSource = dropdown.GetDropdownProduct(ddlZoneSource);
+
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
 
-        protected void btnCreateJobRepair_Click(object sender, EventArgs e)
+        protected void ddlLocationDestination_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Dropdown dropdown = new Dropdown();
+            ddlZoneDestination = dropdown.GetDropdownProduct(ddlZoneDestination);
+
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
+        }
+
+        protected void ddlZoneSource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Dropdown dropdown = new Dropdown();
+            var selectSourceZoneId = int.Parse(ddlZoneSource.SelectedValue);
+            ddlProduct = dropdown.GetDropdownJob(ddlZoneDestination, selectSourceZoneId);
+            txtAmount.Text = "";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
+        }
+
+        protected void ddlProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtAmount.Text = "";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
+        }
+
+        protected void btnCreateJobTransfer_Click(object sender, EventArgs e)
         {
             string message = "";
             if (!ValidateForm(out message))
@@ -57,54 +70,27 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             }
 
             var res = PrepareDataBeforeToRepeater();
-            var newSelectProductId = int.Parse(ddlProduct.SelectedValue);
-            var newSelectProductAmount = int.Parse(txtAmount.Text);
-            if (res.Where(s => s.is_deleted == false).Count() > 0)
+            res.Add(new result_info_job_zone
             {
-                res.ForEach(i =>
-                {
-                    if (i.product_id == newSelectProductId)
-                    {
-                        i.amount += newSelectProductAmount;
-                    }
-                    else
-                    {
-                        res.Add(new result_info_job_zone_item
-                        {
-                            job_id = 0,
-                            product_id = int.Parse(ddlProduct.SelectedValue),
-                            product_name = ddlProduct.SelectedItem.ToString(),
-                            amount = int.Parse(txtAmount.Text),
-                            is_deleted = false
-                        });
-                    }
-                });
-            }
-            else
-            {
-                res.Add(new result_info_job_zone_item
-                {
-                    job_id = 0,
-                    product_id = int.Parse(ddlProduct.SelectedValue),
-                    product_name = ddlProduct.SelectedItem.ToString(),
-                    amount = int.Parse(txtAmount.Text),
-                    is_deleted = false
-                });
-            }
-
+                job_id = 0,
+                product_id = int.Parse(ddlProduct.SelectedValue),
+                product_name = ddlProduct.SelectedItem.ToString(),
+                amount = int.Parse(txtAmount.Text),
+                is_deleted = false
+            });
             setDataToRepeater(res);
 
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
 
-        public List<result_info_job_zone_item> PrepareDataBeforeToRepeater()
+        public List<result_info_job_zone> PrepareDataBeforeToRepeater()
         {
-            var res = new List<result_info_job_zone_item>();
+            var res = new List<result_info_job_zone>();
             var zoneId = GetIdFromQueryString();
             var jobList = GetDataJob(zoneId);
             jobList.ForEach(i =>
             {
-                var job = new result_info_job_zone_item();
+                var job = new result_info_job_zone();
                 job.job_id = i.job_id;
                 job.product_id = i.product_id;
                 job.product_name = i.product_name;
@@ -117,13 +103,13 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             return res;
         }
 
-        public void setDataToRepeater(List<result_info_job_zone_item> items)
+        public void setDataToRepeater(List<result_info_job_zone> jobTransferList)
         {
-            rptJobRepair.DataSource = null;
-            if (items != null && items.Count() > 0)
+            rptJobTransfer.DataSource = null;
+            if (jobTransferList != null && jobTransferList.Count() > 0)
             {
                 var seq = 1;
-                items.ForEach(i =>
+                jobTransferList.ForEach(i =>
                 {
                     if (!i.is_deleted.Value)
                     {
@@ -132,14 +118,14 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     }
 
                 });
-                rptJobRepair.DataSource = items.OrderBy(i => i.seq);
-                rptJobRepair.DataBind();
+                rptJobTransfer.DataSource = jobTransferList.OrderBy(i => i.seq);
+                rptJobTransfer.DataBind();
             }
         }
 
-        protected void rptJobRepair_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void rptJobTransfer_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            result_info_job_zone_item item = (result_info_job_zone_item)e.Item.DataItem;
+            result_info_job_zone item = (result_info_job_zone)e.Item.DataItem;
 
 
             Label lblNo = (Label)e.Item.FindControl("lblNo");
@@ -173,7 +159,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
 
         }
 
-        protected void rptJobRepair_ItemDataBound(object source, RepeaterCommandEventArgs e)
+        protected void rptJobTransfer_ItemDataBound(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
             {
@@ -214,7 +200,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             var user = userLogin();
             List<param_create_job> job = new List<param_create_job>();
 
-            foreach (RepeaterItem item in rptJobRepair.Items)
+            foreach (RepeaterItem item in rptJobTransfer.Items)
             {
                 Label lblJobId = (Label)item.FindControl("lblJobId");
                 Label lblProductId = (Label)item.FindControl("lblProductId");
@@ -229,7 +215,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     product_id = int.Parse(lblProductId.Text),
                     product_name = lblProductName.Text,
                     amount = int.Parse(lblAmount.Text),
-                    status_id = (int)_BaseConst.status_job.repair_processing,
+                    status_id = (int)_BaseConst.status_job.Transfer_processing,
                     comment = txtComment.Text,
                     created_by = user.user_id,
                     modified_by = user.user_id,
@@ -262,11 +248,11 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         }
         protected void lbnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobRepairListUrl, false);
+            Response.Redirect(StaticUrl.JobTransferListUrl, false);
         }
         protected void lblSuccess_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobRepairListUrl, false);
+            Response.Redirect(StaticUrl.JobTransferListUrl, false);
         }
         public int DecryptCode(string enCryptCode)
         {
@@ -293,5 +279,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         {
             return Request.QueryString["ID"] != null ? DecryptCode(Request.QueryString["ID"]) : 0;
         }
+
+
     }
 }

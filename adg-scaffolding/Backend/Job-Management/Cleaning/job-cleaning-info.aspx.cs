@@ -9,9 +9,9 @@ using Definitions;
 using Entity;
 using ClosedXML;
 
-namespace adg_scaffolding.Backend.Job_Management.Repair
+namespace adg_scaffolding.Backend.Job_Management.Cleaning
 {
-    public partial class job_repair_info : System.Web.UI.Page
+    public partial class job_cleaning_info : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,22 +32,22 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         public void setDataToUIByID(Int32 ID)
         {
             DataService dataService = new DataService();
-            result_info_job_zone JobRepair = new result_info_job_zone();
+            result_info_job_zone JobCleaning = new result_info_job_zone();
             UtilityCommon utilityCommon = new UtilityCommon();
             if (ID > 0)
             {
-                var statusId = (int)_BaseConst.status_job.repair_processing;
-                JobRepair = dataService.GetJobZoneInfo(zoneId: ID, statusId: statusId);
-                if (JobRepair != null)
+                var statusId = (int)_BaseConst.status_job.cleaning_processing;
+                JobCleaning = dataService.GetJobZoneInfo(zoneId: ID, statusId: statusId);
+                if (JobCleaning != null)
                 {
-                    txtLocationName.Text = JobRepair.location_name;
-                    txtZoneName.Text = JobRepair.zone_name;
-                    setDataToRepeater(JobRepair.items);
+                    txtLocationName.Text = JobCleaning.location_name;
+                    txtZoneName.Text = JobCleaning.zone_name;
+                    setDataToRepeater(JobCleaning.items);
                 }
             }
         }
 
-        protected void btnCreateJobRepair_Click(object sender, EventArgs e)
+        protected void btnCreateJobCleaning_Click(object sender, EventArgs e)
         {
             string message = "";
             if (!ValidateForm(out message))
@@ -57,6 +57,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             }
 
             var res = PrepareDataBeforeToRepeater();
+
             var newSelectProductId = int.Parse(ddlProduct.SelectedValue);
             var newSelectProductAmount = int.Parse(txtAmount.Text);
             if (res.Where(s => s.is_deleted == false).Count() > 0)
@@ -91,7 +92,6 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     is_deleted = false
                 });
             }
-
             setDataToRepeater(res);
 
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
@@ -117,13 +117,13 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             return res;
         }
 
-        public void setDataToRepeater(List<result_info_job_zone_item> items)
+        public void setDataToRepeater(List<result_info_job_zone_item> item)
         {
-            rptJobRepair.DataSource = null;
-            if (items != null && items.Count() > 0)
+            rptJobCleaning.DataSource = null;
+            if (item != null && item.Count() > 0)
             {
                 var seq = 1;
-                items.ForEach(i =>
+                item.ForEach(i =>
                 {
                     if (!i.is_deleted.Value)
                     {
@@ -132,12 +132,12 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     }
 
                 });
-                rptJobRepair.DataSource = items.OrderBy(i => i.seq);
-                rptJobRepair.DataBind();
+                rptJobCleaning.DataSource = item.OrderBy(i => i.seq);
+                rptJobCleaning.DataBind();
             }
         }
 
-        protected void rptJobRepair_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void rptJobCleaning_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             result_info_job_zone_item item = (result_info_job_zone_item)e.Item.DataItem;
 
@@ -173,7 +173,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
 
         }
 
-        protected void rptJobRepair_ItemDataBound(object source, RepeaterCommandEventArgs e)
+        protected void rptJobCleaning_ItemDataBound(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
             {
@@ -214,7 +214,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             var user = userLogin();
             List<param_create_job> job = new List<param_create_job>();
 
-            foreach (RepeaterItem item in rptJobRepair.Items)
+            foreach (RepeaterItem item in rptJobCleaning.Items)
             {
                 Label lblJobId = (Label)item.FindControl("lblJobId");
                 Label lblProductId = (Label)item.FindControl("lblProductId");
@@ -229,7 +229,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     product_id = int.Parse(lblProductId.Text),
                     product_name = lblProductName.Text,
                     amount = int.Parse(lblAmount.Text),
-                    status_id = (int)_BaseConst.status_job.repair_processing,
+                    status_id = (int)_BaseConst.status_job.cleaning_processing,
                     comment = txtComment.Text,
                     created_by = user.user_id,
                     modified_by = user.user_id,
@@ -262,11 +262,11 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         }
         protected void lbnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobRepairListUrl, false);
+            Response.Redirect(StaticUrl.JobCleaningListUrl, false);
         }
         protected void lblSuccess_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobRepairListUrl, false);
+            Response.Redirect(StaticUrl.JobCleaningListUrl, false);
         }
         public int DecryptCode(string enCryptCode)
         {

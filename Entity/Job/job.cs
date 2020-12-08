@@ -7,6 +7,7 @@ namespace Entity
         public int job_id { get; set; } // job_id (Primary key)
         public int zone_id { get; set; } // zone_id
         public int product_id { get; set; } // product_id
+        public string product_name { get; set; } // product_name
         public int amount { get; set; } // amount
         public int status_id { get; set; } // status_id
         public string comment { get; set; } // comment (length: 4000)

@@ -25,8 +25,8 @@ namespace Definitions
 
         public const string JobRepairListUrl = "/Backend/Job-Management/Repair/job-repair-list.aspx";
         public const string JobRepairInfoUrl = "/Backend/Job-Management/Repair/job-repair-info.aspx";
-        public const string JobClaeaningListUrl = "/Backend/Job-Management/Cleaning/job-cleaning-list.aspx";
-        public const string JobClaeaningInfoUrl = "/Backend/Job-Management/Cleaning/job-cleaning-info.aspx";
+        public const string JobCleaningListUrl = "/Backend/Job-Management/Cleaning/job-cleaning-list.aspx";
+        public const string JobCleaningInfoUrl = "/Backend/Job-Management/Cleaning/job-cleaning-info.aspx";
         public const string JobDeliveryListUrl = "/Backend/Job-Management/Delivery/job-delivery-list.aspx";
         public const string JobDeliveryInfoUrl = "/Backend/Job-Management/Delivery/job-delivery-info.aspx";
 

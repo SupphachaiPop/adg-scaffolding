@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="job-repair-info.aspx.cs" Inherits="adg_scaffolding.Backend.Job_Management.Repair.job_repair_info" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="job-transfer-info.aspx.cs" Inherits="adg_scaffolding.Backend.Job_Management.Transfer.job_transfer_info" %>
 
 <%@ MasterType VirtualPath="~/Backend/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -17,14 +17,14 @@
     </script>
     <!-- Content -->
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+        <contenttemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
-                <h4 class="font-weight-bold py-3 mb-2">JOB REPAIR
+                <h4 class="font-weight-bold py-3 mb-2">JOB TRANSFER
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
                                     <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
-                                    JOB REPAIR
+                                    JOB TRANSFER
                                 </small>
                             </div>
                     <br />
@@ -39,27 +39,52 @@
                         <div class="col-md-12 col-lg-12 col-xl-12">
                             <div class="card-body">
                                 <hr class="mb-3">
+                                <h4>Source</h4>
                                 <div class="row">
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                                Location Name
+                                                Location
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:TextBox ID="txtLocationName" CssClass="form-control form-control-md " ReadOnly="true" Enabled ="false" runat="server" placeholder="Location Name"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlLocationSource" CssClass="form-control form-control-sm text-uppercase  js-example-basic-single" OnSelectedIndexChanged="ddlLocationSource_SelectedIndexChanged" runat="server">
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                                Zone Name
+                                                Zone
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:TextBox ID="txtZoneName" CssClass="form-control form-control-md" ReadOnly="true" Enabled ="false" runat="server" placeholder="Zone Name"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlZoneSource" CssClass="form-control form-control-sm text-uppercase  js-example-basic-single" OnSelectedIndexChanged="ddlZoneSource_SelectedIndexChanged" runat="server">
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
-
+                                <h4>Destination</h4>
+                                <div class="row">
+                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label form-label-sm text-uppercase">
+                                                Location
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <asp:DropDownList ID="ddlLocationDestination" CssClass="form-control form-control-sm text-uppercase  js-example-basic-single" OnSelectedIndexChanged="ddlLocationDestination_SelectedIndexChanged" runat="server">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label form-label-sm text-uppercase">
+                                                Zone
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <asp:DropDownList ID="ddlZoneDestination" CssClass="form-control form-control-sm text-uppercase  js-example-basic-single" runat="server">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
                                 <hr class="mb-3">
                                 <h4>Product Job</h4>
                                 <hr class="mb-3">
@@ -70,7 +95,7 @@
                                                 Select Product
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:DropDownList ID="ddlProduct" CssClass="form-control form-control-sm text-uppercase  js-example-basic-single" runat="server">
+                                            <asp:DropDownList ID="ddlProduct" CssClass="form-control form-control-sm text-uppercase  js-example-basic-single" OnSelectedIndexChanged="ddlProduct_SelectedIndexChanged" runat="server">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -86,7 +111,7 @@
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                            <asp:LinkButton ID="btnCreateJobRepair" CssClass="btn btn-success mt-4" OnClick="btnCreateJobRepair_Click" runat="server"> <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
+                                                <asp:LinkButton ID="btnCreateJobTransfer" CssClass="btn btn-success mt-4" OnClick="btnCreateJobTransfer_Click" runat="server"> <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +127,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <asp:Repeater ID="rptJobRepair" runat="server" OnItemDataBound="rptJobRepair_ItemDataBound" OnItemCommand="rptJobRepair_ItemDataBound">
+                                            <asp:Repeater ID="rptJobTransfer" runat="server" OnItemDataBound="rptJobTransfer_ItemDataBound" OnItemCommand="rptJobTransfer_ItemDataBound">
                                                 <ItemTemplate>
                                                     <tr class="odd gradeX">
                                                         <td>
@@ -143,7 +168,7 @@
             <!-- / Statistics -->
             </div>
             <!-- / Content -->
-        </ContentTemplate>
+        </contenttemplate>
     </asp:UpdatePanel>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ModalPlaceHolder" runat="server">

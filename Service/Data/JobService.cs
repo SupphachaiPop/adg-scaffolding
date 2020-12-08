@@ -9,15 +9,15 @@ namespace Service.Backend
 {
     public partial class DataService
     {
-        public List<job> GetActiveJobList(int pLocationId)
+        public List<job> GetActiveJobList(int pZoneId)
         {
-            var jobList = dataDao.GetJobRepairList(pLocationId: pLocationId);
+            var jobList = dataDao.GetJobRepairList(pZoneId: pZoneId);
             return jobList.Where(i => i.is_active == true && i.is_deleted == false).ToList();
         }
 
-        public List<job> GetAvaliableJobList(int pLocationId)
+        public List<job> GetAvaliableJobList(int pZoneId)
         {
-            var jobList = dataDao.GetJobRepairList(pLocationId: pLocationId);
+            var jobList = dataDao.GetJobRepairList(pZoneId: pZoneId);
             return jobList.Where(i => i.is_deleted == false).ToList();
         }
 
@@ -26,7 +26,7 @@ namespace Service.Backend
             return dataDao.SearchJobZoneList(param);
         }
 
-        public List<result_info_job_zone>  GetJobZoneInfo(int zoneId, int statusId)
+        public result_info_job_zone GetJobZoneInfo(int zoneId, int statusId)
         {
             return dataDao.GetJobZoneInfo(zoneId: zoneId, statusId: statusId);
         }

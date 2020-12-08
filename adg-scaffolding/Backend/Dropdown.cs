@@ -144,5 +144,112 @@ namespace adg_scaffolding.Backend
             return dropdown;
         }
         #endregion
+
+        #region Location 
+        public DropDownList GetDropdownLocation(DropDownList dropdown)
+        {
+            DataService dataService = new DataService();
+            var LocationList = dataService.GetLocationList();
+            if (LocationList.Count() > 0)
+            {
+                LocationList.ForEach(i =>
+                {
+                    i.location_name = i.location_code + " : " + i.location_name;
+                });
+                dropdown.DataSource = LocationList;
+                LocationList.Insert(0, new location
+                {
+                    location_id = 0,
+                    location_name = "-- Select --",
+                    is_active = true
+                });
+
+                dropdown.DataValueField = "location_id";
+                dropdown.DataTextField = "location_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!LocationList.Where(i => i.location_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
+            }
+
+            return dropdown;
+        }
+        #endregion
+
+        #region Zone 
+        public DropDownList GetDropdownZone(DropDownList dropdown)
+        {
+            DataService dataService = new DataService();
+            var zoneList = dataService.GetZoneList();
+            if (zoneList.Count() > 0)
+            {
+                zoneList.ForEach(i =>
+                {
+                    i.zone_name = i.zone_code + " : " + i.zone_name;
+                });
+                dropdown.DataSource = zoneList;
+                zoneList.Insert(0, new zone
+                {
+                    zone_id = 0,
+                    zone_name = "-- Select --",
+                    is_active = true
+                });
+
+                dropdown.DataValueField = "zone_id";
+                dropdown.DataTextField = "zone_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!zoneList.Where(i => i.zone_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
+            }
+
+            return dropdown;
+        }
+        #endregion
+
+        #region Zone 
+        public DropDownList GetDropdownJob(DropDownList dropdown, int zoneId)
+        {
+            DataService dataService = new DataService();
+            var jobList = dataService.GetActiveJobList(pZoneId: zoneId);
+            if (jobList.Count() > 0)
+            {
+                dropdown.DataSource = jobList;
+                jobList.Insert(0, new job
+                {
+                    job_id = 0,
+                    product_name = "-- Select --",
+                    is_active = true
+                });
+
+                dropdown.DataValueField = "job_id";
+                dropdown.DataTextField = "product_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!jobList.Where(i => i.zone_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
+            }
+
+            return dropdown;
+        }
+        #endregion
     }
 }

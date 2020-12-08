@@ -9,9 +9,9 @@ using Definitions;
 using Entity;
 using ClosedXML;
 
-namespace adg_scaffolding.Backend.Job_Management.Repair
+namespace adg_scaffolding.Backend.Job_Management.Delivery
 {
-    public partial class job_repair_info : System.Web.UI.Page
+    public partial class job_delivery_info : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,22 +32,22 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         public void setDataToUIByID(Int32 ID)
         {
             DataService dataService = new DataService();
-            result_info_job_zone JobRepair = new result_info_job_zone();
+            result_info_job_zone JobDelivery = new result_info_job_zone();
             UtilityCommon utilityCommon = new UtilityCommon();
             if (ID > 0)
             {
-                var statusId = (int)_BaseConst.status_job.repair_processing;
-                JobRepair = dataService.GetJobZoneInfo(zoneId: ID, statusId: statusId);
-                if (JobRepair != null)
+                var statusId = (int)_BaseConst.status_job.delivery_processing;
+                JobDelivery = dataService.GetJobZoneInfo(zoneId: ID, statusId: statusId);
+                if (JobDelivery != null)
                 {
-                    txtLocationName.Text = JobRepair.location_name;
-                    txtZoneName.Text = JobRepair.zone_name;
-                    setDataToRepeater(JobRepair.items);
+                    txtLocationName.Text = JobDelivery.location_name;
+                    txtZoneName.Text = JobDelivery.zone_name;
+                    setDataToRepeater(JobDelivery.items);
                 }
             }
         }
 
-        protected void btnCreateJobRepair_Click(object sender, EventArgs e)
+        protected void btnCreateJobDelivery_Click(object sender, EventArgs e)
         {
             string message = "";
             if (!ValidateForm(out message))
@@ -91,7 +91,6 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     is_deleted = false
                 });
             }
-
             setDataToRepeater(res);
 
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
@@ -119,7 +118,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
 
         public void setDataToRepeater(List<result_info_job_zone_item> items)
         {
-            rptJobRepair.DataSource = null;
+            rptJobDelivery.DataSource = null;
             if (items != null && items.Count() > 0)
             {
                 var seq = 1;
@@ -132,12 +131,12 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     }
 
                 });
-                rptJobRepair.DataSource = items.OrderBy(i => i.seq);
-                rptJobRepair.DataBind();
+                rptJobDelivery.DataSource = items.OrderBy(i => i.seq);
+                rptJobDelivery.DataBind();
             }
         }
 
-        protected void rptJobRepair_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void rptJobDelivery_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             result_info_job_zone_item item = (result_info_job_zone_item)e.Item.DataItem;
 
@@ -173,7 +172,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
 
         }
 
-        protected void rptJobRepair_ItemDataBound(object source, RepeaterCommandEventArgs e)
+        protected void rptJobDelivery_ItemDataBound(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
             {
@@ -214,7 +213,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
             var user = userLogin();
             List<param_create_job> job = new List<param_create_job>();
 
-            foreach (RepeaterItem item in rptJobRepair.Items)
+            foreach (RepeaterItem item in rptJobDelivery.Items)
             {
                 Label lblJobId = (Label)item.FindControl("lblJobId");
                 Label lblProductId = (Label)item.FindControl("lblProductId");
@@ -229,7 +228,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                     product_id = int.Parse(lblProductId.Text),
                     product_name = lblProductName.Text,
                     amount = int.Parse(lblAmount.Text),
-                    status_id = (int)_BaseConst.status_job.repair_processing,
+                    status_id = (int)_BaseConst.status_job.delivery_processing,
                     comment = txtComment.Text,
                     created_by = user.user_id,
                     modified_by = user.user_id,
@@ -262,11 +261,11 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         }
         protected void lbnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobRepairListUrl, false);
+            Response.Redirect(StaticUrl.JobDeliveryListUrl, false);
         }
         protected void lblSuccess_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobRepairListUrl, false);
+            Response.Redirect(StaticUrl.JobDeliveryListUrl, false);
         }
         public int DecryptCode(string enCryptCode)
         {

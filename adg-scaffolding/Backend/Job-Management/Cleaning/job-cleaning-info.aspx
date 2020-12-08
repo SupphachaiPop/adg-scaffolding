@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="job-repair-info.aspx.cs" Inherits="adg_scaffolding.Backend.Job_Management.Repair.job_repair_info" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="job-cleaning-info.aspx.cs" Inherits="adg_scaffolding.Backend.Job_Management.Cleaning.job_cleaning_info" %>
 
 <%@ MasterType VirtualPath="~/Backend/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -20,11 +20,11 @@
         <ContentTemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
-                <h4 class="font-weight-bold py-3 mb-2">JOB REPAIR
+                <h4 class="font-weight-bold py-3 mb-2">JOB CLEANING
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
                                     <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
-                                    JOB REPAIR
+                                    JOB CLEANING
                                 </small>
                             </div>
                     <br />
@@ -86,7 +86,7 @@
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                            <asp:LinkButton ID="btnCreateJobRepair" CssClass="btn btn-success mt-4" OnClick="btnCreateJobRepair_Click" runat="server"> <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
+                                            <asp:LinkButton ID="btnCreateJobCleaning" CssClass="btn btn-success mt-4" OnClick="btnCreateJobCleaning_Click" runat="server"> <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <asp:Repeater ID="rptJobRepair" runat="server" OnItemDataBound="rptJobRepair_ItemDataBound" OnItemCommand="rptJobRepair_ItemDataBound">
+                                            <asp:Repeater ID="rptJobCleaning" runat="server" OnItemDataBound="rptJobCleaning_ItemDataBound" OnItemCommand="rptJobCleaning_ItemDataBound">
                                                 <ItemTemplate>
                                                     <tr class="odd gradeX">
                                                         <td>
