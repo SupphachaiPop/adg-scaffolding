@@ -11,13 +11,13 @@ namespace Service.Backend
     {
         public List<job> GetActiveJobList(int pZoneId)
         {
-            var jobList = dataDao.GetJobRepairList(pZoneId: pZoneId);
+            var jobList = dataDao.GetJobList(pZoneId: pZoneId);
             return jobList.Where(i => i.is_active == true && i.is_deleted == false).ToList();
         }
 
         public List<job> GetAvaliableJobList(int pZoneId)
         {
-            var jobList = dataDao.GetJobRepairList(pZoneId: pZoneId);
+            var jobList = dataDao.GetJobList(pZoneId: pZoneId);
             return jobList.Where(i => i.is_deleted == false).ToList();
         }
 
@@ -34,6 +34,11 @@ namespace Service.Backend
         public int UpdateJob(List<param_create_job> entities)
         {
             return dataDao.UpdateJob(entities);
+        }
+
+        public int UpdateAndCreateJobTransfer(List<param_create_job_transfer> entities)
+        {
+            return dataDao.UpdateAndCreateJobTransfer(entities);
         }
     }
 }

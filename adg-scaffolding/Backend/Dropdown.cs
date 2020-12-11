@@ -180,13 +180,48 @@ namespace adg_scaffolding.Backend
 
             return dropdown;
         }
+
+        public DropDownList GetDropdownLocationDestination(DropDownList dropdown, int locationId)
+        {
+            DataService dataService = new DataService();
+            var LocationList = dataService.GetLocationList().Where(i => i.location_id != locationId).ToList();
+            if (LocationList.Count() > 0)
+            {
+                LocationList.ForEach(i =>
+                {
+                    i.location_name = i.location_code + " : " + i.location_name;
+                });
+                dropdown.DataSource = LocationList;
+                LocationList.Insert(0, new location
+                {
+                    location_id = 0,
+                    location_name = "-- Select --",
+                    is_active = true
+                });
+
+                dropdown.DataValueField = "location_id";
+                dropdown.DataTextField = "location_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!LocationList.Where(i => i.location_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
+
+            }
+
+            return dropdown;
+        }
         #endregion
 
         #region Zone 
-        public DropDownList GetDropdownZone(DropDownList dropdown)
+        public DropDownList GetDropdownZone(DropDownList dropdown, int locationId)
         {
             DataService dataService = new DataService();
-            var zoneList = dataService.GetZoneList();
+            var zoneList = dataService.GetZoneList().Where(i => i.location_id == locationId).ToList();
             if (zoneList.Count() > 0)
             {
                 zoneList.ForEach(i =>
@@ -219,11 +254,11 @@ namespace adg_scaffolding.Backend
         }
         #endregion
 
-        #region Zone 
-        public DropDownList GetDropdownJob(DropDownList dropdown, int zoneId)
+        #region job 
+        public DropDownList GetDropdownJobHaveInStock(DropDownList dropdown, int zoneId)
         {
             DataService dataService = new DataService();
-            var jobList = dataService.GetActiveJobList(pZoneId: zoneId);
+            var jobList = dataService.GetActiveJobList(pZoneId: zoneId).Where(i => i.amount > 0).ToList();
             if (jobList.Count() > 0)
             {
                 dropdown.DataSource = jobList;
@@ -239,13 +274,56 @@ namespace adg_scaffolding.Backend
                 dropdown.DataBind();
                 foreach (ListItem item in dropdown.Items)
                 {
-                    if (!jobList.Where(i => i.zone_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    if (!jobList.Where(i => i.job_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
                     {
                         item.Attributes.Add("style", "color:gray;");
                         item.Attributes.Add("disabled", "disabled");
                     }
                 };
 
+            }
+
+            return dropdown;
+        }
+        #endregion
+
+        #region job 
+        public DropDownList GetDropdownStatusJob(DropDownList dropdown, int locationId)
+        {
+            DataService dataService = new DataService();
+            List<status> statuslist = new List<status>();
+
+            statuslist = dataService.GetStatusList();
+            if (locationId == (int)_BaseConst.location.Cleaning)
+            {
+                statuslist = statuslist.Where(i => i.status_id == (int)_BaseConst.status_job.cleaning_processing).ToList();
+            }
+            else if (locationId == (int)_BaseConst.location.Delivery)
+            {
+                statuslist = statuslist.Where(i => i.status_id == (int)_BaseConst.status_job.delivery_processing).ToList();
+            }
+            else if (locationId == (int)_BaseConst.location.Repair)
+            {
+                List<int> statusIds = new List<int>();
+                statusIds.Add((int)_BaseConst.status_job.repair_processing);
+                statusIds.Add((int)_BaseConst.status_job.repair_await_part);
+                statuslist = statuslist.Where(i => statusIds.Any(a => i.status_id == a)).ToList();
+            }
+
+            if (statuslist.Count() > 0)
+            {
+                dropdown.DataSource = statuslist;
+                dropdown.DataValueField = "status_id";
+                dropdown.DataTextField = "status_name";
+                dropdown.DataBind();
+                foreach (ListItem item in dropdown.Items)
+                {
+                    if (!statuslist.Where(i => i.status_id.ToString() == item.Value).Select(s => s.is_active.Value).FirstOrDefault())
+                    {
+                        item.Attributes.Add("style", "color:gray;");
+                        item.Attributes.Add("disabled", "disabled");
+                    }
+                };
             }
 
             return dropdown;

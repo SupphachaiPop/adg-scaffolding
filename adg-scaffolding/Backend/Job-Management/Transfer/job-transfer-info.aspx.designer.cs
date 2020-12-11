@@ -60,13 +60,22 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
         protected global::System.Web.UI.WebControls.DropDownList ddlZoneDestination;
 
         /// <summary>
-        /// ddlProduct control.
+        /// ddlStatusJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProduct;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatusJob;
+
+        /// <summary>
+        /// ddlProductJob control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductJob;
 
         /// <summary>
         /// txtAmount control.

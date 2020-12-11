@@ -20,6 +20,29 @@ namespace Entity
             delivery_processing = 8,
             delivery_complete = 9,
         }
+
+        public enum status_job_cleaning
+        {
+            cleaning_processing = 1,
+
+        }
+
+        public enum status_job_repair
+        {
+            repair_processing = 5,
+            repair_await_part = 7,
+        }
+
+        public enum status_job_delivery
+        {
+            delivery_processing = 8,
+        }
+
+        //public static Dictionary<string, string> LOANER_STATUS = new Dictionary<string, string>() {
+        //    { "Open", "O"},
+        //    { "Loaner", "L"},
+        //    { "Return", "R"}
+        //};
     }
 }
 

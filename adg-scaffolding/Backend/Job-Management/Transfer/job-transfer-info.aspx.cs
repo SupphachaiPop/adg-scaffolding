@@ -25,38 +25,43 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
         public void SetDropdownList()
         {
             Dropdown dropdown = new Dropdown();
-            ddlLocationSource = dropdown.GetDropdownProduct(ddlLocationSource);
+            ddlLocationSource = dropdown.GetDropdownLocation(ddlLocationSource);
         }
 
         protected void ddlLocationSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             Dropdown dropdown = new Dropdown();
-            ddlLocationDestination = dropdown.GetDropdownProduct(ddlLocationDestination);
-            ddlZoneSource = dropdown.GetDropdownProduct(ddlZoneSource);
+            var locationSourceId = int.Parse(ddlLocationSource.SelectedValue);
+            ddlLocationDestination = dropdown.GetDropdownLocationDestination(ddlLocationDestination, locationSourceId);
+            ddlZoneSource = dropdown.GetDropdownZone(ddlZoneSource, locationSourceId);
 
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
+        }
+        protected void ddlZoneSource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Dropdown dropdown = new Dropdown();
+            var selectSourceZoneId = int.Parse(ddlZoneSource.SelectedValue);
+            ddlProductJob = dropdown.GetDropdownJobHaveInStock(ddlProductJob, selectSourceZoneId);
+            txtAmount.Text = "";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
+        }
+
+        protected void ddlProductJob_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataService dataService = new DataService();
+            var productSelectId = int.Parse(ddlProductJob.SelectedValue);
+            var zoneSourceSelectId = int.Parse(ddlZoneSource.SelectedValue);
+            var product = dataService.GetActiveJobList(zoneSourceSelectId).FirstOrDefault(i => i.job_id == productSelectId);
+            txtAmount.Text = product.amount.ToString("#.##");
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
 
         protected void ddlLocationDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
             Dropdown dropdown = new Dropdown();
-            ddlZoneDestination = dropdown.GetDropdownProduct(ddlZoneDestination);
-
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
-        }
-
-        protected void ddlZoneSource_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Dropdown dropdown = new Dropdown();
-            var selectSourceZoneId = int.Parse(ddlZoneSource.SelectedValue);
-            ddlProduct = dropdown.GetDropdownJob(ddlZoneDestination, selectSourceZoneId);
-            txtAmount.Text = "";
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
-        }
-
-        protected void ddlProduct_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtAmount.Text = "";
+            var locationDestinationId = int.Parse(ddlLocationDestination.SelectedValue);
+            ddlZoneDestination = dropdown.GetDropdownZone(ddlZoneDestination, locationDestinationId);
+            ddlStatusJob = dropdown.GetDropdownStatusJob(ddlStatusJob, locationDestinationId);
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
 
@@ -66,31 +71,60 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
             if (!ValidateForm(out message))
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "openModalWaring('" + message + "');", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script2", "InitSelect2();", true);
                 return;
             }
 
             var res = PrepareDataBeforeToRepeater();
-            res.Add(new result_info_job_zone
+            var newSelectProductId = int.Parse(ddlProductJob.SelectedValue);
+            var newSelectProductAmount = int.Parse(txtAmount.Text);
+            var resNewItem = new List<result_info_job_zone_item>();
+            if (res.Where(s => s.is_deleted == false).Count() > 0)
             {
-                job_id = 0,
-                product_id = int.Parse(ddlProduct.SelectedValue),
-                product_name = ddlProduct.SelectedItem.ToString(),
-                amount = int.Parse(txtAmount.Text),
-                is_deleted = false
-            });
+                res.ForEach(i =>
+                {
+                    if (i.product_id == newSelectProductId)
+                    {
+                        i.amount += newSelectProductAmount;
+                    }
+                    else
+                    {
+                        resNewItem.Add(new result_info_job_zone_item
+                        {
+                            job_id = int.Parse(ddlProductJob.SelectedValue),
+                            product_id = int.Parse(ddlProductJob.SelectedValue),
+                            product_name = ddlProductJob.SelectedItem.ToString(),
+                            amount = int.Parse(txtAmount.Text),
+                            is_deleted = false
+                        });
+                    }
+                });
+            }
+            else
+            {
+                resNewItem.Add(new result_info_job_zone_item
+                {
+                    job_id = int.Parse(ddlProductJob.SelectedValue),
+                    product_id = int.Parse(ddlProductJob.SelectedValue),
+                    product_name = ddlProductJob.SelectedItem.ToString(),
+                    amount = int.Parse(txtAmount.Text),
+                    is_deleted = false
+                });
+            }
+            res.AddRange(resNewItem);
             setDataToRepeater(res);
 
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
 
-        public List<result_info_job_zone> PrepareDataBeforeToRepeater()
+        public List<result_info_job_zone_item> PrepareDataBeforeToRepeater()
         {
-            var res = new List<result_info_job_zone>();
+            var res = new List<result_info_job_zone_item>();
             var zoneId = GetIdFromQueryString();
             var jobList = GetDataJob(zoneId);
             jobList.ForEach(i =>
             {
-                var job = new result_info_job_zone();
+                var job = new result_info_job_zone_item();
                 job.job_id = i.job_id;
                 job.product_id = i.product_id;
                 job.product_name = i.product_name;
@@ -103,7 +137,7 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
             return res;
         }
 
-        public void setDataToRepeater(List<result_info_job_zone> jobTransferList)
+        public void setDataToRepeater(List<result_info_job_zone_item> jobTransferList)
         {
             rptJobTransfer.DataSource = null;
             if (jobTransferList != null && jobTransferList.Count() > 0)
@@ -125,12 +159,11 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
 
         protected void rptJobTransfer_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            result_info_job_zone item = (result_info_job_zone)e.Item.DataItem;
+            result_info_job_zone_item item = (result_info_job_zone_item)e.Item.DataItem;
 
 
             Label lblNo = (Label)e.Item.FindControl("lblNo");
             Label lblJobId = (Label)e.Item.FindControl("lblJobId");
-            Label lblProductId = (Label)e.Item.FindControl("lblProductId");
             Label lblProductName = (Label)e.Item.FindControl("lblProductName");
             Label lblAmount = (Label)e.Item.FindControl("lblAmount");
             TextBox txtComment = (TextBox)e.Item.FindControl("txtComment");
@@ -139,16 +172,9 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
 
             lblNo.Text = item.seq.ToString();
             lblJobId.Text = item.job_id.ToString();
-            lblProductId.Text = item.product_id.ToString();
             lblProductName.Text = item.product_name;
             lblAmount.Text = item.amount.ToString("#.##");
             txtComment.Text = item.comment;
-
-            //if (zone.zone_id != 0)
-            //{
-            //    lbnDelete.Enabled = false;
-            //    lbnDelete.Attributes.Add("Style", "cursor: not-allowed");
-            //}
 
             lbnDelete.CommandName = "Delete";
             lbnDelete.CommandArgument = item.job_id.ToString();
@@ -173,15 +199,16 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
         {
             var message = "";
             DataService dataService = new DataService();
-            List<param_create_job> param = new List<param_create_job>();
+            List<param_create_job_transfer> param = new List<param_create_job_transfer>();
             UtilityCommon utilityCommon = new UtilityCommon();
             DateTime _now = DateTime.Now;
             var user = userLogin();
-            var zoneId = GetIdFromQueryString();
+            var zoneId = int.Parse(ddlZoneSource.SelectedValue);
+            var newZoneId = int.Parse(ddlZoneDestination.SelectedValue);
             param = GetDataJob(zoneId: zoneId);
-
+            param.ForEach(i => i.new_zone_id = newZoneId);
             int success = 0;
-            success = dataService.UpdateJob(param);
+            success = dataService.UpdateAndCreateJobTransfer(param);
             if (success > 0)
             {
                 message = "บันทึกข้อมูลสำเร็จ";
@@ -195,27 +222,27 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
             }
         }
 
-        public List<param_create_job> GetDataJob(int zoneId)
+        public List<param_create_job_transfer> GetDataJob(int zoneId)
         {
             var user = userLogin();
-            List<param_create_job> job = new List<param_create_job>();
+            List<param_create_job_transfer> job = new List<param_create_job_transfer>();
 
             foreach (RepeaterItem item in rptJobTransfer.Items)
             {
                 Label lblJobId = (Label)item.FindControl("lblJobId");
-                Label lblProductId = (Label)item.FindControl("lblProductId");
                 Label lblProductName = (Label)item.FindControl("lblProductName");
                 Label lblAmount = (Label)item.FindControl("lblAmount");
                 TextBox txtComment = (TextBox)item.FindControl("txtComment");
 
-                job.Add(new param_create_job
+                var selectStatusId = int.Parse(ddlStatusJob.SelectedValue);
+                job.Add(new param_create_job_transfer
                 {
                     job_id = int.Parse(lblJobId.Text),
                     zone_id = zoneId,
-                    product_id = int.Parse(lblProductId.Text),
+                    product_id = int.Parse(lblJobId.Text),
                     product_name = lblProductName.Text,
                     amount = int.Parse(lblAmount.Text),
-                    status_id = (int)_BaseConst.status_job.Transfer_processing,
+                    status_id = selectStatusId,
                     comment = txtComment.Text,
                     created_by = user.user_id,
                     modified_by = user.user_id,
@@ -231,12 +258,11 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
             DataService dataService = new DataService();
             message = "";
 
-            if (ddlProduct.SelectedValue == "0")
+            if (ddlProductJob.SelectedValue == "0")
             {
                 message = "กรุณาเลือกสินค้า (product)";
                 return false;
             }
-
 
             if (!int.TryParse(txtAmount.Text, out int a))
             {
@@ -244,15 +270,26 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
                 return false;
             }
 
+            var productSelectId = int.Parse(ddlProductJob.SelectedValue);
+            var zoneSourceSelectId = int.Parse(ddlZoneSource.SelectedValue);
+            var product = dataService.GetActiveJobList(zoneSourceSelectId).FirstOrDefault(i => i.job_id == productSelectId);
+            var amountProductInSelect = PrepareDataBeforeToRepeater().Where(i => i.job_id == productSelectId && i.is_deleted == false).Sum(s => s.amount);
+            var amountSelect = int.Parse(txtAmount.Text);
+            var totalProductSelect = amountSelect + amountProductInSelect;
+            if (totalProductSelect > product.amount)
+            {
+                message = "จำนวนสินค้าที่กรอกเกินจากที่มีอยู่ กรุณากรอกจำนวนสินค้าใหม่ (Over Stock. Pls try again)";
+                return false;
+            }
             return true;
         }
         protected void lbnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobTransferListUrl, false);
+            Response.Redirect(StaticUrl.JobTransferInfoUrl, false);
         }
         protected void lblSuccess_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.JobTransferListUrl, false);
+            Response.Redirect(StaticUrl.JobTransferInfoUrl, false);
         }
         public int DecryptCode(string enCryptCode)
         {
@@ -279,7 +316,6 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
         {
             return Request.QueryString["ID"] != null ? DecryptCode(Request.QueryString["ID"]) : 0;
         }
-
 
     }
 }

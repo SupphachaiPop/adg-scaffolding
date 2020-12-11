@@ -29,6 +29,7 @@ namespace Definitions
         public const string JobCleaningInfoUrl = "/Backend/Job-Management/Cleaning/job-cleaning-info.aspx";
         public const string JobDeliveryListUrl = "/Backend/Job-Management/Delivery/job-delivery-list.aspx";
         public const string JobDeliveryInfoUrl = "/Backend/Job-Management/Delivery/job-delivery-info.aspx";
+        public const string JobTransferInfoUrl = "/Backend/Job-Management/Transfer/job-transfer-info.aspx";
 
 
         public const string DEFAULT_EMPTY_URL = "javascript:void(0);";

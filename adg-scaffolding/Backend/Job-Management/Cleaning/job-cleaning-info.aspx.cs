@@ -53,6 +53,7 @@ namespace adg_scaffolding.Backend.Job_Management.Cleaning
             if (!ValidateForm(out message))
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "openModalWaring('" + message + "');", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script2", "InitSelect2();", true);
                 return;
             }
 
@@ -60,6 +61,7 @@ namespace adg_scaffolding.Backend.Job_Management.Cleaning
 
             var newSelectProductId = int.Parse(ddlProduct.SelectedValue);
             var newSelectProductAmount = int.Parse(txtAmount.Text);
+            var resNewItem = new List<result_info_job_zone_item>();
             if (res.Where(s => s.is_deleted == false).Count() > 0)
             {
                 res.ForEach(i =>
@@ -70,7 +72,7 @@ namespace adg_scaffolding.Backend.Job_Management.Cleaning
                     }
                     else
                     {
-                        res.Add(new result_info_job_zone_item
+                        resNewItem.Add(new result_info_job_zone_item
                         {
                             job_id = 0,
                             product_id = int.Parse(ddlProduct.SelectedValue),
@@ -83,7 +85,7 @@ namespace adg_scaffolding.Backend.Job_Management.Cleaning
             }
             else
             {
-                res.Add(new result_info_job_zone_item
+                resNewItem.Add(new result_info_job_zone_item
                 {
                     job_id = 0,
                     product_id = int.Parse(ddlProduct.SelectedValue),
@@ -92,6 +94,7 @@ namespace adg_scaffolding.Backend.Job_Management.Cleaning
                     is_deleted = false
                 });
             }
+            res.AddRange(resNewItem);
             setDataToRepeater(res);
 
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);

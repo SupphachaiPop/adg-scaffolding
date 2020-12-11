@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="adg-scaffolding" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\adg-scaffolding\\adg-scaffolding\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\adg-scaffolding\\adg-scaffolding\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="ConnectionString-Web.config Connection String" description="ConnectionString Connection String used in web.config by the application to access the database." value="Server =adg-china-thailand.database.windows.net; Initial Catalog=scaffolding; Persist Security Info=False; User ID=adgchina.thailand; Password=P@ssw0rd; Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\adg-scaffolding\\adg-scaffolding\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="ConnectionStringBackend-Web.config Connection String" description="ConnectionStringBackend Connection String used in web.config by the application to access the database." value="Server =adg-china-thailand.database.windows.net; Initial Catalog=scaffolding; Persist Security Info=False; User ID=adgchina.thailand; Password=P@ssw0rd; Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\adg-scaffolding\\adg-scaffolding\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ConnectionStringBackend']/@connectionString" />
+  </parameter>
+</parameters>
