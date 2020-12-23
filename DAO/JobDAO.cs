@@ -58,7 +58,6 @@ namespace DAO.Backend
                         DBHelper.AddParam("page_number", param.pageNumber);
                         DBHelper.AddParam("search", param.search);
                         DBHelper.AddParam("location_id", param.location_id);
-                        DBHelper.AddParam("status_id", param.status_id);
                         res = DBHelper.SelectStoreProcedure<result_search_job_zone>("select_search_job_zone").ToList();
                     }
                     catch (Exception ex)

@@ -11,13 +11,21 @@ using Service.Backend;
 using Definitions.Static_Text;
 using Definitions;
 
-namespace adg_scaffolding.Backend.Job_Management.Repair
+namespace adg_scaffolding.Backend.Job_Management.Job
 {
     [System.Web.Script.Services.ScriptService]
-    public partial class job_repair_list : System.Web.UI.Page
+    public partial class job_list : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            SetDataDropDownList();
+        }
+
+        private void SetDataDropDownList()
+        {
+            Dropdown dropdown = new Dropdown();
+            ddlWarehouse = dropdown.GetDropdownWarehouse(ddlWarehouse);
+            ddlLocation = dropdown.GetDropdownLocation(ddlLocation);
         }
 
         [WebMethod]
@@ -26,7 +34,9 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                                     int start,
                                     int length,
                                     List<JQDT_Order> order,
-                                    string txtSearch)
+                                    string txtSearch,
+                                    int warehouseId,
+                                    int LocationId)
         {
 
             param_search_job_zone param = new param_search_job_zone();
@@ -43,18 +53,20 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                 param.search = txtSearch.Trim();
                 param.pageSize = length;
                 param.pageNumber = (start + length) / length;
+                param.warehouse_id = warehouseId;
+                param.location_id = LocationId;
 
-                List<result_search_job_zone> JobRepairList = LoadData(param: param,
+                List<result_search_job_zone> jobList = LoadData(param: param,
                                                       Order: OrderField,
                                                       OrderDir: OrderDir);
 
-                if (JobRepairList.Count() > 0)
+                if (jobList.Count() > 0)
                 {
-                    TotalRecords = JobRepairList.FirstOrDefault().total_record;
+                    TotalRecords = jobList.FirstOrDefault().total_record;
                     result.draw = Convert.ToInt32(draw);
                     result.recordsTotal = TotalRecords;
                     result.recordsFiltered = TotalRecords;
-                    result.data = JobRepairList;
+                    result.data = jobList;
                 }
             }
             catch (Exception ex)
@@ -66,25 +78,23 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
         }
 
         private static List<result_search_job_zone> LoadData(param_search_job_zone param,
-                                                             String Order,
-                                                             String OrderDir)
+                                                          String Order,
+                                                          String OrderDir)
         {
             DataService dataService = new DataService();
-            List<result_search_job_zone> JobRepairList = new List<result_search_job_zone>();
+            List<result_search_job_zone> jobList = new List<result_search_job_zone>();
 
             try
             {
-                param.location_id = (int)_BaseConst.location.Repair;
-                param.status_id = (int)_BaseConst.status_job.repair_processing;
-                JobRepairList = dataService.SearchJobZoneList(param: param);
-                JobRepairList = buildDataForDisplay(entities: JobRepairList);
+                jobList = dataService.SearchJobZoneList(param: param);
+                jobList = buildDataForDisplay(entities: jobList);
             }
             catch (Exception ex)
             {
                 throw;
             }
 
-            return JobRepairList;
+            return jobList;
         }
 
         private static List<result_search_job_zone> buildDataForDisplay(List<result_search_job_zone> entities)
@@ -98,7 +108,7 @@ namespace adg_scaffolding.Backend.Job_Management.Repair
                 e.amount = e.amount >= 0 ? e.amount : 0;
                 e.comment = !string.IsNullOrEmpty(e.comment) ? e.comment : Static_Text.DEFAULT_VALUE.DEFAULT_REPLACE_STRING_EMPTY;
                 e.id = utilityCommon.EncryptDataUrlEncoder(textData: e.zone_id.ToString(),
-                                                                    encryptionkey: StaticKeys.DataEncrypteKey);
+                                                                   encryptionkey: StaticKeys.DataEncrypteKey);
                 return e;
 
             }).ToList();

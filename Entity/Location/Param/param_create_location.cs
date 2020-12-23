@@ -17,10 +17,11 @@ namespace Entity
         public bool? is_deleted { get; set; } // is_deleted
 
         public List<param_create_zone> zone { get; set; }
-
+        public List<param_create_status> status { get; set; }
         public param_create_location()
         {
             this.zone = new List<param_create_zone>();
+            this.status = new List<param_create_status>();
         }
     }
 }

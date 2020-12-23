@@ -18,7 +18,7 @@
 
     <!-- Content -->
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+        <contenttemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
                 <h4 class="font-weight-bold py-3 mb-2">LOCATION
@@ -101,8 +101,7 @@
                                 <h4>Zone</h4>
                                 <hr class="mb-3">
                                 <asp:LinkButton ID="btnCreateZone" CssClass="btn btn-success mt-4" OnClick="btnCreateZone_Click" runat="server">
-                                <span class="ion ion-md-add mr-1"></span>
-                                </asp:LinkButton>
+                               <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
                                 <div class="card-datatable table-responsive">
                                     <table class="datatables-demo table table-striped table-hover table-bordered">
                                         <thead class="thead-dark">
@@ -156,6 +155,67 @@
                                             </asp:Repeater>
                                         </tbody>
                                     </table>
+                                </div>
+
+                                  <hr class="mb-3">
+                                <h4>Zone</h4>
+                                <hr class="mb-3">
+                                <asp:LinkButton ID="btnCreateStatus" CssClass="btn btn-success mt-4" OnClick="btnCreateStatus_Click" runat="server">
+                                <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
+                              
+                                <div class="card-datatable table-responsive">
+                                    <table class="datatables-demo table table-striped table-hover table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="tbw-2">No.</th>
+                                                <th class="tbw-10">Status Name</th>
+                                                <th class="tbw-10">Status Name Eng</th>
+                                                <th class="tbw-10">Comment</th>
+                                                <th class="tbw-2">Status</th>
+                                                <th class="tbw-2">Tools</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <asp:Repeater ID="rptStatus" runat="server" OnItemDataBound="rptStatus_ItemDataBound" OnItemCommand="rptStatus_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <tr class="odd gradeX">
+                                                        <td>
+                                                            <asp:Label ID="lblNo" runat="server"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="lblStatusId" Visible="false" runat="server"></asp:Label>
+                                                            <asp:TextBox ID="txtStatusName" CssClass="form-control form-control-md" runat="server" placeholder="Status Name"></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtStatusNameEng" CssClass="form-control form-control-md" runat="server" placeholder="Status Name Eng"></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtComment" CssClass="form-control form-control-md" runat="server" placeholder="Comment"></asp:TextBox>
+                                                        </td>
+                                                        <td class="center">
+                                                            <label class="switcher switcher-sm">
+                                                                <asp:HiddenField ID="hdfStatus" runat="server" />
+                                                                <input id="chkStatus" runat="server" type="checkbox" class="switcher-input">
+                                                                <span class="switcher-indicator">
+                                                                    <span class="switcher-yes">
+                                                                        <span class="ion ion-md-checkmark"></span>
+                                                                    </span>
+                                                                    <span class="switcher-no">
+                                                                        <span class="ion ion-md-close"></span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:LinkButton ID="lbnDelete" runat="server" CssClass="btn btn-danger" ClientIDMode="AutoID">
+                                                        <i class="ion ion-md-close"></i>
+                                                            </asp:LinkButton>
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </tbody>
+                                    </table>
 
                                 </div>
 
@@ -170,7 +230,7 @@
             <!-- / Statistics -->
             </div>
             <!-- / Content -->
-        </ContentTemplate>
+        </contenttemplate>
     </asp:UpdatePanel>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ModalPlaceHolder" runat="server">

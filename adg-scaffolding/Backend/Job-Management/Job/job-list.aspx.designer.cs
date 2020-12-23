@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace adg_scaffolding.Backend.Job_Management.Delivery
+namespace adg_scaffolding.Backend.Job_Management.Job
 {
 
 
-    public partial class job_delivery_list
+    public partial class job_list
     {
 
         /// <summary>
@@ -42,13 +42,22 @@ namespace adg_scaffolding.Backend.Job_Management.Delivery
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
 
         /// <summary>
-        /// ddlStatus control.
+        /// ddlWarehouse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlWarehouse;
+
+        /// <summary>
+        /// ddlLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
 
         /// <summary>
         /// lblId control.

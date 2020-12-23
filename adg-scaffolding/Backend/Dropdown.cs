@@ -293,22 +293,22 @@ namespace adg_scaffolding.Backend
             DataService dataService = new DataService();
             List<status> statuslist = new List<status>();
 
-            statuslist = dataService.GetStatusList();
-            if (locationId == (int)_BaseConst.location.Cleaning)
-            {
-                statuslist = statuslist.Where(i => i.status_id == (int)_BaseConst.status_job.cleaning_processing).ToList();
-            }
-            else if (locationId == (int)_BaseConst.location.Delivery)
-            {
-                statuslist = statuslist.Where(i => i.status_id == (int)_BaseConst.status_job.delivery_processing).ToList();
-            }
-            else if (locationId == (int)_BaseConst.location.Repair)
-            {
-                List<int> statusIds = new List<int>();
-                statusIds.Add((int)_BaseConst.status_job.repair_processing);
-                statusIds.Add((int)_BaseConst.status_job.repair_await_part);
-                statuslist = statuslist.Where(i => statusIds.Any(a => i.status_id == a)).ToList();
-            }
+            statuslist = dataService.GetStatusList().Where(i => i.location_id == locationId).ToList() ;
+            //if (locationId == (int)_BaseConst.location.Cleaning)
+            //{
+            //    statuslist = statuslist.Where(i => i.status_id == (int)_BaseConst.status_job.cleaning_processing).ToList();
+            //}
+            //else if (locationId == (int)_BaseConst.location.Delivery)
+            //{
+            //    statuslist = statuslist.Where(i => i.status_id == (int)_BaseConst.status_job.delivery_processing).ToList();
+            //}
+            //else if (locationId == (int)_BaseConst.location.Repair)
+            //{
+            //    List<int> statusIds = new List<int>();
+            //    statusIds.Add((int)_BaseConst.status_job.repair_processing);
+            //    statusIds.Add((int)_BaseConst.status_job.repair_await_part);
+            //    statuslist = statuslist.Where(i => statusIds.Any(a => i.status_id == a)).ToList();
+            //}
 
             if (statuslist.Count() > 0)
             {

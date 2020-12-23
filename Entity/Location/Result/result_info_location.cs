@@ -11,10 +11,11 @@ namespace Entity
         public bool? is_referred { get; set; } // is_referred
         public bool? is_active { get; set; } // is_active
         public List<result_info_zone> zone { get; set; }
-
+        public List<result_info_status> status { get; set; }
         public result_info_location()
         {
             this.zone = new List<result_info_zone>();
+            this.status = new List<result_info_status>();
         }
     }
 }

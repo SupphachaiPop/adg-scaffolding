@@ -96,6 +96,24 @@ namespace adg_scaffolding.Backend.Warehouse_Management.Location
         protected global::System.Web.UI.WebControls.Repeater rptZone;
 
         /// <summary>
+        /// btnCreateStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCreateStatus;
+
+        /// <summary>
+        /// rptStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptStatus;
+
+        /// <summary>
         /// lbnBack control.
         /// </summary>
         /// <remarks>

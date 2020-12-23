@@ -159,7 +159,7 @@ namespace DAO.Backend
                                     DBHelper.AddParam("is_referred", false);
                                     DBHelper.AddParam("is_deleted", false);
                                     DBHelper.ExecuteStoreProcedure("insert_sub_specification");
-                                    DBHelper.GetParamOut<Int32>("specification_menu_id");
+                                    DBHelper.GetParamOut<Int32>("sub_specification_id");
                                 }
                             });
                         }

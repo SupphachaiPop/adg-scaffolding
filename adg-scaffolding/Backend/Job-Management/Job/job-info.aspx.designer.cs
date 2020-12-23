@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace adg_scaffolding.Backend.Job_Management.Delivery
+namespace adg_scaffolding.Backend.Job_Management.Job
 {
 
 
-    public partial class job_delivery_info
+    public partial class job_info
     {
 
         /// <summary>
@@ -60,22 +60,22 @@ namespace adg_scaffolding.Backend.Job_Management.Delivery
         protected global::System.Web.UI.WebControls.TextBox txtAmount;
 
         /// <summary>
-        /// btnCreateJobDelivery control.
+        /// btnCreateJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCreateJobDelivery;
+        protected global::System.Web.UI.WebControls.LinkButton btnCreateJob;
 
         /// <summary>
-        /// rptJobDelivery control.
+        /// rptJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptJobDelivery;
+        protected global::System.Web.UI.WebControls.Repeater rptJob;
 
         /// <summary>
         /// lbnBack control.

@@ -1,7 +1,7 @@
-var urlList = "/Backend/Job-Management/Delivery/job-delivery-list.aspx";
-var urlInfo = "/Backend/Job-Management/Delivery/job-delivery-info.aspx";
+var urlList = "/Backend/Job-Management/Job/job-list.aspx";
+var urlInfo = "/Backend/Job-Management/Job/job-info.aspx";
 var msg;
-var tblId = '#tblJobDelivery';
+var tblId = '#tblJob';
 var tblObj;
 
 $(function () {
@@ -26,7 +26,8 @@ $(function () {
             dataType: "json",
             data: function (d) {
                 d.txtSearch = $("input[id*=txtSearch]").val();
-
+                d.warehouseId = $("select[id*=ddlWarehouse]").find(':selected').val();
+                d.LocationId = $("select[id*=ddlLocation]").find(':selected').val();
                 return JSON.stringify(d);
             },
             dataSrc: function (json) {
@@ -104,7 +105,7 @@ $(function () {
     function renderCol_Tools(data, type, row, meta) {
         var ret = '';
         var btnDelete = '<button type="button" id="btnDelete"  rIndex="' + meta.row + '" class="btn btn-danger text-uppercase"><i class="ion ion-md-close"></i></button>';
-        var aView = '<a href="' + urlInfo + '?ID=' + data + '" class="btn btn-primary mr-1"><i class="ion ion-md-search"></i></a>';
+        var aView = '<a href="' + urlInfo + '?ID=' + data + '" target="_blank" class="btn btn-primary mr-1"><i class="ion ion-md-search"></i></a>';
 
         if (type === 'display') {
 

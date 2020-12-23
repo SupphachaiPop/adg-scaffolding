@@ -14,6 +14,7 @@ namespace Entity
         public string comment { get; set; } // comment (length: 4000)
         public bool? is_referred { get; set; } // is_referred
         public bool? is_active { get; set; } // is_active
+
     }
 }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="job-delivery-list.aspx.cs" Inherits="adg_scaffolding.Backend.Job_Management.Delivery.job_delivery_list" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="job-list.aspx.cs" Inherits="adg_scaffolding.Backend.Job_Management.Job.job_list" %>
 
 <%@ MasterType VirtualPath="~/Backend/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -8,11 +8,11 @@
         <ContentTemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
-                <h4 class="font-weight-bold py-3 mb-2">JOB DELIVERY
+                <h4 class="font-weight-bold py-3 mb-2">JOB CLEANING
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
                                     <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
-                                    JOB DELIVERY
+                                    JOB
                                 </small>
                             </div>
                 </h4>
@@ -24,8 +24,8 @@
                     <div class="row no-gutters row-bordered">
                         <div class="col-md-12 col-lg-12 col-xl-12">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-9 col-xl-9 mb-12">
+                                <div class="row">   
+                                    <div class="col-lg-6 col-xl-6 mb-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">Search</label>
                                             <asp:TextBox ID="txtSearch" CssClass="form-control form-control-md" runat="server" placeholder="ค้นหา"></asp:TextBox>
@@ -33,13 +33,15 @@
                                     </div>
                                     <div class="col-lg-3 col-xl-3 mb-12">
                                         <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">Status</label>
-                                            <asp:DropDownList ID="ddlStatus" CssClass="form-control form-control-sm text-uppercase js-example-basic-single" runat="server">
-                                                <asp:ListItem Value="">
-                                                  --- select ---
-                                                </asp:ListItem>
-                                                <asp:ListItem Value="true">Active</asp:ListItem>
-                                                <asp:ListItem Value="false">InActive</asp:ListItem>
+                                            <label class="form-label form-label-sm text-uppercase">Warehouse</label>
+                                            <asp:DropDownList ID="ddlWarehouse" CssClass="form-control form-control-sm text-uppercase js-example-basic-single" runat="server">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-xl-3 mb-12">
+                                        <div class="form-group">
+                                            <label class="form-label form-label-sm text-uppercase">Location</label>
+                                            <asp:DropDownList ID="ddlLocation" CssClass="form-control form-control-sm text-uppercase js-example-basic-single" runat="server">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -55,7 +57,7 @@
                             <!-- Sale stats -->
                             <div class="card-body">
                                 <div class="card-datatable table-responsive">
-                                    <table id="tblJobDelivery" class="table table-hover table-bordered">
+                                    <table id="tblJob" class="table table-hover table-bordered">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Warehouse Name</th>
@@ -81,7 +83,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <script src="/assets/js/JobManagement/job-delivery-list.js"></script>
+    <script src="/assets/js/JobManagement/job-list.js"></script>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ModalPlaceHolder" runat="server">

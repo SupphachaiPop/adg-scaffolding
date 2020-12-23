@@ -82,6 +82,7 @@ namespace DAO.Backend
         {
             result_info_location res = new result_info_location();
             res.zone = new List<result_info_zone>();
+            res.status = new List<result_info_status>();
             try
             {
                 using (DBHelper.CreateConnection())
@@ -95,6 +96,7 @@ namespace DAO.Backend
                         if (res != null)
                         {
                             res.zone = DBHelper.SelectStoreProcedure<result_info_zone>("select_info_zone_by_location").ToList();
+                            res.status = DBHelper.SelectStoreProcedure<result_info_status>("select_info_status_by_location").ToList();
                         }
                     }
                     catch (Exception ex)
@@ -161,6 +163,30 @@ namespace DAO.Backend
                                     DBHelper.AddParam("is_deleted", false);
                                     DBHelper.ExecuteStoreProcedure("insert_zone");
                                     DBHelper.GetParamOut<Int32>("zone_id");
+                                }
+                            });
+                        }
+
+                        if (entity.status.Count() > 0)
+                        {
+                            entity.status.ForEach(i =>
+                            {
+                                if (!i.flag_delete)
+                                {
+                                    DBHelper.AddParamOut("status_id", i.status_id);
+                                    DBHelper.AddParam("location_id", res);
+                                    DBHelper.AddParam("status_name", i.status_name);
+                                    DBHelper.AddParam("status_name_en", i.status_name_en);
+                                    DBHelper.AddParam("comment", i.comment);
+                                    DBHelper.AddParam("created_by", i.created_by);
+                                    DBHelper.AddParam("created_date", dateNow);
+                                    DBHelper.AddParam("modified_by", i.modified_by);
+                                    DBHelper.AddParam("modified_date", dateNow);
+                                    DBHelper.AddParam("is_active", true);
+                                    DBHelper.AddParam("is_referred", false);
+                                    DBHelper.AddParam("is_deleted", false);
+                                    DBHelper.ExecuteStoreProcedure("insert_status");
+                                    DBHelper.GetParamOut<Int32>("status_id");
                                 }
                             });
                         }
@@ -259,6 +285,64 @@ namespace DAO.Backend
                                         DBHelper.AddParam("is_referred", false);
                                         DBHelper.AddParam("is_deleted", false);
                                         DBHelper.ExecuteStoreProcedure("insert_zone");
+                                    }
+                                }
+                            });
+                        }
+
+                        if (entity.status.Count() > 0)
+                        {
+                            entity.status.ForEach(i =>
+                            {
+                                // update status
+                                if (i.status_id != 0)
+                                {
+                                    if (!i.flag_delete)
+                                    {
+                                        DBHelper.CreateParameters();
+                                        DBHelper.AddParamOut("success_row", res);
+                                        DBHelper.AddParam("location_id", entity.location_id);
+                                        DBHelper.AddParam("status_name", i.status_name);
+                                        DBHelper.AddParam("status_name_en", i.status_name_en);
+                                        DBHelper.AddParam("comment", i.comment);
+                                        DBHelper.AddParam("created_by", i.created_by);
+                                        DBHelper.AddParam("created_date", dateNow);
+                                        DBHelper.AddParam("modified_by", i.modified_by);
+                                        DBHelper.AddParam("modified_date", dateNow);
+                                        DBHelper.AddParam("is_active", true);
+                                        DBHelper.AddParam("is_referred", false);
+                                        DBHelper.AddParam("is_deleted", false);
+                                        DBHelper.ExecuteStoreProcedure("update_status");
+                                    }
+                                    else
+                                    {
+                                        DBHelper.CreateParameters();
+                                        DBHelper.AddParamOut("success_row", res);
+                                        DBHelper.AddParam("status_id", i.status_id);
+                                        DBHelper.AddParam("modified_by", i.modified_by);
+                                        DBHelper.AddParam("modified_date", dateNow);
+                                        DBHelper.ExecuteStoreProcedure("delete_status");
+                                    }
+                                }
+                                else
+                                {
+                                    if (!i.flag_delete)
+                                    {
+                                        DBHelper.CreateParameters();
+                                        // create status
+                                        DBHelper.AddParamOut("status_id", i.status_id);
+                                        DBHelper.AddParam("location_id", entity.location_id);
+                                        DBHelper.AddParam("status_name", i.status_name);
+                                        DBHelper.AddParam("status_name_en", i.status_name_en);
+                                        DBHelper.AddParam("comment", i.comment);
+                                        DBHelper.AddParam("created_by", i.created_by);
+                                        DBHelper.AddParam("created_date", dateNow);
+                                        DBHelper.AddParam("modified_by", i.modified_by);
+                                        DBHelper.AddParam("modified_date", dateNow);
+                                        DBHelper.AddParam("is_active", true);
+                                        DBHelper.AddParam("is_referred", false);
+                                        DBHelper.AddParam("is_deleted", false);
+                                        DBHelper.ExecuteStoreProcedure("insert_status");
                                     }
                                 }
                             });

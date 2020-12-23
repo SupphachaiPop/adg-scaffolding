@@ -205,7 +205,7 @@
     <Content Include="assets\img\uikit\sunglasses.jpg" />
     <Content Include="assets\js\customer\customer-list1.js" />
     <Content Include="assets\js\JobManagement\job-delivery-list.js" />
-    <Content Include="assets\js\JobManagement\job-cleaning-list.js" />
+    <Content Include="assets\js\JobManagement\job-list.js" />
     <Content Include="assets\js\JobManagement\job-repair-list.js" />
     <Content Include="assets\js\delivery\delivery-list.js" />
     <Content Include="assets\js\warehouseManagement\location-list.js" />
@@ -536,18 +536,14 @@
     <Content Include="Backend\Customer\customer-list.aspx" />
     <Content Include="Backend\Delivery\delivery-info.aspx" />
     <Content Include="Backend\Delivery\delivery-list.aspx" />
-    <Content Include="Backend\Job-Management\Cleaning\job-cleaning-info.aspx" />
-    <Content Include="Backend\Job-Management\Delivery\job-delivery-list.aspx" />
-    <Content Include="Backend\Job-Management\Cleaning\job-cleaning-list.aspx" />
-    <Content Include="Backend\Job-Management\Delivery\job-delivery-info.aspx" />
-    <Content Include="Backend\Job-Management\Repair\job-repair-info.aspx" />
+    <Content Include="Backend\Job-Management\Job\job-info.aspx" />
+    <Content Include="Backend\Job-Management\Job\job-list.aspx" />
     <Content Include="Backend\Job-Management\Transfer\job-transfer-info.aspx" />
     <Content Include="Backend\Product-Management\Product\product-info.aspx" />
     <Content Include="Backend\Product-Management\Product\product-list.aspx" />
     <Content Include="Backend\Customer\customer-info.aspx" />
     <Content Include="Backend\Product-Management\Specification\specification-info.aspx" />
     <Content Include="Backend\Product-Management\Specification\specification-list.aspx" />
-    <Content Include="Backend\Job-Management\Repair\job-repair-list.aspx" />
     <Content Include="Backend\Warehouse-Management\Location\location-info.aspx" />
     <Content Include="Backend\Warehouse-Management\Location\location-list.aspx" />
     <Content Include="Backend\Warehouse-Management\Warehouse\warehouse-info.aspx" />
@@ -606,39 +602,19 @@
       <DependentUpon>delivery-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\IsReferred.cs" />
-    <Compile Include="Backend\Job-Management\Cleaning\job-cleaning-info.aspx.cs">
-      <DependentUpon>job-cleaning-info.aspx</DependentUpon>
+    <Compile Include="Backend\Job-Management\Job\job-info.aspx.cs">
+      <DependentUpon>job-info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Backend\Job-Management\Cleaning\job-cleaning-info.aspx.designer.cs">
-      <DependentUpon>job-cleaning-info.aspx</DependentUpon>
+    <Compile Include="Backend\Job-Management\Job\job-info.aspx.designer.cs">
+      <DependentUpon>job-info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Backend\Job-Management\Delivery\job-delivery-list.aspx.cs">
-      <DependentUpon>job-delivery-list.aspx</DependentUpon>
+    <Compile Include="Backend\Job-Management\Job\job-list.aspx.cs">
+      <DependentUpon>job-list.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Backend\Job-Management\Delivery\job-delivery-list.aspx.designer.cs">
-      <DependentUpon>job-delivery-list.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Cleaning\job-cleaning-list.aspx.cs">
-      <DependentUpon>job-cleaning-list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Cleaning\job-cleaning-list.aspx.designer.cs">
-      <DependentUpon>job-cleaning-list.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Delivery\job-delivery-info.aspx.cs">
-      <DependentUpon>job-delivery-info.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Delivery\job-delivery-info.aspx.designer.cs">
-      <DependentUpon>job-delivery-info.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Repair\job-repair-info.aspx.cs">
-      <DependentUpon>job-repair-info.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Repair\job-repair-info.aspx.designer.cs">
-      <DependentUpon>job-repair-info.aspx</DependentUpon>
+    <Compile Include="Backend\Job-Management\Job\job-list.aspx.designer.cs">
+      <DependentUpon>job-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\Job-Management\Transfer\job-transfer-info.aspx.cs">
       <DependentUpon>job-transfer-info.aspx</DependentUpon>
@@ -681,13 +657,6 @@
     </Compile>
     <Compile Include="Backend\Product-Management\Specification\specification-list.aspx.designer.cs">
       <DependentUpon>specification-list.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Repair\job-repair-list.aspx.cs">
-      <DependentUpon>job-repair-list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Backend\Job-Management\Repair\job-repair-list.aspx.designer.cs">
-      <DependentUpon>job-repair-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\Warehouse-Management\Location\location-info.aspx.cs">
       <DependentUpon>location-info.aspx</DependentUpon>

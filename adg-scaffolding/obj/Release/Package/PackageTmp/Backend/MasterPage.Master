@@ -4,7 +4,7 @@
 
 <html class="default-style">
 <head runat="server">
-    <title>Coverage Service</title>
+    <title>ADG Scaffolding</title>
     <link rel="shortcut icon" href="http://xcite.co.th//img/logo/logo.png" />
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">

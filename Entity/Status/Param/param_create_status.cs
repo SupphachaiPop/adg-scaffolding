@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 namespace Entity
 {
-    public class status
+    public class param_create_status
     {
         public int status_id { get; set; } // status_id (Primary key)
         public int location_id { get; set; } // location_id
@@ -16,17 +16,7 @@ namespace Entity
         public bool? is_referred { get; set; } // is_referred
         public bool? is_active { get; set; } // is_active
         public bool? is_deleted { get; set; } // is_deleted
-
-        public virtual ICollection<job_delivery> job_delivery { get; set; } // job_delivery.fk_job_delivery_status_status_id
-        public virtual ICollection<job> job { get; set; } // job.fk_job_status_status_id
-
-        public virtual status_group status_group { get; set; } // fk_status_status_group_status_group_id
-
-        public status()
-        {
-            this.job = new List<job>();
-            this.job_delivery = new List<job_delivery>();
-        }
+        public bool flag_delete { get; set; } // flag_delete
     }
 }
 
