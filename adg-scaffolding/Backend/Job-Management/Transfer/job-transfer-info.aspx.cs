@@ -52,7 +52,7 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
             var productSelectId = int.Parse(ddlProductJob.SelectedValue);
             var zoneSourceSelectId = int.Parse(ddlZoneSource.SelectedValue);
             var product = dataService.GetActiveJobList(zoneSourceSelectId).FirstOrDefault(i => i.job_id == productSelectId);
-            txtAmount.Text = product.amount.ToString("#.##");
+            txtAmount.Text = productSelectId > 0 ? product.amount.ToString("#.##") : "";
             ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Script1", "InitSelect2();", true);
         }
 
@@ -206,7 +206,7 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
             var zoneId = int.Parse(ddlZoneSource.SelectedValue);
             var newZoneId = int.Parse(ddlZoneDestination.SelectedValue);
             param = GetDataJob(zoneId: zoneId);
-            param.ForEach(i => i.new_zone_id = newZoneId);
+            param.ForEach(i => i.zone_destination_id = newZoneId);
             int success = 0;
             success = dataService.UpdateAndCreateJobTransfer(param);
             if (success > 0)
@@ -235,10 +235,18 @@ namespace adg_scaffolding.Backend.Job_Management.Transfer
                 TextBox txtComment = (TextBox)item.FindControl("txtComment");
 
                 var selectStatusId = int.Parse(ddlStatusJob.SelectedValue);
+                var selectLoacationSourceId = int.Parse(ddlLocationSource.SelectedValue);
+                var selectZoneSourceId = int.Parse(ddlZoneSource.SelectedValue);
+                var selectLoacationDestinationId = int.Parse(ddlLocationDestination.SelectedValue);
+                var selectZoneDestinationId = int.Parse(ddlZoneDestination.SelectedValue);
+
                 job.Add(new param_create_job_transfer
                 {
                     job_id = int.Parse(lblJobId.Text),
-                    zone_id = zoneId,
+                    location_source_id = selectLoacationSourceId,                
+                    zone_source_id = selectZoneSourceId,
+                    loaction_destination_id = selectLoacationDestinationId,
+                    zone_destination_id = selectZoneDestinationId,
                     product_id = int.Parse(lblJobId.Text),
                     product_name = lblProductName.Text,
                     amount = int.Parse(lblAmount.Text),

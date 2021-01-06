@@ -227,16 +227,18 @@ namespace DAO.Backend
                     try
                     {
                         DBHelper.OpenConnection();
+
+                        var statusList = DBHelper.SelectStoreProcedure<status>("select_list_status").ToList();
+
                         DBHelper.CreateParameters();
-                        DBHelper.AddParam("zone_id", entities.FirstOrDefault().zone_id);
+                        DBHelper.AddParam("zone_id", entities.FirstOrDefault().zone_source_id);
                         var jobListSelect = DBHelper.SelectStoreProcedure<job>("select_list_job_zone").ToList();
                         DBHelper.CreateParameters();
-                        DBHelper.AddParam("zone_id", entities.FirstOrDefault().new_zone_id);
+                        DBHelper.AddParam("zone_id", entities.FirstOrDefault().zone_destination_id);
                         var newjobList = DBHelper.SelectStoreProcedure<job>("select_list_job_zone").ToList();
 
                         var jobListSelectIds = entities.Where(i => i.is_deleted == false).Select(s => s.job_id).ToList();
                         jobListSelect = jobListSelect.Where(i => jobListSelectIds.Any(a => i.job_id == a)).ToList();
-
 
 
                         entities.ForEach(i =>
@@ -246,6 +248,7 @@ namespace DAO.Backend
                                 var jobSelect = jobListSelect.Where(j => j.job_id == i.job_id).FirstOrDefault();
                                 if (jobSelect != null)
                                 {
+                                    //set new value of job select from zone source
                                     var balanceAmount = jobSelect.amount - i.amount;
                                     var productId = jobSelect.product_id;
                                     var setIsDeleted = balanceAmount > 0 ? jobSelect.is_deleted : true;
@@ -264,6 +267,15 @@ namespace DAO.Backend
                                     DBHelper.ExecuteStoreProcedure("update_job");
                                     res = DBHelper.GetParamOut<Int32>("success_row");
 
+                                    var statusComplete = statusList.Where(s => s.location_id == i.location_source_id && s.status_name_en.Contains(_BaseConst.job_complete)).FirstOrDefault();
+                                    // add job history
+                                    addjobHistory(DBHelper: DBHelper,
+                                                 jobId: jobSelect.job_id,
+                                                 amount: i.amount,
+                                                 statusId: statusComplete.status_id,
+                                                 parentJobId: null,
+                                                 comment: i.comment,
+                                                 userId: i.created_by.Value);
 
                                     var newJobSelect = newjobList.Where(j => j.product_id == productId && j.is_deleted == false).FirstOrDefault();
                                     if (newJobSelect != null)
@@ -283,12 +295,21 @@ namespace DAO.Backend
                                         DBHelper.AddParam("modified_date", dateNow);
                                         DBHelper.ExecuteStoreProcedure("update_job");
                                         res = DBHelper.GetParamOut<Int32>("success_row");
+
+                                        // add job history
+                                        addjobHistory(DBHelper: DBHelper,
+                                                     jobId: newJobSelect.job_id,
+                                                     amount: i.amount,
+                                                     statusId: newJobSelect.status_id,
+                                                     parentJobId: i.job_id,
+                                                     comment: newJobSelect.comment,
+                                                     userId: newJobSelect.created_by.Value);
                                     }
                                     else
                                     {
                                         DBHelper.CreateParameters();
                                         DBHelper.AddParamOut("job_id", res);
-                                        DBHelper.AddParam("zone_id", i.new_zone_id);
+                                        DBHelper.AddParam("zone_id", i.zone_destination_id);
                                         DBHelper.AddParam("product_id", productId);
                                         DBHelper.AddParam("amount", i.amount);
                                         DBHelper.AddParam("status_id", i.status_id);
@@ -301,6 +322,14 @@ namespace DAO.Backend
                                         DBHelper.AddParam("modified_date", dateNow);
                                         DBHelper.ExecuteStoreProcedure("insert_job");
                                         res = DBHelper.GetParamOut<Int32>("job_id");
+
+                                        addjobHistory(DBHelper: DBHelper,
+                                                      jobId: res,
+                                                      amount: i.amount,
+                                                      statusId: i.status_id,
+                                                      parentJobId: i.job_id,
+                                                      comment: i.comment,
+                                                      userId: i.created_by.Value);
                                     }
                                 }
                             }
@@ -321,6 +350,27 @@ namespace DAO.Backend
                 throw ex;
             }
             return res;
+        }
+
+
+        private void addjobHistory(DBHelper DBHelper, int jobId, int amount, int statusId, int? parentJobId, string comment, int userId)
+        {
+            // add job history
+            var dateNow = DateTime.Now;
+            DBHelper.CreateParameters();
+            DBHelper.AddParamOut("job_history_id", 0);
+            DBHelper.AddParam("job_id", jobId);
+            DBHelper.AddParam("amount", amount);
+            DBHelper.AddParam("status_id", statusId);
+            DBHelper.AddParam("parent_job_id", parentJobId);
+            DBHelper.AddParam("comment", comment);
+            DBHelper.AddParam("is_active", true);
+            DBHelper.AddParam("is_deleted", false);
+            DBHelper.AddParam("created_by", userId);
+            DBHelper.AddParam("created_date", dateNow);
+            DBHelper.AddParam("modified_by", userId);
+            DBHelper.AddParam("modified_date", dateNow);
+            DBHelper.ExecuteStoreProcedure("insert_job_history");
         }
     }
 }

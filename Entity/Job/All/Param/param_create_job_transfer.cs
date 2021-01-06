@@ -4,8 +4,10 @@ namespace Entity
     public class param_create_job_transfer
     {
         public int job_id { get; set; } // job_id (Primary key)
-        public int zone_id { get; set; } // zone_id
-        public int new_zone_id { get; set; } // zone_id
+        public int location_source_id { get; set; } // location_source_id
+        public int zone_source_id { get; set; } // zone_source_id
+        public int loaction_destination_id { get; set; } // loaction_destination_id
+        public int zone_destination_id { get; set; } // zone_destination_id
         public int product_id { get; set; } // 
         public string product_name { get; set; } // product_id
         public int amount { get; set; } // amount

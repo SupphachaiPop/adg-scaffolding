@@ -3,6 +3,8 @@ namespace Entity
 {
     public partial class _BaseConst
     {
+
+        public const string job_complete = "complete";
         public enum location
         {
             Cleaning = 1,

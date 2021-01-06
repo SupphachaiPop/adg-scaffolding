@@ -158,7 +158,7 @@
                                 </div>
 
                                   <hr class="mb-3">
-                                <h4>Zone</h4>
+                                <h4>Status</h4>
                                 <hr class="mb-3">
                                 <asp:LinkButton ID="btnCreateStatus" CssClass="btn btn-success mt-4" OnClick="btnCreateStatus_Click" runat="server">
                                 <span class="ion ion-md-add mr-1"></span> ADD</asp:LinkButton>
