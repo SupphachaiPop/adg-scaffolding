@@ -27,6 +27,11 @@ namespace Definitions
         public const string JobInfoUrl = "/Backend/Job-Management/Job/job-info.aspx";
         public const string JobTransferInfoUrl = "/Backend/Job-Management/Transfer/job-transfer-info.aspx";
 
+        public const string ProductStoreListUrl = "/Backend/Store/Product-Store/product-store-list.aspx";
+        public const string ProductStoreInfoUrl = "/Backend/Store/Product-Store/product-store-info.aspx";
+        public const string StoreListUrl = "/Backend/Store/store-list.aspx";
+        public const string StoreInfoUrl = "/Backend/Store/store-info.aspx";
+
 
         public const string DEFAULT_EMPTY_URL = "javascript:void(0);";
         public const string BASE_URL = "/Backend";

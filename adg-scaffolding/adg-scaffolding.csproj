@@ -143,70 +143,9 @@
     <Content Include="assets\css\custom.css" />
     <Content Include="assets\css\demo.css" />
     <Content Include="assets\css\tabs.css" />
-    <Content Include="assets\img\avatars\1-small.png" />
-    <Content Include="assets\img\avatars\1.png" />
-    <Content Include="assets\img\avatars\10-small.png" />
-    <Content Include="assets\img\avatars\10.png" />
-    <Content Include="assets\img\avatars\11-small.png" />
-    <Content Include="assets\img\avatars\11.png" />
-    <Content Include="assets\img\avatars\12-small.png" />
-    <Content Include="assets\img\avatars\12.png" />
-    <Content Include="assets\img\avatars\2-small.png" />
-    <Content Include="assets\img\avatars\2.png" />
-    <Content Include="assets\img\avatars\3-small.png" />
-    <Content Include="assets\img\avatars\3.png" />
-    <Content Include="assets\img\avatars\4-small.png" />
-    <Content Include="assets\img\avatars\4.png" />
-    <Content Include="assets\img\avatars\5-small.png" />
-    <Content Include="assets\img\avatars\5.png" />
-    <Content Include="assets\img\avatars\6-small.png" />
-    <Content Include="assets\img\avatars\6.png" />
-    <Content Include="assets\img\avatars\7-small.png" />
-    <Content Include="assets\img\avatars\7.png" />
-    <Content Include="assets\img\avatars\8-small.png" />
-    <Content Include="assets\img\avatars\8.png" />
-    <Content Include="assets\img\avatars\9-small.png" />
-    <Content Include="assets\img\avatars\9.png" />
-    <Content Include="assets\img\bg\1.jpg" />
-    <Content Include="assets\img\bg\2.jpg" />
-    <Content Include="assets\img\bg\3.jpg" />
-    <Content Include="assets\img\bg\4.jpg" />
-    <Content Include="assets\img\bg\5.jpg" />
-    <Content Include="assets\img\bg\6.jpg" />
-    <Content Include="assets\img\logo.png" />
-    <Content Include="assets\img\uikit\adidas.jpg" />
-    <Content Include="assets\img\uikit\app-phone.png" />
-    <Content Include="assets\img\uikit\app.png" />
-    <Content Include="assets\img\uikit\backpack.jpg" />
-    <Content Include="assets\img\uikit\chair-1.jpg" />
-    <Content Include="assets\img\uikit\headphones.jpg" />
-    <Content Include="assets\img\uikit\iwatch.jpg" />
-    <Content Include="assets\img\uikit\logo-1.png" />
-    <Content Include="assets\img\uikit\logo-10.png" />
-    <Content Include="assets\img\uikit\logo-11.png" />
-    <Content Include="assets\img\uikit\logo-2.png" />
-    <Content Include="assets\img\uikit\logo-3.png" />
-    <Content Include="assets\img\uikit\logo-4.png" />
-    <Content Include="assets\img\uikit\logo-5.png" />
-    <Content Include="assets\img\uikit\logo-6.png" />
-    <Content Include="assets\img\uikit\logo-7.png" />
-    <Content Include="assets\img\uikit\logo-8.png" />
-    <Content Include="assets\img\uikit\logo-9.png" />
-    <Content Include="assets\img\uikit\nike-1.jpg" />
-    <Content Include="assets\img\uikit\presentation-costume.jpg" />
-    <Content Include="assets\img\uikit\presentation-jeans.jpg" />
-    <Content Include="assets\img\uikit\presentation-shirt.jpg" />
-    <Content Include="assets\img\uikit\presentation-suit.jpg" />
-    <Content Include="assets\img\uikit\ps4.jpg" />
-    <Content Include="assets\img\uikit\s7edge-1.jpg" />
-    <Content Include="assets\img\uikit\s7edge-2.jpg" />
-    <Content Include="assets\img\uikit\s7edge-3.jpg" />
-    <Content Include="assets\img\uikit\s7edge-4.jpg" />
-    <Content Include="assets\img\uikit\sunglasses.jpg" />
+    <Content Include="assets\img\adg_logo.png" />
     <Content Include="assets\js\customer\customer-list1.js" />
-    <Content Include="assets\js\JobManagement\job-delivery-list.js" />
     <Content Include="assets\js\JobManagement\job-list.js" />
-    <Content Include="assets\js\JobManagement\job-repair-list.js" />
     <Content Include="assets\js\delivery\delivery-list.js" />
     <Content Include="assets\js\warehouseManagement\location-list.js" />
     <Content Include="assets\js\warehouseManagement\warehouse-list.js" />
@@ -529,6 +468,9 @@
     <Content Include="assets\vendor\libs\vegas\overlays\09.png" />
     <Content Include="assets\vendor\libs\vegas\vegas.css" />
     <Content Include="assets\vendor\libs\vegas\vegas.js" />
+    <Content Include="Backend\Store\store-list.aspx" />
+    <Content Include="Backend\Store\Product-Store\product-store-info.aspx" />
+    <Content Include="Backend\Store\Product-Store\product-store-list.aspx" />
     <Content Include="Backend\Administrator\Role\role-info.aspx" />
     <Content Include="Backend\Administrator\Role\role-list.aspx" />
     <Content Include="Backend\Administrator\User\user-info.aspx" />
@@ -539,6 +481,10 @@
     <Content Include="Backend\Job-Management\Job\job-info.aspx" />
     <Content Include="Backend\Job-Management\Job\job-list.aspx" />
     <Content Include="Backend\Job-Management\Transfer\job-transfer-info.aspx" />
+    <Content Include="Backend\Print\print-tax-invoice.aspx" />
+    <Content Include="Backend\Print\print-invoice.aspx" />
+    <Content Include="Backend\Print\print-quotation.aspx" />
+    <Content Include="Backend\Print\print-purchase-request.aspx" />
     <Content Include="Backend\Product-Management\Product\product-info.aspx" />
     <Content Include="Backend\Product-Management\Product\product-list.aspx" />
     <Content Include="Backend\Customer\customer-info.aspx" />
@@ -548,12 +494,34 @@
     <Content Include="Backend\Warehouse-Management\Location\location-list.aspx" />
     <Content Include="Backend\Warehouse-Management\Warehouse\warehouse-info.aspx" />
     <Content Include="Backend\Warehouse-Management\Warehouse\warehouse-list.aspx" />
+    <Content Include="Backend\Print\print-purchase-order.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Backend\login.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Store\store-list.aspx.cs">
+      <DependentUpon>store-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Store\store-list.aspx.designer.cs">
+      <DependentUpon>store-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Store\Product-Store\product-store-info.aspx.cs">
+      <DependentUpon>product-store-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Store\Product-Store\product-store-info.aspx.designer.cs">
+      <DependentUpon>product-store-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Store\Product-Store\product-store-list.aspx.cs">
+      <DependentUpon>product-store-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Store\Product-Store\product-store-list.aspx.designer.cs">
+      <DependentUpon>product-store-list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\Administrator\Role\role-info.aspx.cs">
       <DependentUpon>role-info.aspx</DependentUpon>
     </Compile>
@@ -623,6 +591,34 @@
     <Compile Include="Backend\Job-Management\Transfer\job-transfer-info.aspx.designer.cs">
       <DependentUpon>job-transfer-info.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Backend\Print\print-tax-invoice.aspx.cs">
+      <DependentUpon>print-tax-invoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Print\print-tax-invoice.aspx.designer.cs">
+      <DependentUpon>print-tax-invoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Print\print-invoice.aspx.cs">
+      <DependentUpon>print-invoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Print\print-invoice.aspx.designer.cs">
+      <DependentUpon>print-invoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Print\print-quotation.aspx.cs">
+      <DependentUpon>print-quotation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Print\print-quotation.aspx.designer.cs">
+      <DependentUpon>print-quotation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Print\print-purchase-request.aspx.cs">
+      <DependentUpon>print-purchase-request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Print\print-purchase-request.aspx.designer.cs">
+      <DependentUpon>print-purchase-request.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\Product-Management\Product\product-info.aspx.cs">
       <DependentUpon>product-info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -683,6 +679,13 @@
     <Compile Include="Backend\Warehouse-Management\Warehouse\warehouse-list.aspx.designer.cs">
       <DependentUpon>warehouse-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Backend\Print\print-purchase-order.aspx.cs">
+      <DependentUpon>print-purchase-order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Print\print-purchase-order.aspx.designer.cs">
+      <DependentUpon>print-purchase-order.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Backend\Dropdown.cs" />
     <Compile Include="Backend\login.aspx.cs">
@@ -703,7 +706,6 @@
   <ItemGroup>
     <Content Include="assets\.DS_Store" />
     <Content Include="assets\img\.DS_Store" />
-    <Content Include="assets\img\bg\.DS_Store" />
     <Content Include="assets\vendor\.DS_Store" />
     <Content Include="assets\vendor\css\.DS_Store" />
     <Content Include="assets\vendor\fonts\fontawesome\fa-brands-400.eot" />
