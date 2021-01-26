@@ -8,39 +8,79 @@ using Service.Backend;
 using Definitions;
 using Entity;
 using ClosedXML;
+using System.Web.Services;
+using System.Web.Script.Services;
+using Definitions.Static_Text;
 
-namespace adg_scaffolding.Backend.Store.Product_Store
+namespace adg_scaffolding.Backend.Store
 {
-    public partial class product_store_info : System.Web.UI.Page
+    [System.Web.Script.Services.ScriptService]
+    public partial class store_info : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                var productStoreId = GetIdFromQueryString();
-                setDataToUIByID(productStoreId);
+                var StoreId = GetIdFromQueryString();
+                setDataToUIByID(StoreId);
             }
         }
 
         public void setDataToUIByID(Int32 ID)
         {
             DataService dataService = new DataService();
-            result_info_product_store productStore = new result_info_product_store();
+            result_info_store store = new result_info_store();
             UtilityCommon utilityCommon = new UtilityCommon();
             chkStatus.Checked = true;
             if (ID > 0)
             {
-                productStore = dataService.GetProductStoreInfo(ID);
-                if (productStore != null)
+                store = dataService.GetStoreInfo(ID);
+                if (store != null)
                 {
-                    lblProductStoreId.Text = ID.ToString();
-                    txtProductStoreName.Text = productStore.product_store_name;
-                    txtProductStoreCode.Text = productStore.product_store_code;
-                    txtComment.Text = productStore.comment;
-                    chkStatus.Checked = ID != 0 ? productStore.is_active.Value : true;
+                    lblStoreId.Text = ID.ToString();
+                    ddlProductStore.Text = store.product_store_id.ToString();
+                    txtQty.Text = store.qty.ToString();
+                    txtComment.Text = store.comment;
+                    chkStatus.Checked = ID != 0 ? store.is_active.Value : true;
+                    setDataToRepeater(store.store_history);
                 }
             }
         }
+
+
+        #region store history
+        public void setDataToRepeater(List<result_search_store_history> storeHistoryList)
+        {
+            rptStoreHistory.DataSource = null;
+            if (storeHistoryList != null && storeHistoryList.Count() > 0)
+            {
+                rptStoreHistory.DataSource = storeHistoryList.OrderBy(i => i.created_date);
+                rptStoreHistory.DataBind();
+            }
+        }
+        protected void rptStoreHistory_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            result_search_store_history storeHistory = (result_search_store_history)e.Item.DataItem;
+
+            Label lblDate = (Label)e.Item.FindControl("lblDate");
+            Label lblLocationName = (Label)e.Item.FindControl("lblLocationName");
+            Label lblZoneName = (Label)e.Item.FindControl("lblZoneName");
+            Label lblQty = (Label)e.Item.FindControl("lblQty");
+            Label lblComment = (Label)e.Item.FindControl("lblComment");
+
+            lblDate.Text = storeHistory.created_date.ToString("dd/MM/YYYY");
+            lblLocationName.Text = storeHistory.location_name;
+            lblZoneName.Text = storeHistory.zone_name;
+            lblQty.Text = storeHistory.qty.ToString();
+            lblComment.Text = storeHistory.comment;
+
+            lblQty.Attributes.Add("checked", "color:green");
+            if (!storeHistory.is_inbound)
+            {
+                lblQty.Attributes.Add("style", "color:red");
+            }
+        }
+        #endregion
         protected void lbnSave_Click(object sender, EventArgs e)
         {
             string message = "";
@@ -51,14 +91,14 @@ namespace adg_scaffolding.Backend.Store.Product_Store
             }
 
             DataService dataService = new DataService();
-            param_create_product_store param = new param_create_product_store();
+            param_create_store param = new param_create_store();
             UtilityCommon utilityCommon = new UtilityCommon();
             DateTime _now = DateTime.Now;
             var user = userLogin();
-            var productStoreId = GetIdFromQueryString();
-            param.product_store_id = productStoreId;
-            param.product_store_name = txtProductStoreName.Text;
-            param.product_store_code = txtProductStoreCode.Text;
+            var storeId = GetIdFromQueryString();
+            param.store_id = storeId;
+            param.product_store_id = int.Parse(ddlProductStore.SelectedValue);
+            param.qty = int.Parse(txtQty.Text);
             param.comment = txtComment.Text;
             param.is_referred = true;
             param.is_active = chkStatus.Checked;
@@ -69,14 +109,7 @@ namespace adg_scaffolding.Backend.Store.Product_Store
             param.modified_date = _now;
 
             int success = 0;
-            if (productStoreId > 0)
-            {
-                success = dataService.UpdateProductStore(param);
-            }
-            else
-            {
-                success = dataService.InsertProductStore(param);
-            }
+            success = dataService.InsertStore(param);
 
             if (success > 0)
             {
@@ -93,46 +126,29 @@ namespace adg_scaffolding.Backend.Store.Product_Store
         public bool ValidateForm(out string message)
         {
             DataService dataService = new DataService();
-            List<product_store> productStoreList = dataService.GetProductStoreList();
+            List<store> StoreList = dataService.GetStoreList();
             message = "";
 
-            if (string.IsNullOrEmpty(txtProductStoreCode.Text.Trim()))
+            if (ddlProductStore.SelectedValue != "")
             {
-                message = "กรุณากรอก รหัสลูกค้า (Product Store Code)";
+                message = "กรุณาเลือกสินค้า (Product Store Name)";
                 return false;
             }
-            if (string.IsNullOrEmpty(txtProductStoreName.Text.Trim()))
+            if (string.IsNullOrEmpty(txtQty.Text.Trim()))
             {
-                message = "กรุณากรอก ชื่อลูกค้า (Product Store Name)";
+                message = "กรุณากรอกจำนวน (Qty)";
                 return false;
-            }
-
-            if (productStoreList != null && productStoreList.Count > 0)
-            {
-                int productStoreId = GetIdFromQueryString();
-                productStoreList = productStoreList.Where(i => i.product_store_id != productStoreId).ToList();
-                if (productStoreList.Any(i => i.product_store_name.Trim().Equals(txtProductStoreName.Text.Trim())))
-                {
-                    message = "ชื่อลูกค้า (productStore Name) นี้มีอยู่ในระบบแล้ว";
-                    return false;
-                }
-
-                if (productStoreList.Any(i => i.product_store_code.Trim().Equals(txtProductStoreCode.Text.Trim())))
-                {
-                    message = "รหัสลูกค้า (productStore Code) นี้มีอยู่ในระบบแล้ว";
-                    return false;
-                }
             }
 
             return true;
         }
         protected void lbnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.ProductStoreListUrl, false);
+            Response.Redirect(StaticUrl.StoreListUrl, false);
         }
         protected void lblSuccess_Click(object sender, EventArgs e)
         {
-            Response.Redirect(StaticUrl.ProductStoreListUrl, false);
+            Response.Redirect(StaticUrl.StoreListUrl, false);
         }
         public int DecryptCode(string enCryptCode)
         {
@@ -159,5 +175,7 @@ namespace adg_scaffolding.Backend.Store.Product_Store
         {
             return Request.QueryString["ID"] != null ? DecryptCode(Request.QueryString["ID"]) : 0;
         }
+
+
     }
 }

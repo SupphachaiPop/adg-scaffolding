@@ -7,17 +7,15 @@ namespace Entity
         public int warehouse_id { get; set; } // warehouse_id
         public int product_store_id { get; set; } // product_store_id
         public int qty { get; set; } // qty
-        public string comment { get; set; } // comment (length: 4000)
-        public int? created_by { get; set; } // created_by
-        public System.DateTime? created_date { get; set; } // created_date
-        public int? modified_by { get; set; } // modified_by
-        public System.DateTime? modified_date { get; set; } // modified_date
+        public string comment { get; set; } // comment (length: 4000)   
         public bool? is_referred { get; set; } // is_referred
         public bool? is_active { get; set; } // is_active
-        public bool? is_deleted { get; set; } // is_deleted
+        public List<result_search_store_history> store_history { get; set; }
 
-        public virtual product_store product_store { get; set; } // FK_Table_1_product_store_product_store_id
-        public virtual warehouse warehouse { get; set; } // FK_store_warehouse
+        public result_info_store()
+        {
+            this.store_history = new List<result_search_store_history>();
+        }
     }
 }
 

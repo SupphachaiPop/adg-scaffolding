@@ -1,19 +1,30 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="product-info.aspx.cs" Inherits="adg_scaffolding.Backend.Product_Management.Product.product_info" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="store-info.aspx.cs" Inherits="adg_scaffolding.Backend.Store.store_info" %>
 
+<%@ MasterType VirtualPath="~/Backend/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FromPlaceHolder" runat="server">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function clearFilter() {
+            $('#inbound-info').dataTable({
+                paging: false,
+                destroy: true,
+                deferRender: true,
+            });
+            $('#inbound-info').dataTable().fnFilter('');
+        }
+    </script>
     <!-- Content -->
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
-                <h4 class="font-weight-bold py-3 mb-2">PRODUCT
+                <h4 class="font-weight-bold py-3 mb-2">STORE
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
                                     <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
-                                    PRODUCT
+                                    STORE
                                 </small>
                             </div>
                     <br />
@@ -32,127 +43,30 @@
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                                Product Code
+                                                Store Code
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:Label ID="lblProductId" runat="server" Visible="false"></asp:Label>
-                                            <asp:TextBox ID="txtProductCode" CssClass="form-control form-control-md" runat="server" placeholder="Product Code"></asp:TextBox>
+                                            <asp:Label ID="lblStoreId" runat="server" Visible="false"></asp:Label>
+                                            <asp:DropDownList ID="ddlProductStore" CssClass="form-control form-control-sm text-uppercase js-example-basic-single" runat="server" />
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                                Product Name
+                                                Store Name
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:TextBox ID="txtProductName" CssClass="form-control form-control-md" runat="server" placeholder="Product Name"></asp:TextBox>
+                                            <asp:TextBox ID="txtQty" CssClass="form-control form-control-md" TextMode="Number" runat="server" placeholder="Qty"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Stock
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:TextBox ID="txtStock" CssClass="form-control form-control-md" runat="server" TextMode="Number" placeholder="Stock"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                specification
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:DropDownList ID="ddlSpecification" CssClass="form-control form-control-sm text-uppercase js-example-basic-single" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="true" runat="server">
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Cost Price
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:TextBox ID="txtCostPrice" CssClass="form-control form-control-md" runat="server" placeholder="Cost Price"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Sale Price
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:TextBox ID="txtSalePrice" CssClass="form-control form-control-md" runat="server" placeholder="Sale Price"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">Product Description</label>
-                                            <asp:TextBox ID="txtProductDescription" CssClass="form-control form-control-md" TextMode="MultiLine" Rows="3" runat="server" placeholder="Product Description"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
+                                    <div class="col-lg-12 col-xl-12 mb-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">Comment</label>
                                             <asp:TextBox ID="txtComment" CssClass="form-control form-control-md" TextMode="MultiLine" Rows="3" runat="server" placeholder="Comment"></asp:TextBox>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="card-datatable table-responsive">
-                                        <table class="datatables-demo table table-striped table-hover table-bordered">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th class="tbw-10">No.</th>
-                                                    <th class="tbw-2">Sub Product Name</th>
-                                                     <th class="tbw-2">Sub Product Value</th>
-                                                    <th class="tbw-2">Status </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptProductSpecification" runat="server" OnItemDataBound="rptProductSpecification_ItemDataBound">
-                                                    <ItemTemplate>
-                                                        <tr class="odd gradeX">
-                                                            <td>
-                                                                <asp:Label ID="lblProductSpecificationId" Visible="false" runat="server"></asp:Label>
-                                                                <asp:Label ID="lblNo" runat="server"></asp:Label>
-                                                            </td>
-                                                            <td>
-                                                                <asp:Label ID="lblSubSpecificationId" Visible="false" runat="server"></asp:Label>
-                                                                <asp:Label ID="lblProductSpecificationName"  runat="server"></asp:Label>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtProductSpecificationValue" CssClass="form-control form-control-md" runat="server" placeholder="Value"></asp:TextBox>
-                                                            </td>
-                                                            <td class="center">
-                                                                <label class="switcher switcher-sm">
-                                                                    <asp:HiddenField ID="hdfStatus" runat="server" />
-                                                                    <input id="chkStatus" runat="server" type="checkbox" class="switcher-input">
-                                                                    <span class="switcher-indicator">
-                                                                        <span class="switcher-yes">
-                                                                            <span class="ion ion-md-checkmark"></span>
-                                                                        </span>
-                                                                        <span class="switcher-no">
-                                                                            <span class="ion ion-md-close"></span>
-                                                                        </span>
-                                                                    </span>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-lg-12 col-xl-12 mb-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">Status</label>
@@ -170,35 +84,54 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <hr class="my-3">
                                 <asp:LinkButton ID="lbnBack" runat="server" CssClass="btn btn-lg btn-secondary" OnClick="lbnBack_Click">Back</asp:LinkButton>
                                 <asp:LinkButton ID="lbnSave" runat="server" CssClass="btn btn-lg btn-primary" OnClick="lbnSave_Click" OnClientClick="clearFilter();">Save</asp:LinkButton>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-                   <div class="card mb-3">
+                <div class="card mb-3">
                     <div class="row no-gutters row-bordered">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <!-- Sale stats -->
                             <div class="card-body">
                                 <div class="card-datatable table-responsive">
-                                    <table id="tblStore" class="table table-hover table-bordered">
+                                    <table id="tblStoreHistory" class="datatables-demo table table-striped table-hover table-bordered">
                                         <thead class="thead-dark">
                                             <tr>
-                                                <th>Store</th>
-                                                <th>Product Store Name</th>
+                                                <th>Date</th>
+                                                <th>location</th>
+                                                <th>zone</th>
                                                 <th>Qty</th>
                                                 <th>Comment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <asp:Label ID="lblId" runat="server"></asp:Label>
+                                            <asp:Repeater ID="rptStoreHistory" runat="server" OnItemDataBound="rptStoreHistory_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <tr class="odd gradeX">
+                                                        <td>
+                                                            <asp:Label ID="lblDate" runat="server"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="lblLocationName" runat="server"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="lblZoneName" runat="server"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="lblQty" runat="server"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="lblComment" runat="server"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
                             <!-- / Sale stats -->
@@ -211,9 +144,9 @@
             <!-- / Content -->
         </ContentTemplate>
     </asp:UpdatePanel>
+    <script src="/assets/js/store/store-info.js"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ModalPlaceHolder" runat="server">
-
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type='text/javascript'>
         function openModalError(msg) {

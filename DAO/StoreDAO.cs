@@ -589,6 +589,38 @@ namespace DAO.Backend
             }
             return res;
         }
-        #endregion      
+        #endregion
+
+        public List<result_search_store_history> SearchStoreHistoryList(int productStoreId)
+        {
+            List<result_search_store_history> res = null;
+
+            try
+            {
+                using (DBHelper.CreateConnection())
+                {
+                    try
+                    {
+                        DBHelper.OpenConnection();
+                        DBHelper.CreateParameters();
+                        DBHelper.AddParam("product_store_id", productStoreId);
+                        res = DBHelper.SelectStoreProcedure<result_search_store_history>("select_search_store_history").ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        DBHelper.CloseConnection();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return res;
+        }
     }
 }

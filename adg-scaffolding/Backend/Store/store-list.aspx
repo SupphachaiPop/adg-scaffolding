@@ -84,7 +84,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <script src="/assets/js/store/product-store-list.js"></script>
+    <script src="/assets/js/store/store-list.js"></script>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ModalPlaceHolder" runat="server">

@@ -21,6 +21,7 @@ namespace Service.Backend
         {
             return dataDao.SearchStoreList(param);
         }
+
         public int InsertStore(param_create_store entity)
         {
             return dataDao.InsertStore(entity);
@@ -77,5 +78,10 @@ namespace Service.Backend
             return dataDao.DeleteProductStore(entity);
         }
         #endregion
+
+        public List<result_search_store_history> SearchStoreHistoryList(int productStoreId)
+        {
+            return dataDao.SearchStoreHistoryList(productStoreId);
+        }
     }
 }

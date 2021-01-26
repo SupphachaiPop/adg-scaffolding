@@ -468,8 +468,9 @@
     <Content Include="assets\vendor\libs\vegas\overlays\09.png" />
     <Content Include="assets\vendor\libs\vegas\vegas.css" />
     <Content Include="assets\vendor\libs\vegas\vegas.js" />
-    <Content Include="Backend\Store\store-list.aspx" />
+    <Content Include="Backend\Store\store-info.aspx" />
     <Content Include="Backend\Store\Product-Store\product-store-info.aspx" />
+    <Content Include="Backend\Store\store-list.aspx" />
     <Content Include="Backend\Store\Product-Store\product-store-list.aspx" />
     <Content Include="Backend\Administrator\Role\role-info.aspx" />
     <Content Include="Backend\Administrator\Role\role-list.aspx" />
@@ -501,12 +502,12 @@
     <Content Include="Backend\login.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backend\Store\store-list.aspx.cs">
-      <DependentUpon>store-list.aspx</DependentUpon>
+    <Compile Include="Backend\Store\store-info.aspx.cs">
+      <DependentUpon>store-info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Backend\Store\store-list.aspx.designer.cs">
-      <DependentUpon>store-list.aspx</DependentUpon>
+    <Compile Include="Backend\Store\store-info.aspx.designer.cs">
+      <DependentUpon>store-info.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\Store\Product-Store\product-store-info.aspx.cs">
       <DependentUpon>product-store-info.aspx</DependentUpon>
@@ -514,6 +515,13 @@
     </Compile>
     <Compile Include="Backend\Store\Product-Store\product-store-info.aspx.designer.cs">
       <DependentUpon>product-store-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Store\store-list.aspx.cs">
+      <DependentUpon>store-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Store\store-list.aspx.designer.cs">
+      <DependentUpon>store-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backend\Store\Product-Store\product-store-list.aspx.cs">
       <DependentUpon>product-store-list.aspx</DependentUpon>

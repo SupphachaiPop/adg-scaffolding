@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace adg_scaffolding.Backend.Store.Product_Store
+namespace adg_scaffolding.Backend.Store
 {
 
 
-    public partial class product_store_info
+    public partial class store_info
     {
 
         /// <summary>
@@ -24,31 +24,31 @@ namespace adg_scaffolding.Backend.Store.Product_Store
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// lblProductStoreId control.
+        /// lblStoreId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProductStoreId;
+        protected global::System.Web.UI.WebControls.Label lblStoreId;
 
         /// <summary>
-        /// txtProductStoreCode control.
+        /// ddlProductStore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProductStoreCode;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductStore;
 
         /// <summary>
-        /// txtProductStoreName control.
+        /// txtQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProductStoreName;
+        protected global::System.Web.UI.WebControls.TextBox txtQty;
 
         /// <summary>
         /// txtComment control.
@@ -85,6 +85,15 @@ namespace adg_scaffolding.Backend.Store.Product_Store
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbnSave;
+
+        /// <summary>
+        /// rptStoreHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptStoreHistory;
 
         /// <summary>
         /// lblSuccess control.

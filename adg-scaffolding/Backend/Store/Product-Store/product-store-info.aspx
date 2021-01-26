@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="product-store-info.aspx.cs" Inherits="adg_scaffolding.Backend.Administrator.User.user_info" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backend/MasterPage.Master" AutoEventWireup="true" CodeBehind="product-store-info.aspx.cs" Inherits="adg_scaffolding.Backend.Store.Product_Store.product_store_info" %>
 
 <%@ MasterType VirtualPath="~/Backend/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -20,11 +20,11 @@
         <ContentTemplate>
             <div class="container-fluid flex-grow-1 container-p-y">
 
-                <h4 class="font-weight-bold py-3 mb-2">USER
+                <h4 class="font-weight-bold py-3 mb-2">PRODUCT STORE
                             <div class="text-muted text-tiny mt-1">
                                 <small class="font-weight-normal text-uppercase">
                                     <a href="javascript:void(0)" class="mr-1">ADG SCAFFOLDING</a>/
-                                    USER
+                                    PRODUCT STORE
                                 </small>
                             </div>
                     <br />
@@ -43,81 +43,24 @@
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                                User Name
+                                                Product Store Code
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:Label ID="lblUserId" runat="server" Visible="false"></asp:Label>
-                                            <asp:TextBox ID="txtUserName" CssClass="form-control form-control-md" runat="server" placeholder="User Name"></asp:TextBox>
+                                            <asp:Label ID="lblProductStoreId" runat="server" Visible="false"></asp:Label>
+                                            <asp:TextBox ID="txtProductStoreCode" CssClass="form-control form-control-md" runat="server" placeholder="Product Store Code"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">
-                                                Password
+                                                Product Store Name
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <asp:TextBox ID="txtPassword" CssClass="form-control form-control-md" runat="server" placeholder="Password"></asp:TextBox>
+                                            <asp:TextBox ID="txtProductStoreName" CssClass="form-control form-control-md" runat="server" placeholder="Product Store Name"></asp:TextBox>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12" id="DropdownRole" runat="server">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Role
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:DropDownList ID="ddlRole" CssClass="form-control form-control-md text-uppercase  js-example-basic-single" runat="server">
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                First Name
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:TextBox ID="txtFirstname" CssClass="form-control form-control-md" runat="server" placeholder="Firstname"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Last Name
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <asp:TextBox ID="txtLastname" CssClass="form-control form-control-md" runat="server" placeholder="Firstname"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">
-                                                Nick Name
-                                            </label>
-                                            <asp:TextBox ID="txtNickName" CssClass="form-control form-control-md" runat="server" placeholder="Firstname"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="row col-lg-12 col-xl-12 mb-12 col-sm-12">
-                                        <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label form-label-sm text-uppercase">
-                                                    Address
-                                                 <span class="text-danger">*</span>
-                                                </label>
-                                                <asp:TextBox ID="txtAddress" CssClass="form-control form-control-md" TextMode="MultiLine" Rows="3" runat="server" placeholder="Address"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">Phone</label>
-                                            <asp:TextBox ID="txtPhone" CssClass="form-control form-control-md" TextMode="Phone" runat="server" placeholder="Phone"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-xl-4 mb-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label form-label-sm text-uppercase">Email</label>
-                                            <asp:TextBox ID="txtEmail" CssClass="form-control form-control-md" TextMode="Email" runat="server" placeholder="Email"></asp:TextBox>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-12 col-xl-12 mb-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label form-label-sm text-uppercase">Comment</label>
