@@ -31,6 +31,8 @@ namespace Definitions
         public const string ProductStoreInfoUrl = "/Backend/Store/Product-Store/product-store-info.aspx";
         public const string StoreListUrl = "/Backend/Store/store-list.aspx";
         public const string StoreInfoUrl = "/Backend/Store/store-info.aspx";
+        public const string StoreCurculationListUrl = "/Backend/Store/Store-Curculation/store-curculation-list.aspx";
+        public const string StoreCurculationInfoUrl = "/Backend/Store/Store-Curculation/store-curculation-info.aspx";
 
 
         public const string DEFAULT_EMPTY_URL = "javascript:void(0);";

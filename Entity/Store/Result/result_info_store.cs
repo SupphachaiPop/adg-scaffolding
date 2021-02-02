@@ -10,11 +10,11 @@ namespace Entity
         public string comment { get; set; } // comment (length: 4000)   
         public bool? is_referred { get; set; } // is_referred
         public bool? is_active { get; set; } // is_active
-        public List<result_search_store_history> store_history { get; set; }
+        public List<result_info_store_history> store_history { get; set; }
 
         public result_info_store()
         {
-            this.store_history = new List<result_search_store_history>();
+            this.store_history = new List<result_info_store_history>();
         }
     }
 }

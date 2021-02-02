@@ -78,7 +78,7 @@ namespace DAO.Backend
         public result_info_store GetStoreInfo(long id)
         {
             result_info_store res = new result_info_store();
-
+            res.store_history = new List<result_info_store_history>();
             try
             {
                 using (DBHelper.CreateConnection())
@@ -89,6 +89,7 @@ namespace DAO.Backend
                         DBHelper.CreateParameters();
                         DBHelper.AddParam("store_id", id);
                         res = DBHelper.SelectStoreProcedureFirst<result_info_store>("select_info_store");
+                        res.store_history = DBHelper.SelectStoreProcedure<result_info_store_history>("select_search_store_history").ToList();
                     }
                     catch (Exception ex)
                     {
@@ -591,9 +592,9 @@ namespace DAO.Backend
         }
         #endregion
 
-        public List<result_search_store_history> SearchStoreHistoryList(int productStoreId)
+        public List<result_info_store_history> SearchStoreHistoryList(int productStoreId)
         {
-            List<result_search_store_history> res = null;
+            List<result_info_store_history> res = null;
 
             try
             {
@@ -604,7 +605,7 @@ namespace DAO.Backend
                         DBHelper.OpenConnection();
                         DBHelper.CreateParameters();
                         DBHelper.AddParam("product_store_id", productStoreId);
-                        res = DBHelper.SelectStoreProcedure<result_search_store_history>("select_search_store_history").ToList();
+                       
                     }
                     catch (Exception ex)
                     {

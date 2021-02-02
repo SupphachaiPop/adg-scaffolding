@@ -8,6 +8,13 @@ namespace Entity
         public System.DateTime purchase_request_date { get; set; } // purchase_request_date
         public string ref_document_no { get; set; } // ref_document_no (length: 20)
         public int vendor_id { get; set; } // vendor_id
+        public string vendor_code { get; set; } // vendor_code (length: 300)
+        public string vendor_name { get; set; } // vendor_name (length: 300)
+        public string tax_no { get; set; } // tax_no (length: 20)
+        public string address { get; set; } // address (length: 300)
+        public string email { get; set; } // email (length: 300)
+        public string phone { get; set; } // phone (length: 15)
+        public string fax { get; set; } // fax (length: 15)
         public decimal sub_total { get; set; } // sub_total
         public decimal vat { get; set; } // vat
         public decimal total { get; set; } // total

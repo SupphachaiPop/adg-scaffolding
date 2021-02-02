@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 namespace Entity
 { 
-    public class result_search_store_history
+    public class result_info_store_history
     {
         public int total_record { get; set; }
         public string id { get; set; } // specification_id (Primary key)

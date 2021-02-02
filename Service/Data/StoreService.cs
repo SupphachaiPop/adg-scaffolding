@@ -79,7 +79,7 @@ namespace Service.Backend
         }
         #endregion
 
-        public List<result_search_store_history> SearchStoreHistoryList(int productStoreId)
+        public List<result_info_store_history> SearchStoreHistoryList(int productStoreId)
         {
             return dataDao.SearchStoreHistoryList(productStoreId);
         }
