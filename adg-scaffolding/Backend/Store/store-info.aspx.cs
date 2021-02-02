@@ -49,7 +49,7 @@ namespace adg_scaffolding.Backend.Store
 
 
         #region store history
-        public void setDataToRepeater(List<result_search_store_history> storeHistoryList)
+        public void setDataToRepeater(List<result_info_store_history> storeHistoryList)
         {
             rptStoreHistory.DataSource = null;
             if (storeHistoryList != null && storeHistoryList.Count() > 0)
@@ -60,7 +60,7 @@ namespace adg_scaffolding.Backend.Store
         }
         protected void rptStoreHistory_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            result_search_store_history storeHistory = (result_search_store_history)e.Item.DataItem;
+            result_info_store_history storeHistory = (result_info_store_history)e.Item.DataItem;
 
             Label lblDate = (Label)e.Item.FindControl("lblDate");
             Label lblLocationName = (Label)e.Item.FindControl("lblLocationName");

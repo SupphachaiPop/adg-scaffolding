@@ -468,6 +468,8 @@
     <Content Include="assets\vendor\libs\vegas\overlays\09.png" />
     <Content Include="assets\vendor\libs\vegas\vegas.css" />
     <Content Include="assets\vendor\libs\vegas\vegas.js" />
+    <Content Include="Backend\Store\Store-Curculation\store-curculation-info.aspx" />
+    <Content Include="Backend\Store\Store-Curculation\store-curculation-list.aspx" />
     <Content Include="Backend\Store\store-info.aspx" />
     <Content Include="Backend\Store\Product-Store\product-store-info.aspx" />
     <Content Include="Backend\Store\store-list.aspx" />
@@ -502,6 +504,20 @@
     <Content Include="Backend\login.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Store\Store-Curculation\store-curculation-info.aspx.cs">
+      <DependentUpon>store-curculation-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Store\Store-Curculation\store-curculation-info.aspx.designer.cs">
+      <DependentUpon>store-curculation-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backend\Store\Store-Curculation\store-curculation-list.aspx.cs">
+      <DependentUpon>store-curculation-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Backend\Store\Store-Curculation\store-curculation-list.aspx.designer.cs">
+      <DependentUpon>store-curculation-list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Backend\Store\store-info.aspx.cs">
       <DependentUpon>store-info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
